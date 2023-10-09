@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="footer.css">
+        <script src="login.js">
+    
+        </script>
+        <style>
+            .btnlogin{
+                height: 30px; 
+                width: 100px;  
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 50px;
+                background-color: rgb(47, 0, 255);
+                color:white;
+            }
+            .in{
+                border-radius:50px;
+                display: block;
+                border-color: rgb(185, 177, 177);
+                margin-left: auto;
+                margin-right: auto;
+                width: 90%;
+                padding-left:20px;
+                height: 40px;
+               
+            }
+            .foot{
+                padding-top: 5px;
+                padding-left: 25px;
+                
+            }
+            .lgntble{
+                border: 5px solid rgb(174, 152, 192);
+                 height: 350px; 
+                 width: 250px;
+                 
+            }
+        </style>
+    </head>
+
+    <body style="background-color: antiquewhite;">
+        <header>
+            <nav>
+                <img id="logo" src="img/logo.jpg">
+                <p id="Cname"> Infotech pvt ltd </p>
+                <ul style="align-items: inline;">
+                   
+                    
+                    <li>
+                        <a href="contact.html"> Contacts us</a>
+                     </li>
+                     <li>
+                        
+                         <a href="registration.html">Signup</a>
+                     </li>
+                     <li>
+                         <a href="login.html">Signin</a>
+                     </li>
+                     <li>
+                         <a href="about.html"> About us</a>
+                     </li>
+                        <li>
+                           
+                            <a href="project1.html">Home</a>
+                        </li>
+                </ul>
+            </nav>
+        </header>
+        
+        <center>
+        <p style="text-align: center; color: red;" id="p"></p>
+            <form style="padding-top: 50px; align-content: center;" >
+            <table  class="lgntble">
+                <tr>
+                    <th style="background-color: blueviolet; height: 60px; color: #ffffff; " >Login Form</h1>
+                </tr>
+                  <tr >
+                    <td style="padding-top: 30px;">
+                        <input class="in" placeholder="Email Address" type="email" id="username" required >
+                        
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >
+                      
+                        <input class="in"  type="password" placeholder="password" id="password" onfocusout="validateLogin()" required>
+                    </td>
+                  </tr>
+
+           <tr>
+            <td >
+                <input type="checkbox" placeholder="Remember me">Remember me 
+                <a style="text-decoration: none; float: right; " href="">Forgot password?</a> </td>
+            
+           
+           </tr>
+
+           <tr>
+            <td >
+                
+            <input  class="btnlogin"  type="submit" value="Login" onmouseover="validateLogin()">
+        </td>
+           </tr>
+
+           <tr>
+            <td class="foot" >
+               Not a member? <a href="" style="text-decoration: none; float: right; padding-right: 30px;"> signup now</a>
+            </td>
+           </tr>
+            </table> </form>
+        </center>
+
+        <footer><p class="copy">Infotech pvt ltd. @2023<br>
+            <a href="#"><img class="footerlogo1" src="img/x.jpeg" ></a>
+            <a href="#"><img class="footerlogo" src="img/youtube.jpeg" ></a>
+            <a href="#">  <img class="footerlogo" src="img/facebook.jpg" ></a>
+        
+        
+           </p></footer>
+    </body>
+</html>

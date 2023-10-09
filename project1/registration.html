@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="regstyle.css">
+        <title>
+            Registration Form
+        </title>
+<style>
+
+
+</style>
+
+        <script src="registration.js">
+         </script>
+
+    </head>
+    <body>
+        <header>
+            <nav>
+                <img id="logo" src="img/logo.jpg">
+                <p id="Cname"> Infotech pvt ltd </p>
+                <ul style="align-items: inline;">
+                
+                    <li>
+                        <a href="contact.html"> Contacts us</a>
+                     </li>
+                     <li>
+                        
+                         <a href="registration.html">Signup</a>
+                     </li>
+                     <li>
+                         <a href="login.html">Signin</a>
+                     </li>
+                     <li>
+                         <a href="about.html"> About us</a>
+                     </li>
+                        <li>
+                           
+                            <a href="project1.html">Home</a>
+                        </li>
+                </ul>
+            </nav>
+        </header>
+        <center><h2>Registration Form</h2>
+            <p id="warn" style="text-align: center; color: red; font-size: 15;"></p>
+            <form onsubmit="valform()">
+                
+              
+                <table>
+                    <tr>
+                       
+                        <td><input id="fname" type="text" name="Firstname" placeholder="First Name" required></td>
+                    </tr>
+
+                    <tr>
+                        
+                        <td><input type="text"  id="lname" name="lastname" placeholder="Last Name " required></td>
+                    </tr>
+                    <tr>
+                        
+                        <td><input id="dob" type="date" name="DOB" placeholder=" DOB" required></td>
+                    </tr>
+                    <tr>
+                        
+                        <td><input type="number" id="age" name="age" placeholder="Age"min=20 max= 50 maxlength=2 required></td>
+                    </tr>
+                    <tr>
+                        
+                            
+                            <td>
+                       
+                                <input id="gndr" type="radio" name="gndr" value="male"  style="width: 60px; padding-left: 0px;">male
+                            <input id="gndr" type="radio" name="gndr" value="female"style="width: 60px;" >female
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td><input id="phone" type="number" name="Phone" placeholder="Phone" pattern="[6789][0-9]{9}" required></td>
+                    </tr>
+                    <tr>
+                        
+                        <td>
+                            <input id="email" type="email" placeholder="Email" id="email" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td><textarea id="adr" placeholder="Address"></textarea></td>
+                    </tr>
+
+                    <tr>
+                       
+                        <td>
+                            <select id="state" onchange="selectcity(this.value)" required> 
+                                <option value="" selected disabled>Choose State</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Tamilnadu">Tamilnadu</option>
+                                <option value="Karnataka">Karnataka</option>
+                                
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                       
+                        <td><select id="cityselect">
+                            <option selected disabled>choose City</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        
+                        <td>
+                            <input id="username" type="text" placeholder="Username" name="Username" required>
+                        </td>
+                    </tr>
+                    <tr>
+                     
+                        <td>
+                            <input type="password" placeholder="password" name="password" id="ps1" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        
+                        <td>
+                            <input type="password" placeholder="Conform password" name="cpassword" id="ps2" onfocusout="myFunction2()" required>
+                        </td>
+                    </tr>
+                    <tr >
+                        <th colspan="2" ><input type="submit" onmouseover="myFunction2()"></th>
+                    </tr>
+
+                    
+                </table>
+
+            </form>
+
+
+        </center>
+
+        <footer>
+            <p class="foot">Infotech pvt ltd</p>
+        </footer>
+    </body>
+</html>
