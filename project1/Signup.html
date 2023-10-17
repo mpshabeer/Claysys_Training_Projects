@@ -1,0 +1,142 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About Us</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="css/regstyle.css">
+        <title>
+            Registration Form
+        </title>
+        <style>
+                 body {
+            background-color: #f8f9fa;
+        }
+        </style>
+        <script src="js/registration.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Infotech Pvt Ltd
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="project1.html">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html">About Us</a>
+              </li>
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="Signup.html">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="signin.html">Sign In</a>
+                    </li>
+                   
+                    <li class="nav-item">
+                      <a class="nav-link" href="contact.html">Contact Us</a>
+                  </li>
+                    
+                </ul>
+            </div>
+        </nav> 
+        <center>
+            <h2>Sign Up</h2>
+            <div class="formclass">
+            <form onsubmit="valform()">
+                <div>
+                    
+                    <input id="firstname" type="text" name="firstname" placeholder="First Name" onfocusout="validatefirstname()" required>
+                    <div><small id="fnamewarn" style="text-align: center; color: red;"></small></div>
+                </div>
+                
+                <div>
+                    
+                    <input type="text" id="lastname" name="lastname" placeholder="Last Name" onfocusout="validatelastname()" required>
+                    <div><small id="lnamewarn" style="text-align: center; color: red;"></small></div>
+                </div>
+                <div>
+                    <pre> Date of Birth :</pre>
+                    <input  id="dob" type="date" name="DOB" placeholder="Date of Birth" max="" onfocusout="validdates()">
+                    <div><small id="datewarn" style="text-align: center; color: red;"></small></div>
+                </div>
+                
+                <div>
+                    <pre> Age :</pre>
+                    <input  type="number" id="age" name="age" value="0" min="0" max="20" required>
+                </div>
+                
+                <div>
+                    <pre>Gender :</pre>
+                    <input id="gndr" type="radio" name="gndr" value="male" style="width: 20px; padding-left: 0px;">Male
+                    <input id="gndr" type="radio" name="gndr" value="female" style="width: 20px;">Female
+                    <input id="gndr" type="radio" name="gndr" value="others" style="width: 20px;">Others
+                </div>
+
+                <div>
+                    <input id="phone" type="number" name="Phone" placeholder="Phone Number" onfocusout="validatephone()" pattern="[6789][0-9]{9}" required>
+                    <div><small id="phonewarn" style="text-align: center; color: red;"></small></div>
+                </div>
+                <div >
+                    <input placeholder="E-mail " type="email" id="email" onfocusout="validatemail()" required>
+                    <div><small id="warnemail" style="text-align: center; color: red;"></small></div>
+                </div>
+                <div>
+                    <textarea id="address" placeholder="Address" onfocusout="validateadr()"></textarea>
+                    <div><small id="addresswarn" style="text-align: center; color: red;"></small></div>
+                </div>
+                <div>
+                    <select id="state" onchange="selectcity(this.value)" required>
+                        <option value="" selected disabled>Choose State</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Tamilnadu">Tamilnadu</option>
+                        <option value="Karnataka">Karnataka</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="cityselect">
+                        <option selected disabled>Choose City</option>
+                    </select>
+                </div>
+                <div>
+                    <input id="username" type="text" placeholder="Username" name="Username" onfocusout="validusername()" required>
+                    <div><small id="usernamewarn" style="text-align: center; color: red;"></small></div>
+                </div>
+                <div>
+                    <input type="password" placeholder="Password" name="password" id="password" onfocusout="validapassword()" required>
+                    <div><small id="passwordwarn" style="text-align: center; color: red;"></small></div>
+                </div>
+                <div>
+                    <input type="password" placeholder="Re-enter Password" name="password2" id="password2" onfocusout="validapassword2()" required>
+                    <div><small id="passwordwarn2" style="text-align: center; color: red;"></small></div>
+                </div>
+                <div>
+                    <input type="submit" onmouseover="myFunction2()">
+                </div>
+                
+            </form>
+            <div>
+                <p>Do you have an account    <a href="signin.html"> Sign In</a></p> 
+            </div>
+        </div>
+        </center>
+      
+        <footer class="bg-dark text-light text-center p-3 position-fixed fixed-bottom" style="width: 100%;">
+            Infotech Pvt Ltd &copy; 2023
+        </footer>
+    
+    </body>
+    
+    </html>
+    

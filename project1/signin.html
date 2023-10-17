@@ -1,0 +1,119 @@
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+        <script src="js/login.js"></script>
+        <style>
+            .btnlogin {
+                height: 30px;
+                width: 200px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 50px;
+                background-color: rgb(47, 0, 255);
+                color: white;
+            }
+            .in {
+                border-radius: 50px;
+                display: block;
+                border-color: rgb(185, 177, 177);
+                margin-left: auto;
+                margin-top: 30px;
+                margin-right: auto;
+                width: 90%;
+                padding-left: 20px;
+                height: 40px;
+            }
+            .foot {
+                padding-top: 5px;
+                padding-left: 25px;
+            }
+            .lgntble {
+                border: 5px solid rgb(174, 152, 192);
+                height: 450px;
+                margin-top: 0;
+                width: 300px;
+            }
+            body {
+            background-color: #f8f9fa;
+        }
+        </style>
+</head><body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="img/logo.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+            Infotech Pvt Ltd
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="project1.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+          </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="Signup.html">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="signin.html">Sign In</a>
+                </li>
+               
+                <li class="nav-item">
+                  <a class="nav-link" href="contact.html">Contact Us</a>
+              </li>
+                
+            </ul>
+        </div>
+    </nav>
+
+        <center>
+            <form style="padding-top: 50px; align-content: center;">
+                <div class="lgntble">
+                    <h1 style="background-color: blueviolet; height: 80px; color: #ffffff; margin-top: 0;">Sign In</h1>
+                   
+                    <div style="padding-top: 0px;">
+                        <input class="in" placeholder="E-mail" type="email" id="username" onfocusout="validateusername()" required>
+                    </div>
+
+                    <small style="text-align: center; color: red;" id="warnemail"></small>
+                    <div>
+                        <input class="in" type="password" placeholder="Password" id="password" onfocusout="validatepassword()" required>
+                    </div>
+
+                    <small style="text-align: center; color: red;" id="warnpassword"></small>
+
+                    <div style="margin-top: 20px;">
+                        <input type="checkbox" placeholder="Remember me" >Remember me
+                        <a style="text-decoration: none; " href="">Forgot password?</a>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <input class="btnlogin" type="submit" value="Login" onclick="validateLogin()">
+                    </div>
+                    <div class="foot" style="margin-top: 20px;">
+                        Not a member? <a href="Signup.html" style="text-decoration: none; float: right; padding-right: 25px;"> Sign Up now</a>
+                    </div>
+                </div>
+            </form>
+        </center>
+
+        <footer class="bg-dark text-light text-center p-3 position-fixed fixed-bottom" style="width: 100%;">
+            Infotech Pvt Ltd &copy; 2023
+        </footer>
+    
+    </body>
+    
+    </html>
+    
