@@ -1,0 +1,52 @@
+﻿@model IEnumerable<MVC_Project.Models.ProductModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (TempData["InfoMessage"] != null)
+{
+<div class="alert alert-info">
+    @TempData["InfoMessage"]
+</div>
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Productname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Qty)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Productname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qty)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Productid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Productid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Productid })
+        </td>
+    </tr>
+}
+
+</table>
