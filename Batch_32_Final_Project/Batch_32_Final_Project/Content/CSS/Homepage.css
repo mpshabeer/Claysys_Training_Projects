@@ -1,0 +1,95 @@
+h1 {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: darkblue;
+}
+
+
+
+.font1{
+    font-size: large;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   color:rgb(27, 12, 219);
+   margin: 30px;
+}
+.imageborder {
+    border: 4px hidden;
+    width: 700px;
+    height: 350px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* Ensure the image does not overflow */
+}
+
+.next,
+.prev {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    padding: 16px;
+    color: rgb(252, 15, 26);
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.cardtext {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(27, 12, 219);
+   
+    font-size: 14;
+    color: rgb(28, 11, 243);
+    margin: 10px;
+}
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.imageslideshow {
+    
+    width: 100%;
+    height: 350px;
+    display:block;
+   
+}
+.card-title{
+    margin-left:50px;
+  
+    color:rgb(217, 3, 3)
+}
+
+.imageslideshow img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.heading{
+    margin-right:auto;
+    margin-left:auto;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    align-items:center;
+    color:rgb(16, 5, 118)
+}
+
+
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+    .active,
+    .dot:hover {
+        background-color: #717171;
+    }

@@ -1,0 +1,94 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<div class="text-center"><h2 class="heading">INFOTECH PVT LTD</h2></div>
+
+<div class="card">
+    <div class="card-body">
+        <p class="font1">
+            Our spirit of innovation and pass that we have undertaken over the years with a vision to create greater
+            business impact.We take advantage of our expertise and experience to create technologies that can really
+            affect the present day and shape the future. The quality of our processes, the sanctity of our promises,
+            and our ever growing wealth of experience are all leveraged in each project.
+        </p>
+    </div>
+</div>
+
+
+
+<main>
+    <script src="~/Content/JS/homepagescript.js"></script>
+    <link href="~/Content/CSS/Homepage.css" rel="stylesheet" />
+
+    <section class="row" aria-labelledby="aspnetTitle">
+    </section>
+
+    <div class="row">
+        <div class="imageborder">
+            <div class="next" onclick="pluslide(1)"> ❯ </div>
+            <div class="prev" onclick="pluslide(-1)"> ❮ </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image3.jpg")">
+
+            </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image2.jpg")">
+            </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image1.jpg")">
+            </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image4.jpg")">
+            </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image5.jpg")">
+            </div>
+        </div>
+        <div style="text-align: center; margin: 20px;">
+            <span class="dot" onclick="slide(1)"></span>
+            <span class="dot" onclick="slide(2)"></span>
+            <span class="dot" onclick="slide(3)"></span>
+            <span class="dot" onclick="slide(4)"></span>
+            <span class="dot" onclick="slide(5)"></span>
+        </div>
+    </div>
+
+</main>
+
+<div class="container" style="margin-bottom:100px;">
+    <div class="row justify-content-around">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Our Mission</h3>
+                    <p class="cardtext">
+                    Empowering businesses through innovative technology solutions, our mission is to provide cutting-edge IT 
+                    services that drive efficiency, foster growth, and deliver exceptional value to our clients. By harnessing
+                    the power of technology, we aim to streamline processes, enhance user experiences, and enable businesses to 
+                    thrive in a rapidly evolving digital landscape. Our commitment to excellence, integrity, and customer satisfaction
+                    forms the cornerstone of our mission, as we continue to be a trusted partner shaping the future of businesses worldwide
+                    </p></p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Our Vision</h3>
+                    <p class="cardtext">
+                        To be a global leader in transformative technology solutions, driving innovation and shaping the digital future.
+                        We envision a world where technology is seamlessly integrated into every aspect of life, empowering businesses and 
+                        individuals to achieve their full potential. Through our relentless pursuit of excellence and a deep commitment to 
+                        technological advancement, we strive to create a more connected, efficient, and sustainable world, fostering growth and driving positive change on a global scale
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

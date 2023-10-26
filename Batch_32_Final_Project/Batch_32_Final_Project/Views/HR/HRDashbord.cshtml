@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "HRDashbord";
+    Layout = "~/Views/Shared/HRLayout.cshtml";
+}
+
+<h4>HR HOME</h4>
+
+@if (@Session["Email"] != null)
+{
+    <h4>Welcome  @Session["Email"].ToString() </h4>
+    
+}
+else
+{
+    Response.RedirectToRoute("Default", new { controller = "Home", action = "Index" });
+}
+
+
+
