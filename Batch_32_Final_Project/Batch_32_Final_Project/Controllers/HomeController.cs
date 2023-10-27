@@ -35,7 +35,6 @@ namespace Batch_32_Final_Project.Controllers
         {
             bool isInserted = false;
             bool isvalidmail = false;
-
             try
             {
 
@@ -59,7 +58,7 @@ namespace Batch_32_Final_Project.Controllers
                     }
                     else
                     {
-                        ViewBag.Message = "Email Exisist";
+                        ViewBag.Message = "Email Already  Exisist";
                         return View();
                     }
                 }

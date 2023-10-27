@@ -1,0 +1,21 @@
+﻿
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn-submit {
+    width: 100%;
+}
+
+.form-container {
+    width: 50%;
+    margin: 30px auto;
+    padding: 50px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+

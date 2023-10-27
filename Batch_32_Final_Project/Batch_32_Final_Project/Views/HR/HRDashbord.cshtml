@@ -4,28 +4,7 @@
     Layout = "~/Views/Shared/HRLayout.cshtml";
 }
 
-
-@if (Session["Email"] != null)
-{
-    <p class="card-title">
-       <strong>Welcome @Session["Email"].ToString()</strong>
-        
-    </p>
-}
-
-
-else
-{
-    Response.RedirectToRoute("Default", new { controller = "Home", action = "Index" });
-}
-
-
-
-
-
-<div class="text-center"><h2 class="heading">INFOTECH PVT LTD</h2></div>
-
-
+<div class="text-center"><h2 style="margin:30px; font-family:'Arial Rounded MT';">INFOTECH PVT LTD</h2></div>
 <div class="col-md-12">
     <div class="card">
         <div class="card-body">
@@ -64,7 +43,7 @@ else
                         technology, we aim to streamline processes, enhance user experiences,and enable businesses to thrive in a rapidly
                         evolving digital landscape. Our commitment to excellence, integrity,and customer satisfaction forms the cornerstone
                         of our mission, as we continue to be a trusted partner shaping the future of businesses worldwide
-                    </p></p>
+                    </p>
 
                 </div>
             </div>

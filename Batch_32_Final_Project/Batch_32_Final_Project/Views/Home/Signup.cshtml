@@ -9,13 +9,13 @@
 <script src="~/Content/JS/Signup.js"></script>
 <script src="~/Content/JS/Validations.js"></script>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
 <div class="table-bordered" style="width:600px; margin-left:auto;margin-right:auto;padding:50px;">
 
-    <div class="text-warning">@ViewBag.Message</div>
+    <div class="text-warning"><strong class="alert-danger">@ViewBag.Message</strong></div>
     <div class="form-horizontal">
         <h2>Signup</h2>
         <hr />
@@ -147,7 +147,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Sigup" class="btn btn-primary" />
             </div>
         </div>
     </div>

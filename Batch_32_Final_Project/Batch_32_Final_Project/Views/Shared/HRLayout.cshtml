@@ -7,9 +7,13 @@
 
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vacancy</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/CSS/HRStyle.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-   
+
 </head>
 <body>
 
@@ -20,7 +24,20 @@
         <li class="navbar_list"><a href="#home">Add new member</a></li>
         <li class="navbar_list"><a href="#home">Account Information </a></li>
         <li class="navbar_list"><a href="#contact">View Applicant</a></li>
-        <li class="navbar_list"><a href="#">Manage Vacancy</a></li>
+        <li class="navbar_list"><a href="Addvacancy">ADD Vacancy</a></li>
+        @if (Session["Email"] != null)
+        {
+            <li class="navbar_list">
+                <a href="#home">
+                    <strong>Welcome @Session["Email"].ToString()</strong>
+                </a>
+            </li>
+        }
+        else
+        {
+            Response.RedirectToRoute("Default", new { controller = "Home", action = "Index" });
+        }
+        <li class="liof"><a href="#"><strong>Infotech Pvt Ltd</strong></a></li>
     </ul>
     @RenderBody()
 
