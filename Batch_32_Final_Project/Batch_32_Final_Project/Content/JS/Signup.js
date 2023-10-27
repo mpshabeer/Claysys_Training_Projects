@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
 const statevisecity={
     Kerala:["Kochi","Calicut","Tiruvanadapuram","Malappuram"],
     Tamilnadu:["Chennai","Coimbatore","Vellore","Madurai"],
@@ -33,4 +34,8 @@ function selectcity(value){
         document.getElementById("cityselect").innerHTML=allcitys;
     }
 }
+
+
+
+
 

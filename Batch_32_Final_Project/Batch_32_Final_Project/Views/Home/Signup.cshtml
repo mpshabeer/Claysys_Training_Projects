@@ -7,6 +7,7 @@
 
 
 <script src="~/Content/JS/Signup.js"></script>
+<script src="~/Content/JS/Validations.js"></script>
 
 @using (Html.BeginForm()) 
 {
@@ -19,16 +20,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatefirstname()" } })
                 @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+                <div><small id="fnamewarn" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" , @onfocusout = "validatelastname()" } })
                 @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+                <div><small id="lnamewarn" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
 
@@ -38,8 +41,9 @@
              
             @Html.LabelFor(model => model.Dateofbirth, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="date" id="Dateofbirth" name="Dateofbirth" class="form-control" />
-               
+                <input type="date" id="Dateofbirth" name="Dateofbirth" class="form-control" onfocusout="validdates()" />
+                <div><small id="datewarn" style="text-align: center; color: red;"></small></div>
+
                 @Html.ValidationMessageFor(model => model.Dateofbirth, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,24 +68,28 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatephone()" } })
                 @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                <div><small id="warnphone" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateemail()" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <div><small id="warnemail" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
 
         <div class="form-group">
+            
             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateaddress()" } })
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                <div><small id="addresswarn" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
 
@@ -108,16 +116,6 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
         <div class="form-group">
             @Html.LabelFor(model => model.Pincode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -129,27 +127,31 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatepassword()" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <div><small id="passwordwarn" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Confirmpassword, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Confirmpassword, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Confirmpassword, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateconfirmpassword()" } })
                 @Html.ValidationMessageFor(model => model.Confirmpassword, "", new { @class = "text-danger" })
+                <div><small id="confirmpasswordwarn" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Signup" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </div>
     </div>
 </div>
 }
 
-
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 

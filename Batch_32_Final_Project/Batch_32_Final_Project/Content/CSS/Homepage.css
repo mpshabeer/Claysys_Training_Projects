@@ -10,7 +10,7 @@ h1 {
     font-size: large;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
    color:rgb(27, 12, 219);
-   margin: 30px;
+   margin: 40px;
 }
 .imageborder {
     border: 4px hidden;
@@ -38,10 +38,9 @@ h1 {
     user-select: none;
 }
 
-.cardtext {
+.text-justify {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: rgb(27, 12, 219);
-   
     font-size: 14;
     color: rgb(28, 11, 243);
     margin: 10px;
@@ -60,7 +59,8 @@ h1 {
 }
 .card-title{
     margin-left:50px;
-  
+    font-family:'Arno Pro Display';
+    font-size:20;
     color:rgb(217, 3, 3)
 }
 

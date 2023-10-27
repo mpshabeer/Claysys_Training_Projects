@@ -126,9 +126,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Contactus.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Registration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ContactRepository.cs" />
     <Compile Include="Repository\RegistrationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +163,7 @@
     <Content Include="Content\Images\logo.jpg" />
     <Content Include="Content\JS\homepagescript.js" />
     <Content Include="Content\JS\Signup.js" />
+    <Content Include="Content\JS\Validations.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -192,7 +195,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\HRLayout.cshtml" />
     <Content Include="Views\HR\HRDashbord.cshtml" />
@@ -202,6 +204,7 @@
     <Content Include="Views\Home\Signup.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Signin.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,6 +16,7 @@ namespace Batch_32_Final_Project.Controllers
     {
 
         RegistrationRepository _RegistrationRepository = new RegistrationRepository();
+        ContactRepository _ContactRepository = new ContactRepository();
         private SqlConnection connection;
         public ActionResult Index()
         {
@@ -128,9 +129,40 @@ namespace Batch_32_Final_Project.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+   
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Contact(Contactus contactus)
+        {
+            bool isInserted = false;
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    isInserted = _ContactRepository.InsertContact(contactus);
+
+                    if (isInserted)
+                    {
+                        TempData["Successmessage"] = "Your request saved";
+
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Successmessage"] = "Unable to save";
+                        return View();
+                    }
+                }
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Messags = ex.Message;
+                return View();
+            }
         }
     }
 }
