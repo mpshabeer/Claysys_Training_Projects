@@ -17,6 +17,8 @@ namespace Batch_32_Final_Project.Controllers
 
         RegistrationRepository _RegistrationRepository = new RegistrationRepository();
         ContactRepository _ContactRepository = new ContactRepository();
+        Decryptpassword decryptpassword = new Decryptpassword();
+        EmailexistRepository emailexist = new EmailexistRepository();
         private SqlConnection connection;
         public ActionResult Index()
         {
@@ -32,30 +34,40 @@ namespace Batch_32_Final_Project.Controllers
         public ActionResult Signup(Registration registration)
         {
             bool isInserted = false;
+            bool isvalidmail = false;
 
             try
             {
+
                 if (ModelState.IsValid)
-                { 
-                    isInserted = _RegistrationRepository.Insertregistration(registration);
-
-                    if (isInserted)
+                {
+                    isvalidmail = emailexist.checkemail(registration);
+                    if (isvalidmail)
                     {
-                        TempData["Successmessage"] = "Registration  Successfull";
+                        isInserted = _RegistrationRepository.Insertregistration(registration);
+                        if (isInserted)
+                        {
+                            TempData["Successmessage"] = "Registration  Successfull";
 
-                        return RedirectToAction("Signin");
+                            return RedirectToAction("Signin");
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Unable to save";
+                            return View();
+                        }
                     }
                     else
                     {
-                        TempData["Successmessage"] = "Unable to save";
+                        ViewBag.Message = "Email Exisist";
                         return View();
                     }
                 }
-                return View();
+                 return View();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                ViewBag.Messags = ex.Message;
+                ViewBag.Messags = "exception error";
                 return View();
             }
         }
@@ -85,40 +97,50 @@ namespace Batch_32_Final_Project.Controllers
                     SqlCommand command = new SqlCommand("LoginValidation", connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Email", login.Email);
-                    command.Parameters.AddWithValue("@Password", login.Password);
-
                     connection.Open();
                     SqlDataReader sdr = command.ExecuteReader();
                     if (sdr.Read())
                     {
-                        FormsAuthentication.SetAuthCookie(login.Email, false);
-                        Session["Email"] = login.Email.ToString();
-                        string userType = sdr["Type"].ToString();
-                        if (userType == "Candidate")
+                        string encryptedpasswords = sdr["Password"].ToString();
+                        string decryptedpassword = decryptpassword.Decrypt(encryptedpasswords);
+                        if (login.Password == decryptedpassword)
                         {
-                            return RedirectToAction("CandidateDashbord", "Candidate");
-                        }
-                        else if (userType == "HR")
-                        {
+                            FormsAuthentication.SetAuthCookie(login.Email, false);
+                            Session["Email"] = login.Email.ToString();
+                            string userType = sdr["Type"].ToString();
+                            try
+                            {
+                                if (userType == "Candidate")
+                                {
+                                    return RedirectToAction("CandidateDashbord", "Candidate");
+                                }
+                                else if (userType == "HR")
+                                {
 
-                            return RedirectToAction("HRDashbord", "HR");
+                                    return RedirectToAction("HRDashbord", "HR");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+
+                                ViewBag.Message = ex;
+                                return View("Error");
+                            }
+                           
                         }
                         else
                         {
-                            ViewBag.Message = "Unknown user type.";
-                            return View("Error");
+                            ViewBag.Message = "Password doesn't Match Please recheck it";
+                            return View();
                         }
                     }
                     else
                     {
-                        ViewBag.Message = "No user found please recheck your user name and Password";
+                        ViewBag.Message = "Email not found Please recheck it ";
+                        return View();
                     }
-                    return View();
                 }
-                else
-                {
-                    return View();
-                }
+                return View();
             }
             catch (Exception ex)
             {

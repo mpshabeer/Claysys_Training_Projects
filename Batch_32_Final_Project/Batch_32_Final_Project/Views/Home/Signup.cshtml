@@ -9,10 +9,13 @@
 <script src="~/Content/JS/Signup.js"></script>
 <script src="~/Content/JS/Validations.js"></script>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    
 <div class="table-bordered" style="width:600px; margin-left:auto;margin-right:auto;padding:50px;">
+
+    <div class="text-warning">@ViewBag.Message</div>
     <div class="form-horizontal">
         <h2>Signup</h2>
         <hr />
@@ -29,16 +32,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control" , @onfocusout = "validatelastname()" } })
+                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatelastname()" } })
                 @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
                 <div><small id="lnamewarn" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
 
         <div class="form-group">
-          
 
-             
+
+
             @Html.LabelFor(model => model.Dateofbirth, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="date" id="Dateofbirth" name="Dateofbirth" class="form-control" onfocusout="validdates()" />
@@ -84,7 +87,7 @@
         </div>
 
         <div class="form-group">
-            
+
             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateaddress()" } })

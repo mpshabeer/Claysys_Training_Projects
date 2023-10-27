@@ -5,20 +5,7 @@
 }
 
 
-@if (Session["Email"] != null)
-{
-    <p class="card-title">
-        <strong>Welcome @Session["Email"].ToString()</strong>
-
-    </p>
-}
-else
-{
-    Response.RedirectToRoute("Default", new { controller = "Home", action = "Index" });
-}
-
-
-<div class="text-center"><h2>INFOTECH PVT LTD</h2></div>
+<div class="text-center"><h2 style="margin:30px; font-family:'Arial Rounded MT';">INFOTECH PVT LTD</h2></div>
 
 
 <div class="col-md-12">
