@@ -1,0 +1,87 @@
+use Batch32finalproject
+
+C:\Users\shabeer\source\repos
+
+CREATE PROCEDURE InsertToRegistration
+@Firstnane varchar(50)=null,
+@Lastname varchar(50)=null,
+@Dateofbirth date=null,
+@Gender varchar(50)=null,
+@Phone varchar(50)=null,
+@Email varchar(50)=null,
+@Address varchar(MAX)=null,
+@State varchar(50)=null,
+@City varchar(50)=null,
+@Pincode varchar(50)=null,
+@Password varchar(200)=null,
+@Type varchar(50)='Candidate'
+
+AS
+BEGIN
+INSERT INTO Registration(Firstname,Lastname,Dateofbirth,Gender,Phone,Email,Address,State,City,Pincode,Password,Type)
+VALUES(@Firstnane,@Lastname,@Dateofbirth,@Gender,@Phone,@Email,@Address,@State,@City,@Pincode,@Password,@Type)
+END
+
+
+
+
+CREATE PROCEDURE LoginValidation
+@Email VARCHAR(50),
+@Password VARCHAR(50)
+As
+BEGIN
+SELECT Email,Password,Type FROM [dbo].[Registration] WHERE Email=@Email and Password=@Password
+END
+
+
+CREATE PROCEDURE Inserttocontact
+@Name varchar(50),
+@Email varchar(50),
+@Phone varchar(50),
+@Command varchar(MAX)
+AS
+BEGIN
+INSERT INTO dbo.Contact (Name,Email,Phone,Command)
+VALUES(@Name,@Email,@Phone,@Command)
+END
+
+CREATE PROCEDURE LoginValidation
+@Email VARCHAR(50)
+As
+BEGIN
+SELECT Email,Password,Type FROM [dbo].[Registration] WHERE Email=@Email
+END
+
+
+
+
+
+CREATE PROCEDURE Inserttovacancy
+@JobTitle VARCHAR(50),
+@JobDescription  VARCHAR(MAX),
+@Department  VARCHAR(50),
+@Location  VARCHAR(50),
+@VacancyStatus  VARCHAR(50),
+@NumberOfOpenings INT,
+@Qualification  VARCHAR(MAX),
+@ResponsibilitiesAndDuties  VARCHAR(MAX),
+@SalaryRange  VARCHAR(50),
+@PostedDate  VARCHAR(50),
+@LastDateToApply  VARCHAR(50),
+@RecruiterInCharge VARCHAR(50),
+@InterviewRounds INT,
+@SelectionProcess  VARCHAR(MAX),
+@Createdby  VARCHAR(50)
+AS
+BEGIN
+INSERT INTO dbo.Vacancy (JobTitle,JobDescription,Department,Location,VacancyStatus,NumberOfOpenings,Qualification,
+ResponsibilitiesAndDuties,SalaryRange,PostedDate,LastDateToApply,RecruiterInCharge,InterviewRounds,SelectionProcess,
+Createdby) VALUES(@JobTitle,@JobDescription,@Department,@Location,@VacancyStatus,@NumberOfOpenings,@Qualification,
+@ResponsibilitiesAndDuties,@SalaryRange,@PostedDate,@LastDateToApply,@RecruiterInCharge,@InterviewRounds,@SelectionProcess,
+@Createdby)
+END
+
+
+exec Inserttovacancy 'Software Engineer Trainee','Trainee','Software','malappuram','Open',
+3,'MCA','Engineer','10000','2023-10-28','2023-11-15',
+'shaabeer',5,'walkindrive','shabeer'
