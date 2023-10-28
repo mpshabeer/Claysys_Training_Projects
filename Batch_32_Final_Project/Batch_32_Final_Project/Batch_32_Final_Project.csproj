@@ -135,6 +135,7 @@
     <Compile Include="Repository\Decryptpassword.cs" />
     <Compile Include="Repository\EmailexistRepository.cs" />
     <Compile Include="Repository\RegistrationRepository.cs" />
+    <Compile Include="Repository\VacancyRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -158,6 +159,7 @@
     <Content Include="Content\CSS\HomeStyle.css" />
     <Content Include="Content\CSS\HRStyle.css" />
     <Content Include="Content\CSS\Homepage.css" />
+    <Content Include="Content\CSS\table.css" />
     <Content Include="Content\CSS\vacancyform.css" />
     <Content Include="Content\Images\image1.jpg" />
     <Content Include="Content\Images\image3.jpg" />
@@ -211,6 +213,9 @@
     <Content Include="Views\Home\Signin.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\HR\Addvacancy.cshtml" />
+    <Content Include="Views\Candidate\Viewvacancy.cshtml" />
+    <Content Include="Views\Candidate\ViewVacancyDetails.cshtml" />
+    <Content Include="Views\HR\Viewvacancy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

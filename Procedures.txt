@@ -85,3 +85,59 @@ END
 exec Inserttovacancy 'Software Engineer Trainee','Trainee','Software','malappuram','Open',
 3,'MCA','Engineer','10000','2023-10-28','2023-11-15',
 'shaabeer',5,'walkindrive','shabeer'
+
+
+
+
+
+CREATE PROCEDURE GetVacancylist
+  AS
+  BEGIN
+  SELECT vid,JobTitle,JobDescription FROM Vacancy
+  END
+
+  EXEC GetVacancylist
+
+
+CREATE PROCEDURE DetailsofVacancy
+@vid INT
+AS
+BEGIN
+SELECT * FROM Vacancy WHERE vid=@vid
+END
+
+
+
+CREATE PROCEDURE Inserttovacancy
+@JobTitle VARCHAR(50),
+@JobDescription  VARCHAR(MAX),
+@Department  VARCHAR(50),
+@Location  VARCHAR(50),
+@VacancyStatus  VARCHAR(50),
+@NumberOfOpenings INT,
+@Qualification  VARCHAR(MAX),
+@ResponsibilitiesAndDuties  VARCHAR(MAX),
+@SalaryRange  VARCHAR(50),
+@PostedDate  VARCHAR(50),
+@LastDateToApply  VARCHAR(50),
+@RecruiterInCharge VARCHAR(50),
+@InterviewRounds INT,
+@SelectionProcess  VARCHAR(MAX),
+@Createdby  VARCHAR(50)
+AS
+BEGIN
+INSERT INTO dbo.Vacancy (JobTitle,JobDescription,Department,Location,VacancyStatus,NumberOfOpenings,Qualification,
+ResponsibilitiesAndDuties,SalaryRange,PostedDate,LastDateToApply,RecruiterInCharge,InterviewRounds,SelectionProcess,
+Createdby) VALUES(@JobTitle,@JobDescription,@Department,@Location,@VacancyStatus,@NumberOfOpenings,@Qualification,
+@ResponsibilitiesAndDuties,@SalaryRange,@PostedDate,@LastDateToApply,@RecruiterInCharge,@InterviewRounds,@SelectionProcess,
+@Createdby)
+END
+
+
+
+
+CREATE PROCEDURE GetVacancylist
+  AS
+  BEGIN
+  SELECT vid,JobTitle,JobDescription,PostedDate,LastDateToApply,Createdby FROM Vacancy
+  END

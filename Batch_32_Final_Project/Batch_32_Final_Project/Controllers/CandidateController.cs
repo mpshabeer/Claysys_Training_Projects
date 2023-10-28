@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Batch_32_Final_Project.Models;
+using System.Configuration;
+using Batch_32_Final_Project.Repository;
+using System.Web.Services.Description;
 
 namespace Batch_32_Final_Project.Controllers
 {
+   
     public class CandidateController : Controller
     {
         /// <summary>
@@ -14,89 +22,50 @@ namespace Batch_32_Final_Project.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
+        /// 
+
+        private SqlConnection connection;
+        
         public ActionResult CandidateDashbord()
         {
             return View();
         }
 
-       
+        public ActionResult Viewvacancy()
+        {
+            VacancyRepository vacancyRepository = new VacancyRepository();
+            ModelState.Clear();
+            return View(vacancyRepository.GetallVacancy());
+           
+        }
+
+        
+        public ActionResult ViewVacancyDetails(int id)
+        {
+            try
+            {
+                VacancyRepository vacancyRepository = new VacancyRepository();
+                ModelState.Clear();
+                return View(vacancyRepository.GetVacancyDetails(id));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message=ex.Message;
+                return View();
+            }
+        }
+
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Signin", "Home");
         }
 
-        // GET: Candidate/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+       
 
-        // GET: Candidate/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Candidate/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Candidate/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Candidate/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Candidate/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Candidate/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
+        
+       
     }
 }

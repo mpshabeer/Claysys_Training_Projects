@@ -8,6 +8,8 @@ namespace Batch_32_Final_Project.Models
 {
     public class Vacancy
     {
+        public int vid { get; set; }
+
         [Display(Name = "Job Title")]
         [Required(ErrorMessage = "Job Title is required")]
         public string JobTitle { get; set; }
@@ -48,9 +50,6 @@ namespace Batch_32_Final_Project.Models
         [Required(ErrorMessage = "Salary Range is required")]
         public string SalaryRange { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "Posted Date")]
-        [Required(ErrorMessage = "Posted Date is required")]
         public string PostedDate { get; set; }
 
         [DataType(DataType.Date)]
@@ -70,5 +69,7 @@ namespace Batch_32_Final_Project.Models
         [Display(Name = "Selection Process")]
         [Required(ErrorMessage = "Selection Process is required")]
         public string SelectionProcess { get; set; }
+
+        public string Createdby { get; set; }
     }
 }

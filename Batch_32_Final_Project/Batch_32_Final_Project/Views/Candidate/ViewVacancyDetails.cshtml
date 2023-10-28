@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Batch_32_Final_Project.Models.Vacancy>
+
+    @{
+        ViewBag.Title = "ViewVacancyDetails";
+        Layout = "~/Views/Shared/CandidateLayout.cshtml";
+    }
+
+<link href="~/Content/CSS/table.css" rel="stylesheet" />
+    <table>
+        @foreach (var vacancy in Model)
+        {
+            <tr>
+                <th>Vacancy ID</th>
+                <td>@vacancy.vid</td>
+            </tr>
+            <tr>
+                <th>Job Title</th>
+                <td>@vacancy.JobTitle</td>
+            </tr>
+            <tr>
+                <th>Job Description</th>
+                <td>@vacancy.JobDescription</td>
+            </tr>
+            <tr>
+                <th>Department</th>
+                <td>@vacancy.Department</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>@vacancy.Location</td>
+            </tr>
+            <tr>
+                <th>Number of Openings</th>
+                <td>@vacancy.NumberOfOpenings</td>
+            </tr>
+            <tr>
+                <th>Qualification</th>
+                <td>@vacancy.Qualification</td>
+            </tr>
+            <tr>
+                <th>Responsibilities And Duties</th>
+                <td>@vacancy.ResponsibilitiesAndDuties</td>
+            </tr>
+            <tr>
+                <th>Salary Range</th>
+                <td>@vacancy.SalaryRange</td>
+            </tr>
+            <tr>
+                <th>Posted Date</th>
+                <td>@vacancy.PostedDate</td>
+            </tr>
+            <tr>
+                <th>LastDate To Apply</th>
+                <td>@vacancy.LastDateToApply</td>
+            </tr>
+            <tr>
+                <th>RecruiterInCharge</th>
+                <td>@vacancy.RecruiterInCharge</td>
+            </tr>
+            <tr>
+                <th>Interview Rounds</th>
+                <td>@vacancy.InterviewRounds</td>
+            </tr>
+            <tr>
+                <th>SelectionProcess</th>
+                <td>@vacancy.SelectionProcess</td>
+            </tr>
+            <tr>
+                <td><input type="button" value="Back" class="btn btn-primary" /></td>
+                <td> @Html.ActionLink("Apply", "", new { id = vacancy.vid }, new { @class = "btn btn-success" })</td>
+
+            </tr>
+        }
+    </table>
+

@@ -11,15 +11,17 @@
     <ul class="unorderdlist">
 
 
-        <li class="list"><a href="Logout">Logout</a></li>
-        <li class="list"><a href="#news">Account</a></li>
-        <li class="list"><a href="#about">MyApplication</a></li>
-        <li class="list"><a href="#home">View vacancy</a></li>
-        <li class="list"><a  href="#home">Home</a></li>
+
+        <li class="list">@Html.ActionLink("Logout", "Logout", "Candidate", new { area = "" })</a></li>
+        <li class="list">@Html.ActionLink("Account", "Account", "", new { area = "" })</li>
+        <li class="list">@Html.ActionLink("My Application", "MYApplication", "", new { area = "" })</li>
+        <li class="list">@Html.ActionLink("View Vacancy", "Viewvacancy", "Candidate", new { area = "" })</li>
+        <li class="list">@Html.ActionLink("Home", "CandidateDashbord", "Candidate", new { area = "" })</li>
+
         @if (Session["Email"] != null)
         {
             <li class="list">
-                <a class="active" href="#home">
+                <a href="#home">
                     <strong>Welcome @Session["Email"].ToString()</strong>
                 </a>
             </li>

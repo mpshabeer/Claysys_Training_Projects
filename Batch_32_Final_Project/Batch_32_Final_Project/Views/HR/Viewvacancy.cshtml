@@ -1,0 +1,41 @@
+﻿
+
+
+@model IEnumerable<Batch_32_Final_Project.Models.Vacancy>
+
+@{
+    ViewBag.Title = "Viewvacancy";
+    Layout = "~/Views/Shared/HRLayout.cshtml";
+}
+
+<link href="~/Content/CSS/table.css" rel="stylesheet" />
+<table>
+        <tr>
+            <th>Vacancy ID</th>
+            <th>Job Title</th>
+            <th>Job Description</th>
+            <th>Open Date</th>
+            <th>Close Date</th>
+            <th>Created by</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var vacancy in Model)
+        {
+            <tr>
+                <td>@vacancy.vid</td>
+                <td>@vacancy.JobTitle</td>
+                <td>@vacancy.JobDescription</td>
+                <td>@vacancy.PostedDate</td>
+                <td>@vacancy.LastDateToApply</td>
+                <td>@vacancy.Createdby</td>
+                <td>
+                    @Html.ActionLink("Update", "", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "", new { id = vacancy.vid }, new { @class = "btn btn-danger" })
+
+                </td>
+            </tr>
+        }
+    </table>
+
+
+
