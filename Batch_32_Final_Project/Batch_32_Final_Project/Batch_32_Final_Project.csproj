@@ -126,6 +126,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Applications.cs" />
+    <Compile Include="Models\Apply.cs" />
     <Compile Include="Models\Contactus.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Registration.cs" />
@@ -216,6 +218,10 @@
     <Content Include="Views\Candidate\Viewvacancy.cshtml" />
     <Content Include="Views\Candidate\ViewVacancyDetails.cshtml" />
     <Content Include="Views\HR\Viewvacancy.cshtml" />
+    <Content Include="Views\Candidate\Applyforvacancy.cshtml" />
+    <Content Include="Views\HR\UpdateVacancy.cshtml" />
+    <Content Include="Views\Candidate\ImageInsertintodb.cshtml" />
+    <Content Include="Views\Candidate\ViewApplications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

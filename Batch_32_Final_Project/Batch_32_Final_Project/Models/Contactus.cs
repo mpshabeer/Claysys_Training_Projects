@@ -8,6 +8,8 @@ namespace Batch_32_Final_Project.Models
 {
     public class Contactus
     {
+        [Key]
+        public int cid { get; set; }
 
         [Display(Name = "Name")]
         [Required(ErrorMessage = "Name is required")]

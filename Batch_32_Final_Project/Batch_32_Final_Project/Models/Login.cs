@@ -8,6 +8,7 @@ namespace Batch_32_Final_Project.Models
 {
     public class Login
     {
+       
 
         [DataType(DataType.EmailAddress)]
 

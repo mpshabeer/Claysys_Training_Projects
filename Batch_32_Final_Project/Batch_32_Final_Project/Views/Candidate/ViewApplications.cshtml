@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Batch_32_Final_Project.Models.Applications>
+
+@{
+    ViewBag.Title = "View Applications";
+    Layout = "~/Views/Shared/CandidateLayout.cshtml";
+}
+
+<h2>View Applications</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="container" style="margin-bottom: 100px;">
+    @foreach (var application in Model)
+    {
+        <div>
+            <h5>@application.id</h5>
+            @if (application.Imagefile != null && application.Imagefile.Length > 0)
+            {
+                <img src="data:image;base64,@Convert.ToBase64String(application.Imagefile)" alt="Image" width="100px" />
+            }
+        </div>
+    }
+</div>

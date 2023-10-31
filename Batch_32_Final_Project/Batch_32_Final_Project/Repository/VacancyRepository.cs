@@ -5,8 +5,10 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 
 namespace Batch_32_Final_Project.Repository
 {
@@ -136,7 +138,173 @@ namespace Batch_32_Final_Project.Repository
 
             return VacancyList;
         }
+        public bool UpdateTOVacancy(Vacancy vacancy)
+        {
+
+            connections();
+            
+
+            SqlCommand command = new SqlCommand("UpdateVacancy", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@id", vacancy.vid);
+            command.Parameters.AddWithValue("@JobTitle", vacancy.JobTitle);
+            command.Parameters.AddWithValue("@JobDescription", vacancy.JobDescription);
+            command.Parameters.AddWithValue("@Department", vacancy.Department);
+            command.Parameters.AddWithValue("@Location", vacancy.Location);
+            command.Parameters.AddWithValue("@VacancyStatus", vacancy.VacancyStatus);
+            command.Parameters.AddWithValue("@NumberOfOpenings", Convert.ToInt32(vacancy.NumberOfOpenings));
+            command.Parameters.AddWithValue("@Qualification", vacancy.Qualification);
+            command.Parameters.AddWithValue("@ResponsibilitiesAndDuties", vacancy.ResponsibilitiesAndDuties);
+            command.Parameters.AddWithValue("@SalaryRange", vacancy.SalaryRange);
+            command.Parameters.AddWithValue("@LastDateToApply", vacancy.LastDateToApply);
+            command.Parameters.AddWithValue("@RecruiterInCharge", vacancy.RecruiterInCharge);
+            command.Parameters.AddWithValue("@InterviewRounds", Convert.ToInt32(vacancy.InterviewRounds));
+            command.Parameters.AddWithValue("@SelectionProcess", vacancy.SelectionProcess);
+            connection.Open();
+            int i = command.ExecuteNonQuery();
+            connection.Close();
+            if (i >= 1)
+            {
+
+                return true;
+
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+
+        public bool DeleteTHEvacancy(int id)
+        {
+            connections();
+
+            try
+            {
+                SqlCommand command = new SqlCommand("DeleteVacancy", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@vid", id);
+                connection.Open();
+                int i = command.ExecuteNonQuery();
+                connection.Close();
+                if (i >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return false;
+            }
+        }
+        public bool ImageUpload(HttpPostedFileBase Imagefile)
+        {
+
+            byte[] imgsource = new byte[Imagefile.ContentLength];
+            Imagefile.InputStream.Read(imgsource, 0, Imagefile.ContentLength);
+            connections();
+
+            connection.Open();
+            SqlCommand command = new SqlCommand("SP_I", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@Image", imgsource);
+            int i = command.ExecuteNonQuery();
+            connection.Close();
+            if (i >= 1)
+            {
+
+                return true;
+
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+
+        public List<Applications> GetApplied()
+        {
+             List<Applications> ApplicationsList = new List<Applications>();
+                connections();
+
+                SqlCommand command = new SqlCommand("SPD_Applications", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+                DataTable dataTable = new DataTable();
 
 
+                connection.Open();
+                dataAdapter.Fill(dataTable);
+                connection.Close();
+                foreach (DataRow dataRow in dataTable.Rows)
+                {
+                    byte[] imageData;
+                    try
+                    {
+                        string base64String = dataRow["image"].ToString();
+                        imageData = Convert.FromBase64String(base64String);
+                    }
+                    catch (FormatException ex)
+                    {
+                        Console.WriteLine("Error converting from Base64: " + ex.Message);
+                        continue;
+                    }
+
+                    ApplicationsList.Add(new Applications
+                    {
+                        id = Convert.ToInt32(dataRow["id"]),
+                        Imagefile = imageData
+                    });
+                }
+
+                return ApplicationsList;
+        }
+
+        public bool Applytojob(HttpPostedFileBase Resume, HttpPostedFileBase Photo, int vid,int rid,Apply applyforjob)
+        {
+            
+            byte[] resumeSource = new byte[Resume.ContentLength];
+            Resume.InputStream.Read(resumeSource, 0, Resume.ContentLength);
+            string resumeBase64 = Convert.ToBase64String(resumeSource);
+
+            byte[] imagesource = new byte[Photo.ContentLength];
+            Photo.InputStream.Read(imagesource, 0, Photo.ContentLength);
+            string imageBase64 = Convert.ToBase64String(imagesource);
+
+
+            connections();
+
+            connection.Open();
+            SqlCommand command = new SqlCommand("SPI_job", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@vid", vid);
+            command.Parameters.AddWithValue("@rid", rid);
+            command.Parameters.AddWithValue("@Resume", resumeBase64);
+            command.Parameters.AddWithValue("@Photo", imageBase64);
+            command.Parameters.AddWithValue("@Experiance", applyforjob.Experiance);
+            command.Parameters.AddWithValue("@Description", applyforjob.Description);
+       
+          
+            int i = command.ExecuteNonQuery();
+            connection.Close();
+            if (i >= 1)
+            {
+
+                return true;
+
+            }
+            else
+            {
+
+                return false;
+            }
+        }
     }
 }

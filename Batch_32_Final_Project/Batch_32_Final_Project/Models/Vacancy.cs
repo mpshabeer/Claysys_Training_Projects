@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -8,6 +9,7 @@ namespace Batch_32_Final_Project.Models
 {
     public class Vacancy
     {
+        [Key]
         public int vid { get; set; }
 
         [Display(Name = "Job Title")]

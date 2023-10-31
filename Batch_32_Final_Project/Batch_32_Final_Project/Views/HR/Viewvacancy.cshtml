@@ -7,35 +7,33 @@
     ViewBag.Title = "Viewvacancy";
     Layout = "~/Views/Shared/HRLayout.cshtml";
 }
-
-<link href="~/Content/CSS/table.css" rel="stylesheet" />
-<table>
-        <tr>
-            <th>Vacancy ID</th>
-            <th>Job Title</th>
-            <th>Job Description</th>
-            <th>Open Date</th>
-            <th>Close Date</th>
-            <th>Created by</th>
-            <th>Action</th>
-        </tr>
+<div class="text-warning">@ViewBag.Message</div>
+<div class="container" style="margin-bottom:100px;">
+    <style>
+        .card {
+            margin: 10px;
+        }
+    </style>
+    <div class="row justify-content-around">
         @foreach (var vacancy in Model)
         {
-            <tr>
-                <td>@vacancy.vid</td>
-                <td>@vacancy.JobTitle</td>
-                <td>@vacancy.JobDescription</td>
-                <td>@vacancy.PostedDate</td>
-                <td>@vacancy.LastDateToApply</td>
-                <td>@vacancy.Createdby</td>
-                <td>
-                    @Html.ActionLink("Update", "", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
-                    @Html.ActionLink("Delete", "", new { id = vacancy.vid }, new { @class = "btn btn-danger" })
-
-                </td>
-            </tr>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="vacancy-item">
+                        <div class="card-header"> @vacancy.JobTitle</div>
+                        <div>Vacancy ID: @vacancy.vid</div>
+                        <div> @vacancy.JobDescription</div>
+                        <div>Open Date: @vacancy.PostedDate</div>
+                        <div>Close Date: @vacancy.LastDateToApply</div>
+                        <div>Created by: @vacancy.Createdby</div>
+                        <div class="card-footer">
+                            @Html.ActionLink("Update", "UpdateVacancy", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Delete", "DeleteVacancy", new { id = vacancy.vid }, new { @class = "btn btn-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-    </table>
+    </div>
 
-
-
+</div>

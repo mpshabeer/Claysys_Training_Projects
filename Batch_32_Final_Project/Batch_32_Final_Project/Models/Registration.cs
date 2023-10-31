@@ -10,7 +10,8 @@ namespace Batch_32_Final_Project.Models
 {
     public class Registration
     {
-       
+        [Key]
+        public int rid {  get; set; }
 
         [Display(Name = "Firstname")]
         [Required(ErrorMessage ="Firstname is required")]

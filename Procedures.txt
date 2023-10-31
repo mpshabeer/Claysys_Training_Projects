@@ -141,3 +141,112 @@ CREATE PROCEDURE GetVacancylist
   BEGIN
   SELECT vid,JobTitle,JobDescription,PostedDate,LastDateToApply,Createdby FROM Vacancy
   END
+
+
+  CREATE PROCEDURE UpdateVacancy
+@JobTitle VARCHAR(50),
+@JobDescription  VARCHAR(MAX),
+@Department  VARCHAR(50),
+@Location  VARCHAR(50),
+@VacancyStatus  VARCHAR(50),
+@NumberOfOpenings INT,
+@Qualification  VARCHAR(MAX),
+@ResponsibilitiesAndDuties  VARCHAR(MAX),
+@SalaryRange  VARCHAR(50),
+@LastDateToApply  VARCHAR(50),
+@RecruiterInCharge VARCHAR(50),
+@InterviewRounds INT,
+@SelectionProcess  VARCHAR(MAX)
+AS
+BEGIN
+UPDATE Vacancy
+SET JobTitle=@JobTitle,JobDescription=@JobDescription,Department=@Department,Location=@Location,
+VacancyStatus=@VacancyStatus,NumberOfOpenings=@NumberOfOpenings,Qualification=@Qualification,
+ResponsibilitiesAndDuties=@ResponsibilitiesAndDuties,SalaryRange=@SalaryRange,
+LastDateToApply=@LastDateToApply,RecruiterInCharge=@RecruiterInCharge,
+InterviewRounds=@InterviewRounds,SelectionProcess=@SelectionProcess
+END
+
+
+
+
+
+
+CREATE PROCEDURE UpdateVacancy
+@id INT,
+@JobTitle VARCHAR(50),
+@JobDescription  VARCHAR(MAX),
+@Department  VARCHAR(50),
+@Location  VARCHAR(50),
+@VacancyStatus  VARCHAR(50),
+@NumberOfOpenings INT,
+@Qualification  VARCHAR(MAX),
+@ResponsibilitiesAndDuties  VARCHAR(MAX),
+@SalaryRange  VARCHAR(50),
+@LastDateToApply  VARCHAR(50),
+@RecruiterInCharge VARCHAR(50),
+@InterviewRounds INT,
+@SelectionProcess  VARCHAR(MAX)
+AS
+BEGIN
+UPDATE Vacancy
+SET JobTitle=@JobTitle,JobDescription=@JobDescription,Department=@Department,Location=@Location,
+VacancyStatus=@VacancyStatus,NumberOfOpenings=@NumberOfOpenings,Qualification=@Qualification,
+ResponsibilitiesAndDuties=@ResponsibilitiesAndDuties,SalaryRange=@SalaryRange,
+LastDateToApply=@LastDateToApply,RecruiterInCharge=@RecruiterInCharge,
+InterviewRounds=@InterviewRounds,SelectionProcess=@SelectionProcess
+WHERE vid=@id
+END
+
+
+
+
+CREATE PROCEDURE DeleteVacancy
+@vid INT
+AS
+BEGIN
+DELETE FROM Vacancy WHERE vid=@vid
+END
+
+CREATE PROCEDURE GetID
+@Email VARCHAR(50)
+AS
+BEGIN
+SELECT rid FROM Registration WHERE Email=@Email
+END
+
+exec GetID 'mpshabeer007@gmail.com'
+
+
+SELECT TOP (1000) [id]
+      ,[image]
+  FROM [Batch32finalproject].[dbo].[Img]
+
+
+CREATE PROCEDURE SPD_Applications
+AS
+BEGIN
+SELECT * FROM Img
+END
+use Batch32finalproject
+
+CREATE PROCEDURE SP_Login
+@Email VARCHAR(50)
+As
+BEGIN
+SELECT rid,Email,Password,Type FROM [dbo].[Registration] WHERE Email=@Email
+END
+
+
+CREATE PROCEDURE SPI_job
+@vid INT,
+@rid INT,
+@Resume VARCHAR(MAX),
+@Photo VARCHAR(MAX),
+@Experiance VARCHAR(100),
+@Description VARCHAR(MAX)
+AS
+BEGIN
+INSERT INTO Application(vid,rid,Resumes,Photo,Experiance,Description)
+VALUES(@vid,@rid,@Resume,@Photo,@Experiance,@Description)
+END

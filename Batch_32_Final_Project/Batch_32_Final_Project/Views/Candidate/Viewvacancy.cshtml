@@ -6,32 +6,39 @@
     Layout = "~/Views/Shared/CandidateLayout.cshtml";
 }
 
-<link href="~/Content/CSS/table.css" rel="stylesheet" />
-<table>
-    <tr>
-        <th>Vacancy ID</th>
-        <th>Job Title</th>
-        <th>Job Description</th>
-        <th>Open Date</th>
-        <th>Close Date</th>
-        <th>Action</th>
-    </tr>
-    @foreach (var vacancy in Model)
-    {
-        <tr>
-            <td>@vacancy.vid</td>
-            <td>@vacancy.JobTitle</td>
-            <td>@vacancy.JobDescription</td>
-            <td>@vacancy.PostedDate</td>
-            <td>@vacancy.LastDateToApply</td>
-
-            <td>
-                @Html.ActionLink("View Details", "ViewVacancyDetails", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
-                <input type="button" value="apply" class="btn btn-success" />
-            </td>
-        </tr>
+<style>
+    .card {
+        margin: 10px;
+        padding: 10px;
     }
-</table>
+</style>
+<div class="container" style="margin-bottom:100px;">
+    <div class="row justify-content-around">
+        @foreach (var vacancy in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="vacancy-item">
+                        <div class="card-header">Job Title: @vacancy.JobTitle</div>
+                        <div>Vacancy ID: @vacancy.vid</div>
+                        <div> @vacancy.JobDescription</div>
+                        <div>Open Date: @vacancy.PostedDate</div>
+                        <div class="card-text">Close Date: @vacancy.LastDateToApply</div>
+                        <div class="card-footer">
+                            @Html.ActionLink("View Details", "ViewVacancyDetails", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Apply", "Applyforvacancy", new { vid = vacancy.vid }, new { @class = "btn btn-success" })
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+
 
 
 

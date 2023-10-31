@@ -93,19 +93,21 @@ namespace Batch_32_Final_Project.Controllers
                 {
                     string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
                     connection = new SqlConnection(connectionstring);
-                    SqlCommand command = new SqlCommand("LoginValidation", connection);
+                    SqlCommand command = new SqlCommand("SP_Login", connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Email", login.Email);
                     connection.Open();
                     SqlDataReader sdr = command.ExecuteReader();
                     if (sdr.Read())
                     {
+                        string rid= sdr["rid"].ToString();
                         string encryptedpasswords = sdr["Password"].ToString();
                         string decryptedpassword = decryptpassword.Decrypt(encryptedpasswords);
                         if (login.Password == decryptedpassword)
                         {
                             FormsAuthentication.SetAuthCookie(login.Email, false);
                             Session["Email"] = login.Email.ToString();
+                            Session["rid"] = Convert.ToInt32(rid);
                             string userType = sdr["Type"].ToString();
                             try
                             {

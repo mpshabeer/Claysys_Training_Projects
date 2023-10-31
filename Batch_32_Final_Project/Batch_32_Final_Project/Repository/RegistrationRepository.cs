@@ -70,5 +70,32 @@ namespace Batch_32_Final_Project.Repository
                 return false;
             }
         }
+
+    public int GetID(string mail)
+        {
+            connections();
+            int rid = -1;
+            try
+            {
+                SqlCommand command = new SqlCommand("GetID", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Email", mail);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                     rid = Convert.ToInt32(reader["rid"]);
+                }
+                reader.Close();
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return rid;
+        }
+
+
+
     }
 }
