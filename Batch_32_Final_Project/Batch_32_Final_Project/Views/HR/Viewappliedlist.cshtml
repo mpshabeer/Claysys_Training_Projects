@@ -1,0 +1,43 @@
+﻿
+
+
+@model IEnumerable<Batch_32_Final_Project.Models.Vacancy>
+
+@{
+    ViewBag.Title = "Viewvacancy";
+    Layout = "~/Views/Shared/HRLayout.cshtml";
+}
+<div class="text-warning">@ViewBag.Message</div>
+<div class="container" style="margin-bottom:100px;">
+    <style>
+        .card {
+            margin: 10px;
+        }
+    </style>
+    <div class="row justify-content-around">
+        @foreach (var vacancy in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="vacancy-item">
+                        <div class="card-header"> @vacancy.JobTitle</div>
+                        <div>Vacancy ID: @vacancy.vid</div>
+                        <div> @vacancy.JobDescription</div>
+                        <div>Department: @vacancy.Department</div>
+                        <div>Number of openigs: @vacancy.NumberOfOpenings</div>
+                        <div>Open Date: @vacancy.PostedDate</div>
+                        <div>Close Date: @vacancy.LastDateToApply</div>
+                        <div>Created by: @vacancy.Createdby</div>
+
+
+                        <div class="card-footer">
+                            @Html.ActionLink("View/Update", "UpdateVacancy", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("View Applications", "ViewAppliedDetails", new { id = vacancy.vid }, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

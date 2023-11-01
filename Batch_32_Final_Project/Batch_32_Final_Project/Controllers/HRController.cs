@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -14,7 +15,8 @@ namespace Batch_32_Final_Project.Controllers
     {
         private SqlConnection connection;
         // GET: HR
-        VacancyRepository _vacancyRepository=new VacancyRepository();
+       
+        VacancyRepository vacancyRepository = new VacancyRepository();
         public ActionResult HRDashbord()
         {
             return View();
@@ -34,10 +36,10 @@ namespace Batch_32_Final_Project.Controllers
 
             try
             {
-               
+
                 if (ModelState.IsValid)
                 {
-                    isInserted = _vacancyRepository.InsertVacancy(vacancy, mail);
+                    isInserted = vacancyRepository.InsertVacancy(vacancy, mail);
                     if (isInserted)
                     {
                         ViewBag.Message = "New Vacancy Added";
@@ -67,14 +69,14 @@ namespace Batch_32_Final_Project.Controllers
 
         public ActionResult Viewvacancy()
         {
-            VacancyRepository vacancyRepository = new VacancyRepository();
+          
             ModelState.Clear();
             return View(vacancyRepository.GetallVacancy());
         }
-  
+
         public ActionResult UpdateVacancy(int id)
         {
-            VacancyRepository vacancyRepository = new VacancyRepository();
+            
             return View(vacancyRepository.GetVacancyDetails(id).Find(Vacancy => Vacancy.vid == id));
         }
 
@@ -83,12 +85,12 @@ namespace Batch_32_Final_Project.Controllers
         {
 
             bool isInserted = false;
-          
+
             try
             {
                 if (ModelState.IsValid)
                 {
-                    isInserted = _vacancyRepository.UpdateTOVacancy(vacancy);
+                    isInserted = vacancyRepository.UpdateTOVacancy(vacancy);
                     if (isInserted)
                     {
                         ViewBag.Message = "Vacancy Updated";
@@ -120,7 +122,7 @@ namespace Batch_32_Final_Project.Controllers
         {
             try
             {
-                bool isDeleted = _vacancyRepository.DeleteTHEvacancy(id);
+                bool isDeleted = vacancyRepository.DeleteTHEvacancy(id);
                 if (isDeleted)
                 {
                     ViewBag.Message = "Vacancy Deleted Successfully";
@@ -137,12 +139,52 @@ namespace Batch_32_Final_Project.Controllers
             return RedirectToAction("Viewvacancy");
         }
 
-
+        public ActionResult ViewAppliedDetails(int id)
+        {
+            
+            ModelState.Clear();
+            return View(vacancyRepository.Getallapplieddetails(id));
+        }
+        public ActionResult Actionstatus(int id)
+        {
+            ViewBag.aid = id;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Actionstatus(Statusofapplication statusofapplication, int aid)
+        {
+            
+            try
+            {
+                bool IsSelected = vacancyRepository.Selection(statusofapplication, aid);
+                if (IsSelected)
+                {
+                    ViewBag.Message = "Staus Updated";
+                }
+                else
+                {
+                    ViewBag.Message = "Unable to Update the status";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "An error occurred: " + ex.Message;
+            }
+            return RedirectToAction("Viewappliedlist");
+        }
+    
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Viewappliedlist()
+        {
+            
+            ModelState.Clear();
+            return View(vacancyRepository.GetallVacancy());
         }
     }
 }

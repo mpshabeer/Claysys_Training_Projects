@@ -23,8 +23,12 @@ namespace Batch_32_Final_Project.Models
         public string Photo { get; set; }
 
         [Display(Name = "Experiance")]
-        [Required(ErrorMessage = "Experiance")]
+        [Required(ErrorMessage = "Experiance required")]
         public string Experiance { get; set; }
+
+        [Display(Name = "Highest Qualification")]
+        [Required(ErrorMessage = "Qualification required")]
+        public string Qualification { get; set; }
         public string Description { get; set; }
 
         [ForeignKey("vid")] 

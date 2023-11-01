@@ -23,9 +23,9 @@
 
         <li class="navbar_list">@Html.ActionLink("Logout", "Logout", "HR", new { area = "" })</a></li>
         <li class="navbar_list">@Html.ActionLink("Add new Member", "AddnewHR", "", new { area = "" })</li>
-        <li class="navbar_list">@Html.ActionLink("View Applicant", "", "", new { area = "" })</li>
+        <li class="navbar_list">@Html.ActionLink("View Applications", "Viewappliedlist", "HR", new { area = "" })</li>
         <li class="navbar_list">@Html.ActionLink("Manage vacancy", "Viewvacancy", "HR", new { area = "" })</li>
-        
+
         <li class="navbar_list">@Html.ActionLink("Add Vacancy", "Addvacancy", "HR", new { area = "" })</li>
         <li class="navbar_list">@Html.ActionLink("Home", "HRDashbord", "HR", new { area = "" })</li>
         @if (Session["Email"] != null)

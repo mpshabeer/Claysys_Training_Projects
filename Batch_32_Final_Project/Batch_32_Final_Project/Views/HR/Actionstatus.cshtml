@@ -1,0 +1,36 @@
+﻿@model Batch_32_Final_Project.Models.Statusofapplication
+
+@{
+    ViewBag.Title = "Actionstatus";
+    Layout = "~/Views/Shared/HRLayout.cshtml";
+}
+
+<h2>Actionstatus</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    {
+        var aid = ViewBag.aid as int?;
+        @Html.Hidden("aid", aid)
+    }
+
+    <td>
+        <div class="col-md-10">
+            <select id="Status" name="Status" required>
+                <option value="Short List For interview" )>Short List For interview</option>
+                <option value="Short List For Final interview" )>Short List For Final interview</option>
+                <option value="Short Listed For Training" )>Short Listed For Training</option>
+                <option value="Pending" )>Pending</option>
+                <option value="Not selected">Not Selected</option>
+            </select>
+
+            <strong> @Html.DisplayNameFor(model => model.Interviewdate)</strong>
+            <div><input type="date" name="Interviewdate" /></div>
+
+            <input style="margin:10px;" type="submit" name="Update" class="btn btn-success" />
+
+        </div>
+    </td>
+}

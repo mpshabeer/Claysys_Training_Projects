@@ -61,13 +61,14 @@
                 <th>Interview Rounds</th>
                 <td>@vacancy.InterviewRounds</td>
             </tr>
+
             <tr>
                 <th>SelectionProcess</th>
                 <td>@vacancy.SelectionProcess</td>
             </tr>
             <tr>
                 <td><input type="button" value="Back" class="btn btn-primary" /></td>
-                <td> @Html.ActionLink("Apply", "", new { id = vacancy.vid }, new { @class = "btn btn-success" })</td>
+                <td>  @Html.ActionLink("Apply", "Applyforvacancy", new { vid = vacancy.vid }, new { @class = "btn btn-success" })</td>
 
             </tr>
         }

@@ -25,7 +25,7 @@
                         <div>Open Date: @vacancy.PostedDate</div>
                         <div class="card-text">Close Date: @vacancy.LastDateToApply</div>
                         <div class="card-footer">
-                            @Html.ActionLink("View Details", "ViewVacancyDetails", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("View Job Poster", "ViewVacancyDetails", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
                             @Html.ActionLink("Apply", "Applyforvacancy", new { vid = vacancy.vid }, new { @class = "btn btn-success" })
 
                         </div>
