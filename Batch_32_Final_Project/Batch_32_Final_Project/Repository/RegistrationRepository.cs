@@ -8,12 +8,13 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
+using System.Web.Mvc;
 using Batch_32_Final_Project.Models;
 namespace Batch_32_Final_Project.Repository
 {
     public class RegistrationRepository
     {
-        private SqlConnection connection;
+        string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
         public string Encrypt(string clearText)
         {
             string ciphertext;
@@ -36,31 +37,35 @@ namespace Batch_32_Final_Project.Repository
             }
             return ciphertext;
         }
-        private void connections()
-        {
-            string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
-            connection = new SqlConnection(connectionstring);
-        }
+      
+           
+           
+        
         public bool Insertregistration(Registration registration)
         {
-            connections();
+            int i;
             var encryptedpassword = Encrypt(registration.Password);
-            SqlCommand command = new SqlCommand("InsertToRegistration", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@Firstnane", registration.Firstname);
-            command.Parameters.AddWithValue("@Lastname", registration.Lastname);
-            command.Parameters.AddWithValue("@Dateofbirth", registration.Dateofbirth);
-            command.Parameters.AddWithValue("@Gender", registration.Gender);
-            command.Parameters.AddWithValue("@Phone", registration.Phone);
-            command.Parameters.AddWithValue("@Email", registration.Email);
-            command.Parameters.AddWithValue("@Address", registration.Address);
-            command.Parameters.AddWithValue("@State", registration.State);
-            command.Parameters.AddWithValue("@City", registration.City);
-            command.Parameters.AddWithValue("@Pincode", registration.Pincode);
-            command.Parameters.AddWithValue("@Password",encryptedpassword);
-            connection.Open();
-            int i = command.ExecuteNonQuery();
-            connection.Close();
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("InsertToRegistration", connection))
+                {
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Firstnane", registration.Firstname);
+                    command.Parameters.AddWithValue("@Lastname", registration.Lastname);
+                    command.Parameters.AddWithValue("@Dateofbirth", registration.Dateofbirth);
+                    command.Parameters.AddWithValue("@Gender", registration.Gender);
+                    command.Parameters.AddWithValue("@Phone", registration.Phone);
+                    command.Parameters.AddWithValue("@Email", registration.Email);
+                    command.Parameters.AddWithValue("@Address", registration.Address);
+                    command.Parameters.AddWithValue("@State", registration.State);
+                    command.Parameters.AddWithValue("@City", registration.City);
+                    command.Parameters.AddWithValue("@Pincode", registration.Pincode);
+                    command.Parameters.AddWithValue("@Password", encryptedpassword);
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
             if (i >= 1)
             {
                 return true;
@@ -71,31 +76,112 @@ namespace Batch_32_Final_Project.Repository
             }
         }
 
-    public int GetID(string mail)
+       
+
+
+        public Userdetails GetDetailsofUser(int rid)
         {
-            connections();
-            int rid = -1;
-            try
+            Userdetails userdetails = null;
+
+            using (SqlConnection connection = new SqlConnection(connectionstring))
             {
-                SqlCommand command = new SqlCommand("GetID", connection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@Email", mail);
+               
+                SqlCommand commandd = new SqlCommand("SPD_Registration", connection);
+                commandd.CommandType = CommandType.StoredProcedure;
+                commandd.Parameters.AddWithValue("@rid", rid);
+
                 connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.Read())
+                SqlDataReader dataReader = commandd.ExecuteReader();
+
+                if (dataReader.HasRows)
                 {
-                     rid = Convert.ToInt32(reader["rid"]);
+                    while (dataReader.Read())
+                    {
+                         userdetails = new Userdetails
+                        {
+                            rid=rid,
+                            Firstname = dataReader["Firstname"].ToString(),
+                            Lastname = dataReader["Lastname"].ToString(),
+                            Dateofbirth = dataReader["Dateofbirth"].ToString(),
+                            Gender = dataReader["Gender"].ToString(),
+                            Phone = dataReader["Phone"].ToString(),
+                            Email = dataReader["Email"].ToString(),
+                            Address = dataReader["Address"].ToString(),
+                            State = dataReader["State"].ToString(),
+                            City = dataReader["City"].ToString(),
+                            Pincode = dataReader["Pincode"].ToString(),
+                        };
+                    }
                 }
-                reader.Close();
             }
-            finally
-            {
-                connection.Close();
-            }
-            return rid;
+            return userdetails; 
         }
+        public bool Updateuserdetails(Userdetails userdetails)
+        {
 
+            int i = 0;
 
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPU_Registration", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@rid", userdetails.rid);
+                    command.Parameters.AddWithValue("@Firstname", userdetails.Firstname);
+                    command.Parameters.AddWithValue("@Lastname", userdetails.Lastname);
+                    command.Parameters.AddWithValue("@Dateofbirth", userdetails.Dateofbirth);
+                    command.Parameters.AddWithValue("@Gender", userdetails.Gender);
+                    command.Parameters.AddWithValue("@Email", userdetails.Email);
+                    command.Parameters.AddWithValue("@Phone", userdetails.Phone);
+                    command.Parameters.AddWithValue("@Address", userdetails.Address);
+                    command.Parameters.AddWithValue("@State", userdetails.State);
+                    command.Parameters.AddWithValue("@City", userdetails.City);
+                    command.Parameters.AddWithValue("@Pincode", userdetails.Pincode);
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
+            if (i >= 1)
+            {
 
+                return true;
+
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+        public bool ChangeUserPassword( string encryptedpassword,int rid)
+        {
+
+            int i = 0;
+
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPU_UserPassword", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@rid", rid);
+                    command.Parameters.AddWithValue("@Newpassword", encryptedpassword);
+                 
+      
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
+            if (i >= 1)
+            {
+
+                return true;
+
+            }
+            else
+            {
+
+                return false;
+            }
+        }
     }
 }

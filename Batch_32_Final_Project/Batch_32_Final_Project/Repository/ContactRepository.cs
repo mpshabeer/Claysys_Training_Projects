@@ -14,30 +14,32 @@ namespace Batch_32_Final_Project.Repository
 
         private SqlConnection connection;
         //To Handle connection related activities    
-        private void connections()
-        {
+      
             string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
-            connection = new SqlConnection(connectionstring);
+         
 
-        }
+        
 
         public bool InsertContact(Contactus contactus)
         {
+            int i;
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPI_Contactus", connection))
+                {
 
-            connections();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Name", contactus.Name);
+                    command.Parameters.AddWithValue("@Phone", contactus.Phone);
+                    command.Parameters.AddWithValue("@Email", contactus.Email);
+                    command.Parameters.AddWithValue("@Command", contactus.Command);
 
 
-            SqlCommand command = new SqlCommand("Inserttocontact", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@Name", contactus.Name);
-            command.Parameters.AddWithValue("@Phone", contactus.Phone);
-            command.Parameters.AddWithValue("@Email", contactus.Email);
-            command.Parameters.AddWithValue("@Command", contactus.Command);
-        
-
-            connection.Open();
-            int i = command.ExecuteNonQuery();
-            connection.Close();
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
+         
             if (i >= 1)
             {
 

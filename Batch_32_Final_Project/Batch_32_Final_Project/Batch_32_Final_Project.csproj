@@ -129,10 +129,12 @@
     <Compile Include="Models\Alldetailsofapplication.cs" />
     <Compile Include="Models\Applications.cs" />
     <Compile Include="Models\Apply.cs" />
+    <Compile Include="Models\Changepassword.cs" />
     <Compile Include="Models\Contactus.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Registration.cs" />
     <Compile Include="Models\Statusofapplication.cs" />
+    <Compile Include="Models\Userdetails.cs" />
     <Compile Include="Models\Vacancy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ContactRepository.cs" />
@@ -227,6 +229,10 @@
     <Content Include="Views\HR\ViewAppliedDetails.cshtml" />
     <Content Include="Views\HR\Viewappliedlist.cshtml" />
     <Content Include="Views\HR\Actionstatus.cshtml" />
+    <Content Include="Views\Candidate\Viewmyapplication.cshtml" />
+    <Content Include="Views\Candidate\Getuserdetails.cshtml" />
+    <Content Include="Views\Candidate\Updateuserdetails.cshtml" />
+    <Content Include="Views\Candidate\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

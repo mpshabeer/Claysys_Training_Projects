@@ -30,7 +30,7 @@ namespace Batch_32_Final_Project.Repository
 
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
-                using (SqlCommand command = new SqlCommand("Inserttovacancy", connection))
+                using (SqlCommand command = new SqlCommand("SPI_Vacancy", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@JobTitle", vacancy.JobTitle);
@@ -108,7 +108,7 @@ namespace Batch_32_Final_Project.Repository
 
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
-                SqlCommand command = new SqlCommand("GetVacancylist", connection);
+                SqlCommand command = new SqlCommand("SPD_Vacancy", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter dataadapter = new SqlDataAdapter(command);
                 DataTable datatable = new DataTable();
@@ -140,39 +140,42 @@ namespace Batch_32_Final_Project.Repository
             List<Vacancy> VacancyList = new List<Vacancy>();
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
-                SqlCommand command = new SqlCommand("DetailsofVacancy", connection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@vid", vid);
-                SqlDataAdapter dataadapter = new SqlDataAdapter(command);
-                DataTable datatable = new DataTable();
-
-                connection.Open();
-                dataadapter.Fill(datatable);
-                
-                foreach (DataRow datarow in datatable.Rows)
+                using (SqlCommand command = new SqlCommand("SPD_Job", connection))
                 {
 
-                    VacancyList.Add(
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@vid", vid);
+                    SqlDataAdapter dataadapter = new SqlDataAdapter(command);
+                    DataTable datatable = new DataTable();
 
-                        new Vacancy
-                        {
-                            vid = Convert.ToInt32(datarow["vid"]),
-                            JobTitle = Convert.ToString(datarow["JobTitle"]),
-                            JobDescription = Convert.ToString(datarow["JobDescription"]),
-                            Department = Convert.ToString(datarow["Department"]),
-                            Location = Convert.ToString(datarow["Location"]),
-                            VacancyStatus = Convert.ToString(datarow["VacancyStatus"]),
-                            NumberOfOpenings = Convert.ToString(datarow["NumberOfOpenings"]),
-                            Qualification = Convert.ToString(datarow["Qualification"]),
-                            ResponsibilitiesAndDuties = Convert.ToString(datarow["ResponsibilitiesAndDuties"]),
-                            SalaryRange = Convert.ToString(datarow["SalaryRange"]),
-                            PostedDate = Convert.ToString(datarow["PostedDate"]),
-                            LastDateToApply = Convert.ToString(datarow["LastDateToApply"]),
-                            RecruiterInCharge = Convert.ToString(datarow["RecruiterInCharge"]),
-                            InterviewRounds = Convert.ToString(datarow["InterviewRounds"]),
-                            SelectionProcess = Convert.ToString(datarow["SelectionProcess"]),
-                        }
-                        );
+                    connection.Open();
+                    dataadapter.Fill(datatable);
+
+                    foreach (DataRow datarow in datatable.Rows)
+                    {
+
+                        VacancyList.Add(
+
+                            new Vacancy
+                            {
+                                vid = Convert.ToInt32(datarow["vid"]),
+                                JobTitle = Convert.ToString(datarow["JobTitle"]),
+                                JobDescription = Convert.ToString(datarow["JobDescription"]),
+                                Department = Convert.ToString(datarow["Department"]),
+                                Location = Convert.ToString(datarow["Location"]),
+                                VacancyStatus = Convert.ToString(datarow["VacancyStatus"]),
+                                NumberOfOpenings = Convert.ToString(datarow["NumberOfOpenings"]),
+                                Qualification = Convert.ToString(datarow["Qualification"]),
+                                ResponsibilitiesAndDuties = Convert.ToString(datarow["ResponsibilitiesAndDuties"]),
+                                SalaryRange = Convert.ToString(datarow["SalaryRange"]),
+                                PostedDate = Convert.ToString(datarow["PostedDate"]),
+                                LastDateToApply = Convert.ToString(datarow["LastDateToApply"]),
+                                RecruiterInCharge = Convert.ToString(datarow["RecruiterInCharge"]),
+                                InterviewRounds = Convert.ToString(datarow["InterviewRounds"]),
+                                SelectionProcess = Convert.ToString(datarow["SelectionProcess"]),
+                            }
+                            );
+                    }
                 }
             }
             return VacancyList;
@@ -180,28 +183,33 @@ namespace Batch_32_Final_Project.Repository
         public bool UpdateTOVacancy(Vacancy vacancy)
         {
 
-            connections();
-            
+            int i = 0;
 
-            SqlCommand command = new SqlCommand("UpdateVacancy", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@id", vacancy.vid);
-            command.Parameters.AddWithValue("@JobTitle", vacancy.JobTitle);
-            command.Parameters.AddWithValue("@JobDescription", vacancy.JobDescription);
-            command.Parameters.AddWithValue("@Department", vacancy.Department);
-            command.Parameters.AddWithValue("@Location", vacancy.Location);
-            command.Parameters.AddWithValue("@VacancyStatus", vacancy.VacancyStatus);
-            command.Parameters.AddWithValue("@NumberOfOpenings", Convert.ToInt32(vacancy.NumberOfOpenings));
-            command.Parameters.AddWithValue("@Qualification", vacancy.Qualification);
-            command.Parameters.AddWithValue("@ResponsibilitiesAndDuties", vacancy.ResponsibilitiesAndDuties);
-            command.Parameters.AddWithValue("@SalaryRange", vacancy.SalaryRange);
-            command.Parameters.AddWithValue("@LastDateToApply", vacancy.LastDateToApply);
-            command.Parameters.AddWithValue("@RecruiterInCharge", vacancy.RecruiterInCharge);
-            command.Parameters.AddWithValue("@InterviewRounds", Convert.ToInt32(vacancy.InterviewRounds));
-            command.Parameters.AddWithValue("@SelectionProcess", vacancy.SelectionProcess);
-            connection.Open();
-            int i = command.ExecuteNonQuery();
-            connection.Close();
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPU_Vacancy", connection))
+                {
+
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@id", vacancy.vid);
+                    command.Parameters.AddWithValue("@JobTitle", vacancy.JobTitle);
+                    command.Parameters.AddWithValue("@JobDescription", vacancy.JobDescription);
+                    command.Parameters.AddWithValue("@Department", vacancy.Department);
+                    command.Parameters.AddWithValue("@Location", vacancy.Location);
+                    command.Parameters.AddWithValue("@VacancyStatus", vacancy.VacancyStatus);
+                    command.Parameters.AddWithValue("@NumberOfOpenings", Convert.ToInt32(vacancy.NumberOfOpenings));
+                    command.Parameters.AddWithValue("@Qualification", vacancy.Qualification);
+                    command.Parameters.AddWithValue("@ResponsibilitiesAndDuties", vacancy.ResponsibilitiesAndDuties);
+                    command.Parameters.AddWithValue("@SalaryRange", vacancy.SalaryRange);
+                    command.Parameters.AddWithValue("@LastDateToApply", vacancy.LastDateToApply);
+                    command.Parameters.AddWithValue("@RecruiterInCharge", vacancy.RecruiterInCharge);
+                    command.Parameters.AddWithValue("@InterviewRounds", Convert.ToInt32(vacancy.InterviewRounds));
+                    command.Parameters.AddWithValue("@SelectionProcess", vacancy.SelectionProcess);
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
             if (i >= 1)
             {
 
@@ -217,16 +225,22 @@ namespace Batch_32_Final_Project.Repository
 
         public bool DeleteTHEvacancy(int id)
         {
-            connections();
 
+            int i = 0;
             try
             {
-                SqlCommand command = new SqlCommand("DeleteVacancy", connection);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@vid", id);
-                connection.Open();
-                int i = command.ExecuteNonQuery();
-                connection.Close();
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    using (SqlCommand command = new SqlCommand("SPDel_Vacancy", connection))
+                    {
+
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@vid", id);
+                        connection.Open();
+                        i = command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
                 if (i >= 1)
                 {
                     return true;
@@ -244,17 +258,19 @@ namespace Batch_32_Final_Project.Repository
         }
         public bool ImageUpload(HttpPostedFileBase Imagefile)
         {
-
+            int i = 0;
             byte[] imgsource = new byte[Imagefile.ContentLength];
             Imagefile.InputStream.Read(imgsource, 0, Imagefile.ContentLength);
-            connections();
-
-            connection.Open();
-            SqlCommand command = new SqlCommand("SP_I", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@Image", imgsource);
-            int i = command.ExecuteNonQuery();
-            connection.Close();
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SP_I", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Image", imgsource);
+                    i = command.ExecuteNonQuery();
+                    connection.Close();
+                }
+            }
             if (i >= 1)
             {
 
@@ -317,23 +333,25 @@ namespace Batch_32_Final_Project.Repository
             Photo.InputStream.Read(imagesource, 0, Photo.ContentLength);
             string imageBase64 = Convert.ToBase64String(imagesource);
 
+            int i;
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPI_job", connection))
+                {
 
-            connections();
-
-            connection.Open();
-            SqlCommand command = new SqlCommand("SPI_job", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@vid", vid);
-            command.Parameters.AddWithValue("@rid", rid);
-            command.Parameters.AddWithValue("@Resume", resumeBase64);
-            command.Parameters.AddWithValue("@Photo", imageBase64);
-            command.Parameters.AddWithValue("@Experiance", applyforjob.Experiance);
-            command.Parameters.AddWithValue("@Qualification", applyforjob.Qualification);
-            command.Parameters.AddWithValue("@Description", applyforjob.Description);
-        
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@vid", vid);
+                    command.Parameters.AddWithValue("@rid", rid);
+                    command.Parameters.AddWithValue("@Resume", resumeBase64);
+                    command.Parameters.AddWithValue("@Photo", imageBase64);
+                    command.Parameters.AddWithValue("@Experiance", applyforjob.Experiance);
+                    command.Parameters.AddWithValue("@Qualification", applyforjob.Qualification);
+                    command.Parameters.AddWithValue("@Description", applyforjob.Description);
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
           
-            int i = command.ExecuteNonQuery();
-            connection.Close();
             if (i >= 1)
             {
 
@@ -350,8 +368,7 @@ namespace Batch_32_Final_Project.Repository
         public List<Alldetailsofapplication> Getallapplieddetails(int id)
         {
 
-            string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
-            connection = new SqlConnection(connectionstring);
+            connections();
             List<Alldetailsofapplication> AppliedList = new List<Alldetailsofapplication>();
             SqlCommand command = new SqlCommand("SPD_Allapplications", connection);
             command.CommandType = CommandType.StoredProcedure;
@@ -393,18 +410,20 @@ namespace Batch_32_Final_Project.Repository
 
         public bool Selection(Statusofapplication statusofapplication,int aid)
         {
+            int i;
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPU_Applicationsstatus", connection))
+                {
 
-            connections();
-            
-
-            SqlCommand command = new SqlCommand("SPU_Applicationsstatus", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@aid", aid);
-            command.Parameters.AddWithValue("@Status", statusofapplication.Status);
-            command.Parameters.AddWithValue("@Interviewdate", statusofapplication.Interviewdate);
-            connection.Open();
-            int i = command.ExecuteNonQuery();
-            connection.Close();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@aid", aid);
+                    command.Parameters.AddWithValue("@Status", statusofapplication.Status);
+                    command.Parameters.AddWithValue("@Interviewdate", statusofapplication.Interviewdate);
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
             if (i >= 1)
             {
 
@@ -417,5 +436,79 @@ namespace Batch_32_Final_Project.Repository
                 return false;
             }
         }
+        public List<Alldetailsofapplication> Myapplications(int rid)
+        {
+
+            connections();
+            List<Alldetailsofapplication> AppliedList = new List<Alldetailsofapplication>();
+            SqlCommand command = new SqlCommand("SPD_Myapplications", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@rid", rid);
+            SqlDataAdapter dataadapter = new SqlDataAdapter(command);
+            DataTable datatable = new DataTable();
+
+            connection.Open();
+            dataadapter.Fill(datatable);
+            connection.Close();
+            foreach (DataRow datarow in datatable.Rows)
+            {
+
+                AppliedList.Add(
+
+                    new Alldetailsofapplication
+                    {
+                        vid = Convert.ToInt32(datarow["vid"]),
+                        aid = Convert.ToInt32(datarow["aid"]),
+                        rid = Convert.ToInt32(datarow["rid"]),
+                        JobTitle = Convert.ToString(datarow["JobTitle"]),
+                        Firstname = Convert.ToString(datarow["Firstname"]),
+                        Lastname = Convert.ToString(datarow["Lastname"]),
+                        Email = Convert.ToString(datarow["Email"]),
+                        Resume = Convert.ToString(datarow["Resumes"]),
+                        Photo = Convert.ToString(datarow["Photo"]),
+                        Experiance = Convert.ToString(datarow["Experiance"]),
+                        Description = Convert.ToString(datarow["Description"]),
+                        Qualification = Convert.ToString(datarow["Qualification"]),
+                        Status = Convert.ToString(datarow["Status"]),
+                        Interviewdate = Convert.ToString(datarow["Interviewdate"]),
+
+                    }
+                    );
+            }
+            return AppliedList;
         }
+        public bool Withdrawapplication(int id)
+        {
+
+            int i = 0;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    using (SqlCommand command = new SqlCommand("SP_WithdrawMyapplication", connection))
+                    {
+
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@aid", id);
+                        connection.Open();
+                        i = command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+                if (i >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return false;
+            }
+        }
+    }
 }

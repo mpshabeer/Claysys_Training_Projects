@@ -14,29 +14,33 @@ namespace Batch_32_Final_Project.Repository
 
     {
         private SqlConnection connection;
-        private void connections()
-        {
+       
             string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
-            connection = new SqlConnection(connectionstring);
-        }
+           
+        
         public bool checkemail(Registration registration)
         {
-            connections();
-            SqlCommand command = new SqlCommand("Emailexists", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@Email", registration.Email);
-            connection.Open();
-            SqlDataReader sdr = command.ExecuteReader();
-            if (sdr.Read())
+            using (SqlConnection connection = new SqlConnection(connectionstring))
             {
-                string Emails = sdr["Email"].ToString();
-                if (Emails == registration.Email)
+                using (SqlCommand command = new SqlCommand("SPD_Emailexist", connection))
                 {
-                    return false;
-                }
-                else
-                {
-                    return true;
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Email", registration.Email);
+                    connection.Open();
+                    SqlDataReader sdr = command.ExecuteReader();
+                    if (sdr.Read())
+                    {
+                        string Emails = sdr["Email"].ToString();
+                        if (Emails == registration.Email)
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
             return true;
