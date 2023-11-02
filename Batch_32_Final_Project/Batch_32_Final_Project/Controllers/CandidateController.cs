@@ -41,7 +41,7 @@ namespace Batch_32_Final_Project.Controllers
 
         public ActionResult Viewvacancy()
         {
-            VacancyRepository vacancyRepository = new VacancyRepository();
+           
             ModelState.Clear();
             return View(vacancyRepository.GetallVacancy());
 
@@ -52,7 +52,6 @@ namespace Batch_32_Final_Project.Controllers
         {
             try
             {
-                VacancyRepository vacancyRepository = new VacancyRepository();
                 ModelState.Clear();
                 return View(vacancyRepository.GetVacancyDetails(id));
             }
@@ -121,23 +120,33 @@ namespace Batch_32_Final_Project.Controllers
             if (ModelState.IsValid)
             {
                 bool isinserted;
+                bool isapplied;
                 try
                 {
                     HttpPostedFileBase Resume = Request.Files["Resume"];
                     HttpPostedFileBase Photo = Request.Files["Photo"];
                     if (Resume != null && Photo != null)
                     {
-                        VacancyRepository vacancyRepository = new VacancyRepository();
+                       
                         int rid = Convert.ToInt32(Session["rid"].ToString());
-                        isinserted = vacancyRepository.Applytojob(Resume, Photo, vid, rid, applytojob);
-                        if (isinserted)
+                        isapplied = vacancyRepository.IsApplied(vid, rid);
+                        if (isapplied)
                         {
-                            return RedirectToAction("Viewvacancy");
+                            ViewBag.Message = "Your Application Allready saved in Database";
+                            return View();
                         }
                         else
                         {
-                            ViewBag.Message = "Something Wrong";
-                            return View();
+                            isinserted = vacancyRepository.Applytojob(Resume, Photo, vid, rid, applytojob);
+                            if (isinserted)
+                            {
+                                return RedirectToAction("Viewvacancy");
+                            }
+                            else
+                            {
+                                ViewBag.Message = "Something Wrong";
+                                return View();
+                            }
                         }
                     }
                     ViewBag.Message = "NULL ";

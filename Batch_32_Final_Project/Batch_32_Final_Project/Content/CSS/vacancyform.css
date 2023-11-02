@@ -9,11 +9,11 @@
     width: 100%;
 }
 
-.form-container {
+#container {
     width: 50%;
     margin: 30px auto;
     padding: 50px;
-    background-color: #fff;
+    background-color: rgb(208, 207, 207);
     border: 1px solid #dee2e6;
     border-radius: 5px;
 }

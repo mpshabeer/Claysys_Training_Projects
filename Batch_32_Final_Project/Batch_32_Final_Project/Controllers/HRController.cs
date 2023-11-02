@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
@@ -11,11 +13,13 @@ using Batch_32_Final_Project.Repository;
 
 namespace Batch_32_Final_Project.Controllers
 {
+   
     public class HRController : Controller
     {
         private SqlConnection connection;
         // GET: HR
-       
+        EmailexistRepository emailexist = new EmailexistRepository();
+        RegistrationRepository registrationRepository = new RegistrationRepository();
         VacancyRepository vacancyRepository = new VacancyRepository();
         public ActionResult HRDashbord()
         {
@@ -185,6 +189,172 @@ namespace Batch_32_Final_Project.Controllers
             
             ModelState.Clear();
             return View(vacancyRepository.GetallVacancy());
+        }
+
+        public ActionResult CeatenewHR()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CeatenewHR(Registration registration)
+        {
+            bool isInserted = false;
+            bool isvalidmail = false;
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    isvalidmail = emailexist.checkemail(registration);
+                    if (isvalidmail)
+                    {
+                        isInserted = registrationRepository.InserttoHR(registration);
+                        if (isInserted)
+                        {
+                            TempData["Successmessage"] = "Registration of HR Successfull";
+
+                            return View();
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Unable to save";
+                            return View();
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Email Already  Exisist";
+                        return View();
+                    }
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+                ViewBag.Messags = "exception error";
+                return View();
+            }
+        }
+        public ActionResult Getuserdetails()
+        {
+            int rid = Convert.ToInt32(Session["rid"].ToString());
+            Userdetails userdetails = new Userdetails();
+            userdetails = registrationRepository.GetDetailsofUser(rid);
+            return View(userdetails);
+
+        }
+        public ActionResult Updateuserdetails()
+        {
+            int rid = Convert.ToInt32(Session["rid"].ToString());
+            Userdetails userdetails = new Userdetails();
+            userdetails = registrationRepository.GetDetailsofUser(rid);
+            return View(userdetails);
+
+        }
+
+        [HttpPost]
+        public ActionResult Updateuserdetails(Userdetails userdetails)
+        {
+            bool isInserted = false;
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    isInserted = registrationRepository.Updateuserdetails(userdetails);
+                    if (isInserted)
+                    {
+                        ViewBag.Message = "User details Updated";
+                        return RedirectToAction("Getuserdetails");
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Unable to save: No records were updated.";
+                        return View();
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = "Model not Valid";
+                    var errors = ModelState.Values.SelectMany(v => v.Errors);
+                    foreach (var error in errors)
+                    {
+                        // Log or print the specific validation errors
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error: " + ex.Message;
+                return View();
+            }
+        }
+
+        public ActionResult ChangePassword()
+        {
+
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(Changepassword changepassword)
+        {
+
+            Decryptpassword decryptpassword = new Decryptpassword();
+            int rid = Convert.ToInt32(Session["rid"].ToString());
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
+                    connection = new SqlConnection(connectionstring);
+                    SqlCommand command = new SqlCommand("SPD_Oldpassword", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@rid", rid);
+                    connection.Open();
+                    SqlDataReader sdr = command.ExecuteReader();
+
+                    if (sdr.Read())
+                    {
+
+                        string encryptedpasswords = sdr["Password"].ToString();
+                        string decryptedpassword = decryptpassword.Decrypt(encryptedpasswords);
+                        if (changepassword.OldPassword == decryptedpassword)
+                        {
+                            string newpassword = changepassword.NewPassword;
+                            string encryptedpassword = registrationRepository.Encrypt(newpassword);
+                            bool isupdated = false;
+                            isupdated = registrationRepository.ChangeUserPassword(encryptedpassword, rid);
+                            if (isupdated)
+                            {
+                                return RedirectToAction("Getuserdetails");
+                            }
+                            else
+                            {
+                                ViewBag.Message = "Model Not VALID!!!!!!! ";
+                                return View();
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "User not found Please recheck it ";
+                        return View();
+                    }
+
+                }
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Exception " + ex;
+                return View();
+            }
+
         }
     }
 }

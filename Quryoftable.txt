@@ -1,0 +1,141 @@
+USE [Batch32finalproject]
+GO
+
+/****** Object:  Table [dbo].[Application]    Script Date: 02-11-2023 19:42:09 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Application](
+	[aid] [int] IDENTITY(1,1) NOT NULL,
+	[vid] [int] NULL,
+	[rid] [int] NULL,
+	[Resumes] [varchar](max) NULL,
+	[Photo] [varchar](max) NULL,
+	[Experiance] [varchar](100) NULL,
+	[Description] [varchar](max) NULL,
+	[Status] [varchar](100) NULL,
+	[Interviewdate] [varchar](100) NULL,
+	[Qualification] [varchar](100) NULL,
+ CONSTRAINT [PK_Application] PRIMARY KEY CLUSTERED 
+(
+	[aid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Application]  WITH CHECK ADD  CONSTRAINT [FK_Application_Registration] FOREIGN KEY([rid])
+REFERENCES [dbo].[Registration] ([rid])
+GO
+
+ALTER TABLE [dbo].[Application] CHECK CONSTRAINT [FK_Application_Registration]
+GO
+
+ALTER TABLE [dbo].[Application]  WITH CHECK ADD  CONSTRAINT [FK_Application_Registration1] FOREIGN KEY([rid])
+REFERENCES [dbo].[Registration] ([rid])
+GO
+
+ALTER TABLE [dbo].[Application] CHECK CONSTRAINT [FK_Application_Registration1]
+GO
+
+ALTER TABLE [dbo].[Application]  WITH CHECK ADD  CONSTRAINT [FK_Application_Vacancy] FOREIGN KEY([vid])
+REFERENCES [dbo].[Vacancy] ([vid])
+GO
+
+ALTER TABLE [dbo].[Application] CHECK CONSTRAINT [FK_Application_Vacancy]
+GO
+
+
+USE [Batch32finalproject]
+GO
+
+/****** Object:  Table [dbo].[Contact]    Script Date: 02-11-2023 19:42:58 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Contact](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](50) NULL,
+	[Email] [varchar](50) NULL,
+	[Phone] [varchar](50) NULL,
+	[Command] [varchar](max) NULL,
+ CONSTRAINT [PK_Contact] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+USE [Batch32finalproject]
+GO
+
+/****** Object:  Table [dbo].[Registration]    Script Date: 02-11-2023 19:43:48 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Registration](
+	[rid] [int] IDENTITY(1,1) NOT NULL,
+	[Firstname] [varchar](50) NULL,
+	[Lastname] [varchar](50) NULL,
+	[Dateofbirth] [varchar](50) NULL,
+	[Gender] [varchar](50) NULL,
+	[Phone] [varchar](50) NULL,
+	[Email] [varchar](50) NULL,
+	[Address] [varchar](max) NULL,
+	[State] [varchar](50) NULL,
+	[City] [varchar](50) NULL,
+	[Pincode] [varchar](50) NULL,
+	[Password] [varchar](200) NULL,
+	[Type] [varchar](50) NULL,
+ CONSTRAINT [PK_Registration] PRIMARY KEY CLUSTERED 
+(
+	[rid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+USE [Batch32finalproject]
+GO
+
+/****** Object:  Table [dbo].[Vacancy]    Script Date: 02-11-2023 19:44:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Vacancy](
+	[vid] [int] IDENTITY(1,1) NOT NULL,
+	[JobTitle] [varchar](50) NULL,
+	[JobDescription] [varchar](max) NULL,
+	[Department] [varchar](50) NULL,
+	[Location] [varchar](50) NULL,
+	[VacancyStatus] [varchar](50) NULL,
+	[NumberOfOpenings] [int] NULL,
+	[Qualification] [varchar](max) NULL,
+	[ResponsibilitiesAndDuties] [varchar](max) NULL,
+	[SalaryRange] [varchar](50) NULL,
+	[PostedDate] [varchar](50) NULL,
+	[LastDateToApply] [varchar](50) NULL,
+	[RecruiterInCharge] [varchar](50) NULL,
+	[InterviewRounds] [int] NULL,
+	[SelectionProcess] [varchar](50) NULL,
+	[Createdby] [varchar](50) NULL,
+ CONSTRAINT [PK_Vacancy] PRIMARY KEY CLUSTERED 
+(
+	[vid] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+

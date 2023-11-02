@@ -43,6 +43,7 @@ namespace Batch_32_Final_Project.Models
         [Required(ErrorMessage = "Qualification is required")]
         public string Qualification { get; set; }
 
+        [DataType(DataType.MultilineText)]
         [Display(Name = "Responsibilities And Duties")]
         [Required(ErrorMessage = "Responsibilities And Duties is required")]
         public string ResponsibilitiesAndDuties { get; set; }

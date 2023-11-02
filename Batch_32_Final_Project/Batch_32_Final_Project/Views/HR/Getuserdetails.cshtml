@@ -1,0 +1,92 @@
+﻿@model Batch_32_Final_Project.Models.Userdetails
+
+@{
+    ViewBag.Title = "Getuserdetails";
+    Layout = "~/Views/Shared/HRLayout.cshtml";
+}
+
+<style>
+    .user-details-container {
+        width: 50%;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    .user-details-section {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-top: 50px;
+    }
+
+    .user-detail-row {
+        margin-bottom: 15px;
+    }
+
+        .user-detail-row label {
+            font-weight: bold;
+            width: 150px;
+            display: inline-block;
+        }
+
+    .update-button {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+
+<div class="user-details-container">
+    <div class="user-details-section">
+        <div class="user-details">
+            <div class="user-detail-row">
+                <label>Firstname:</label>
+                <span>@Html.DisplayFor(model => model.Firstname)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Lastname:</label>
+                <span>@Html.DisplayFor(model => model.Lastname)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Date of Birth:</label>
+                <span>@Html.DisplayFor(model => model.Dateofbirth)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Gender:</label>
+                <span>@Html.DisplayFor(model => model.Gender)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Phone:</label>
+                <span>@Html.DisplayFor(model => model.Phone)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Email:</label>
+                <span>@Html.DisplayFor(model => model.Email)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Address:</label>
+                <span>@Html.DisplayFor(model => model.Address)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>State:</label>
+                <span>@Html.DisplayFor(model => model.State)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>City:</label>
+                <span>@Html.DisplayFor(model => model.City)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Pincode:</label>
+                <span>@Html.DisplayFor(model => model.Pincode)</span>
+            </div>
+        </div>
+        <div class="update-button">
+            @Html.ActionLink("Update Details", "Updateuserdetails", null, new { @class = "btn btn-primary" })
+
+        </div>
+        <div class="update-button">
+            @Html.ActionLink("Change Password", "ChangePassword", null, new { @class = "btn btn-primary" })
+
+        </div>
+    </div>
+</div>

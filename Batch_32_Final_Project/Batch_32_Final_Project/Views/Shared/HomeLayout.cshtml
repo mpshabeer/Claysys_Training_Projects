@@ -25,16 +25,18 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Infotech Pvt Ltd</a>
+                <img class="navbar-brand" src="~/Content/Images/logo.jpg" style="width: 40px; height: 50px; margin-left:10px;padding: 1px;" />
+                <a class="navbar-brand" style="margin-left:20px;" href="#">Infotech Pvt Ltd</a>
+
             </div>
-            <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Aboutus", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Signup", "Signup", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Signin", "Signin", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                <li>@Html.ActionLink("Contactus", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-            </ul>
-        </div>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Aboutus", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Signup", "Signup", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Signin", "Signin", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Contactus", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                </ul>
+            </div>
     </nav>
     @RenderBody()
     <footer class="footer">

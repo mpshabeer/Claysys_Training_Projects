@@ -37,10 +37,7 @@ namespace Batch_32_Final_Project.Repository
             }
             return ciphertext;
         }
-      
-           
-           
-        
+
         public bool Insertregistration(Registration registration)
         {
             int i;
@@ -75,9 +72,6 @@ namespace Batch_32_Final_Project.Repository
                 return false;
             }
         }
-
-       
-
 
         public Userdetails GetDetailsofUser(int rid)
         {
@@ -180,6 +174,41 @@ namespace Batch_32_Final_Project.Repository
             else
             {
 
+                return false;
+            }
+        }
+
+        public bool InserttoHR(Registration registration)
+        {
+            int i;
+            var encryptedpassword = Encrypt(registration.Password);
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPI_HR", connection))
+                {
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Firstnane", registration.Firstname);
+                    command.Parameters.AddWithValue("@Lastname", registration.Lastname);
+                    command.Parameters.AddWithValue("@Dateofbirth", registration.Dateofbirth);
+                    command.Parameters.AddWithValue("@Gender", registration.Gender);
+                    command.Parameters.AddWithValue("@Phone", registration.Phone);
+                    command.Parameters.AddWithValue("@Email", registration.Email);
+                    command.Parameters.AddWithValue("@Address", registration.Address);
+                    command.Parameters.AddWithValue("@State", registration.State);
+                    command.Parameters.AddWithValue("@City", registration.City);
+                    command.Parameters.AddWithValue("@Pincode", registration.Pincode);
+                    command.Parameters.AddWithValue("@Password", encryptedpassword);
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
+            if (i >= 1)
+            {
+                return true;
+            }
+            else
+            {
                 return false;
             }
         }

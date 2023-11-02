@@ -510,5 +510,29 @@ namespace Batch_32_Final_Project.Repository
                 return false;
             }
         }
+        public bool IsApplied(int vid, int rid)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPD_isUserApplied", connection))
+                {
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@vid", vid);
+                    command.Parameters.AddWithValue("@rid", rid);
+                    connection.Open();
+                    SqlDataReader sdr = command.ExecuteReader();
+                    if (sdr.HasRows)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            } 
+        }
+
     }
 }

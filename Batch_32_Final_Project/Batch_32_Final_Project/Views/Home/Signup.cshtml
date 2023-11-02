@@ -21,8 +21,8 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Firstname, htmlAttributes: new { @class = "col-form-label col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatefirstname()" } })
                 @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
                 <div><small id="fnamewarn" style="text-align: center; color: red;"></small></div>
@@ -30,8 +30,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Lastname, htmlAttributes: new { @class = "col-form-labell col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatelastname()" } })
                 @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
                 <div><small id="lnamewarn" style="text-align: center; color: red;"></small></div>
@@ -42,9 +42,9 @@
 
 
 
-            @Html.LabelFor(model => model.Dateofbirth, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="date" id="Dateofbirth" name="Dateofbirth" class="form-control" onfocusout="validdates()" />
+            @Html.LabelFor(model => model.Dateofbirth, htmlAttributes: new { @class = "col-form-label col-md-4" })
+            <div class="col-md-8">
+                <input type="date" id="Dateofbirth" name="Dateofbirth" class="form-control " onfocusout="validdates()" />
                 <div><small id="datewarn" style="text-align: center; color: red;"></small></div>
 
                 @Html.ValidationMessageFor(model => model.Dateofbirth, "", new { @class = "text-danger" })
@@ -52,8 +52,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "col-form-label col-md-4" })
+            <div class="col-md-8">
                 <label class="radio-inline">
                     @Html.RadioButtonFor(model => model.Gender, "Male", new { htmlAttributes = new { @class = "form-control" } }) Male
                 </label>
@@ -69,8 +69,8 @@
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "col-form-label col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatephone()" } })
                 @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                 <div><small id="warnphone" style="text-align: center; color: red;"></small></div>
@@ -78,8 +78,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-form-label col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateemail()" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 <div><small id="warnemail" style="text-align: center; color: red;"></small></div>
@@ -88,8 +88,8 @@
 
         <div class="form-group">
 
-            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "col-form-label col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateaddress()" } })
                 @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 <div><small id="addresswarn" style="text-align: center; color: red;"></small></div>
@@ -98,8 +98,8 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-2">State</label>
-            <div class="col-md-10">
+            <label class="col-form-label col-md-4">State</label>
+            <div class="col-md-8">
                 <select id="state" name="state" onchange="selectcity(this.value)" class="form-control" required>
                     <option value="" selected disabled>Choose State</option>
                     <option value="Kerala">Kerala</option>
@@ -110,8 +110,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-2">City</label>
-            <div class="col-md-10">
+            <label class="col-form-label col-md-4">City</label>
+            <div class="col-md-8">
                 <select id="cityselect" name="city" class="form-control" required>
                     <option selected disabled>Choose City</option>
                 </select>
@@ -120,16 +120,16 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Pincode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Pincode, htmlAttributes: new { @class = "col-form-label col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-form-labell col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatepassword()" } })
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                 <div><small id="passwordwarn" style="text-align: center; color: red;"></small></div>
@@ -137,8 +137,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Confirmpassword, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            @Html.LabelFor(model => model.Confirmpassword, htmlAttributes: new { @class = "col-form-label col-md-4" })
+            <div class="col-md-8">
                 @Html.EditorFor(model => model.Confirmpassword, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validateconfirmpassword()" } })
                 @Html.ValidationMessageFor(model => model.Confirmpassword, "", new { @class = "text-danger" })
                 <div><small id="confirmpasswordwarn" style="text-align: center; color: red;"></small></div>
