@@ -4,26 +4,24 @@
         ViewBag.Title = "ViewVacancyDetails";
         Layout = "~/Views/Shared/CandidateLayout.cshtml";
     }
+<div class="form-container bg-light" style="width:600px; margin-left:auto;margin-right:auto;padding:50px;">
 
-<link href="~/Content/CSS/table.css" rel="stylesheet" />
+    <link href="~/Content/CSS/table.css" rel="stylesheet" />
     <table>
         @foreach (var vacancy in Model)
         {
-            <tr>
-                <th>Vacancy ID</th>
-                <td>@vacancy.vid</td>
-            </tr>
+          
             <tr>
                 <th>Job Title</th>
-                <td>@vacancy.JobTitle</td>
+                <th>@vacancy.JobTitle</th>
             </tr>
             <tr>
                 <th>Job Description</th>
-                <td>@vacancy.JobDescription</td>
+                <th>@vacancy.JobDescription</th>
             </tr>
             <tr>
                 <th>Department</th>
-                <td>@vacancy.Department</td>
+                <th>@vacancy.Department</th>
             </tr>
             <tr>
                 <th>Location</th>
@@ -31,11 +29,11 @@
             </tr>
             <tr>
                 <th>Number of Openings</th>
-                <td>@vacancy.NumberOfOpenings</td>
+                <th>@vacancy.NumberOfOpenings</th>
             </tr>
             <tr>
                 <th>Qualification</th>
-                <td>@vacancy.Qualification</td>
+                <th>@vacancy.Qualification</th>
             </tr>
             <tr>
                 <th>Responsibilities And Duties</th>
@@ -67,10 +65,11 @@
                 <td>@vacancy.SelectionProcess</td>
             </tr>
             <tr>
-                <td><input type="button" value="Back" class="btn btn-primary" /></td>
+                <td> @Html.ActionLink("<<Back", "Viewvacancy", new { vid = vacancy.vid }, new { @class = "btn btn-primary" })</td>
                 <td>  @Html.ActionLink("Apply", "Applyforvacancy", new { vid = vacancy.vid }, new { @class = "btn btn-success" })</td>
 
             </tr>
         }
     </table>
 
+    </div>

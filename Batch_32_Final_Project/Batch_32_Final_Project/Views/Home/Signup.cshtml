@@ -39,9 +39,6 @@
         </div>
 
         <div class="form-group">
-
-
-
             @Html.LabelFor(model => model.Dateofbirth, htmlAttributes: new { @class = "col-form-label col-md-4" })
             <div class="col-md-8">
                 <input type="date" id="Dateofbirth" name="Dateofbirth" class="form-control " onfocusout="validdates()" />
@@ -50,6 +47,20 @@
                 @Html.ValidationMessageFor(model => model.Dateofbirth, "", new { @class = "text-danger" })
             </div>
         </div>
+
+    <script>
+   document.addEventListener('DOMContentLoaded', function () {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("Dateofbirth").setAttribute("max", today);
+    });
+</script>
+
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "col-form-label col-md-4" })

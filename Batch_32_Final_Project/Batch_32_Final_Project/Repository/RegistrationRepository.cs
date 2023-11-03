@@ -15,6 +15,7 @@ namespace Batch_32_Final_Project.Repository
     public class RegistrationRepository
     {
         string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
+        Decryptpassword decryptpassword = new Decryptpassword();
         public string Encrypt(string clearText)
         {
             string ciphertext;
@@ -212,5 +213,82 @@ namespace Batch_32_Final_Project.Repository
                 return false;
             }
         }
+
+        public bool ChangePassword(Changepassword changepassword,int rid)
+        {
+            Decryptpassword decryptpassword = new Decryptpassword();
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPD_Oldpassword", connection))
+                {
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@rid", rid);
+                    connection.Open();
+                    SqlDataReader sdr = command.ExecuteReader();
+                    if (sdr.Read())
+                    {
+
+                        string encryptedpasswords = sdr["Password"].ToString();
+                        string decryptedpassword = decryptpassword.Decrypt(encryptedpasswords);
+                        if (changepassword.OldPassword == decryptedpassword)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
     }
+
+
+
+
+
+        public bool ValidateUser(Login login, out string userType, out string rid)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(connectionstring))
+                {
+                    SqlCommand command = new SqlCommand("SP_Login", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Email", login.Email);
+                    connection.Open();
+                    SqlDataReader sdr = command.ExecuteReader();
+                    if (sdr.Read())
+                    {
+                        rid = sdr["rid"].ToString();
+                        string encryptedpasswords = sdr["Password"].ToString();
+                        string decryptedpassword = decryptpassword.Decrypt(encryptedpasswords);
+                        if (login.Password == decryptedpassword)
+                        {
+                            userType = sdr["Type"].ToString();
+                            return true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                userType = null;
+                rid = null;
+                return false;
+            }
+
+            userType = null;
+            rid = null;
+            return false;
+        
+    }
+
+
+}
 }

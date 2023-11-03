@@ -13,34 +13,42 @@ using Batch_32_Final_Project.Repository;
 
 namespace Batch_32_Final_Project.Controllers
 {
-   
     public class HRController : Controller
     {
         private SqlConnection connection;
-        // GET: HR
+        Decryptpassword decryptpassword = new Decryptpassword();
         EmailexistRepository emailexist = new EmailexistRepository();
         RegistrationRepository registrationRepository = new RegistrationRepository();
         VacancyRepository vacancyRepository = new VacancyRepository();
+
+        /// <summary>
+        ///  Displays the HRDashbord view for the HR.
+        /// </summary>
+        /// <returns>Returns the default view for the controller.</returns>
         public ActionResult HRDashbord()
         {
             return View();
         }
-
+        /// <summary>
+        /// Display Addvacancy form for creating new Job poster
+        /// </summary>
+        /// <returns>Returns the Addvacancy view for the controller</returns>
         public ActionResult Addvacancy()
         {
             return View();
         }
-
+        /// <summary>
+        ///  Handles the HTTP POST request for Addvacancy .
+        /// </summary>
+        /// <param name="vacancy">The vacancy object containing Jobposter data.</param>
+        /// <returns>>Returns an ActionResult based on the outcome of the Addvacancy process.</returns>
         [HttpPost]
         public ActionResult Addvacancy(Vacancy vacancy)
         {
             bool isInserted = false;
             string mail = (string)Session["Email"];
-
-
             try
             {
-
                 if (ModelState.IsValid)
                 {
                     isInserted = vacancyRepository.InsertVacancy(vacancy, mail);
@@ -302,59 +310,72 @@ namespace Batch_32_Final_Project.Controllers
         [HttpPost]
         public ActionResult ChangePassword(Changepassword changepassword)
         {
-
-            Decryptpassword decryptpassword = new Decryptpassword();
+            bool isvalidpasswords;
+            bool isupdated ;
             int rid = Convert.ToInt32(Session["rid"].ToString());
             try
             {
                 if (ModelState.IsValid)
                 {
-                    string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
-                    connection = new SqlConnection(connectionstring);
-                    SqlCommand command = new SqlCommand("SPD_Oldpassword", connection);
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@rid", rid);
-                    connection.Open();
-                    SqlDataReader sdr = command.ExecuteReader();
-
-                    if (sdr.Read())
+                    isvalidpasswords = registrationRepository.ChangePassword(changepassword, rid);
+                    if (isvalidpasswords)
                     {
-
-                        string encryptedpasswords = sdr["Password"].ToString();
-                        string decryptedpassword = decryptpassword.Decrypt(encryptedpasswords);
-                        if (changepassword.OldPassword == decryptedpassword)
+                        string newpassword = changepassword.NewPassword;
+                        string encryptedpassword = registrationRepository.Encrypt(newpassword);
+                        isupdated = registrationRepository.ChangeUserPassword(encryptedpassword, rid);
+                        if (isupdated)
                         {
-                            string newpassword = changepassword.NewPassword;
-                            string encryptedpassword = registrationRepository.Encrypt(newpassword);
-                            bool isupdated = false;
-                            isupdated = registrationRepository.ChangeUserPassword(encryptedpassword, rid);
-                            if (isupdated)
-                            {
-                                return RedirectToAction("Getuserdetails");
-                            }
-                            else
-                            {
-                                ViewBag.Message = "Model Not VALID!!!!!!! ";
-                                return View();
-                            }
-
+                            return RedirectToAction("Getuserdetails");
                         }
+                        else
+                        {
+                            ViewBag.Message = "Unable to save your password";
+                            return View();
+                        }
+
                     }
                     else
                     {
-                        ViewBag.Message = "User not found Please recheck it ";
+                        ViewBag.Message = "Please Enter your password Correctly";
                         return View();
                     }
-
                 }
-                return View();
+                else
+                {
+                    ViewBag.Message = "Please Enter the required fields";
+                    return View();
+                }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = "Exception " + ex;
                 return View();
             }
+        }
 
+        public ActionResult Viewcontact()
+        {
+            return View(vacancyRepository.Getallcontactrequest());
+        }
+        public ActionResult DeleteContact(int id)
+        {
+            try
+            {
+                bool isDeleted = vacancyRepository.DeleteContactus(id);
+                if (isDeleted)
+                {
+                    ViewBag.Message = "Vacancy Deleted Successfully";
+                }
+                else
+                {
+                    ViewBag.Message = "Unable to Delete the Vacancy";
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "An error occurred: " + ex.Message;
+            }
+            return RedirectToAction("Viewcontact");
         }
     }
 }

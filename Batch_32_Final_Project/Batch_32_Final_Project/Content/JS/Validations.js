@@ -16,7 +16,7 @@
 
 function validatelastname() {
 
-    const lastname = document.getElementById("Lastname").value;
+    const lastname = document.getElementById("Lastname").value; 
     const validfirstname = /^[A-Za-z ]+$/;
 
     if (lastname == "") {

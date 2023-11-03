@@ -7,7 +7,7 @@
 
 <table class="table">
     <tr>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.JobTitle)
         </th>
@@ -41,46 +41,47 @@
 
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+    @foreach (var item in Model)
+    {
+        <tr>
 
-        <td>
-           <strong> @Html.DisplayFor(modelItem => item.JobTitle)</strong>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Firstname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Lastname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Qualification)
-        </td>
-        <td>
-            <a href="data:application/pdf;base64,@item.Resume" target="_blank">View Resume</a>
-        <td>
-            <img src="data:image;base64,@item.Photo" alt="Image" style="width:100px" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Experiance)
-        </td>
-      
-        <td>
-            <strong>
-                @Html.DisplayFor(modelItem => item.Status)
-            </strong>
-        </td>
-        <td>
-            <strong>@Html.DisplayFor(modelItem => item.Interviewdate)</strong>
-        </td>
-        
+            <td>
+                <strong> @Html.DisplayFor(modelItem => item.JobTitle)</strong>
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Email)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Qualification)
+            </th>
+            <td>
+                <a href="data:application/pdf;base64,@item.Resume" target="_blank">View Resume</a>
+            <td>
+                <img src="data:image;base64,@item.Photo" alt="Image" style="width:100px" />
+            </td>
+            <th>
+                @Html.DisplayFor(modelItem => item.Experiance)
+            </th>
 
-        <td>@Html.ActionLink("Withdraw Application", "Withdrawapplication", new { aid = item.aid }, new { @class = "btn btn-danger" })</td>
-        
-    </tr>
-}
+            <td>
+                <strong>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </strong>
+            </td>
+            <td>
+                <strong>@Html.DisplayFor(modelItem => item.Interviewdate)</strong>
+            </td>
+
+
+            <td>@Html.ActionLink("Withdraw Application", "Withdrawapplication", new { aid = item.aid }, new { @class = "btn btn-danger" })</td>
+
+        </tr>
+    }
 
 </table>

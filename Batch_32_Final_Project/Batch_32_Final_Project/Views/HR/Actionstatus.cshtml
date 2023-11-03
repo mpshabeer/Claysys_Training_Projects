@@ -5,32 +5,34 @@
     Layout = "~/Views/Shared/HRLayout.cshtml";
 }
 
-<h2>Actionstatus</h2>
+<div class="table-bordered bg-light" style="width:600px; margin-left:auto;margin-right:auto;padding-left:175px;">
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
+    @using (Html.BeginForm())
     {
-        var aid = ViewBag.aid as int?;
-        @Html.Hidden("aid", aid)
-    }
+        @Html.AntiForgeryToken()
 
-    <td>
-        <div class="col-md-10">
-            <select id="Status" name="Status" required>
-                <option value="Short List For interview" )>Short List For interview</option>
-                <option value="Short List For Final interview" )>Short List For Final interview</option>
-                <option value="Short Listed For Training" )>Short Listed For Training</option>
-                <option value="Pending" )>Pending</option>
+        {
+            var aid = ViewBag.aid as int?;
+            @Html.Hidden("aid", aid)
+        }
+
+
+        <div class="form-group">
+            <label class="col-md-4"><strong>Status</strong></label>
+            <select class="col-md-8" id="Status" name="Status" required>
+                <option value="Pending" >Pending</option>
+                <option value="Short Listed For interview" )>Short Listing For interview</option>
+                <option value="Short Listed For Final interview" )>Short Listing For Final interview</option>
+                <option value="Short Listed For Training" )>Short Listing For Training</option>
                 <option value="Not selected">Not Selected</option>
             </select>
-
-            <strong> @Html.DisplayNameFor(model => model.Interviewdate)</strong>
-            <div><input type="date" name="Interviewdate" /></div>
-
-            <input style="margin:10px;" type="submit" name="Update" class="btn btn-success" />
-
         </div>
-    </td>
-}
+        <div  class="form-group">
+            <label class="col-md-4"><strong>Interview Date</strong></label>
+          <input class="col-md-8" type="date" name="Interviewdate" />
+            </div>
+            <div  class="form-group">
+            <input style="margin:20px; " type="submit" name="Update" class="btn btn-success" />
+        </div>
+    }
+</div>

@@ -3,6 +3,14 @@
     ViewBag.Title = "HRDashbord";
     Layout = "~/Views/Shared/HRLayout.cshtml";
 }
+@if (Session["Email"] != null && Session["rid"] != null)
+{
+<div class="text-bg-info"> <strong>Welcome @Session["Email"].ToString()</strong> </div>
+}
+else
+{
+    Response.RedirectToRoute("Default", new { controller = "Home", action = "Index" });
+}
 
 <div class="text-center"><h2 style="margin:30px; font-family:'Arial Rounded MT';">INFOTECH PVT LTD</h2></div>
 <div class="col-md-12">

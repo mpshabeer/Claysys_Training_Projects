@@ -254,59 +254,46 @@ namespace Batch_32_Final_Project.Controllers
         [HttpPost]
         public ActionResult ChangePassword(Changepassword changepassword)
         {
-
-            Decryptpassword decryptpassword = new Decryptpassword();
+            bool isvalidpasswords;
+            bool isupdated;
             int rid = Convert.ToInt32(Session["rid"].ToString());
             try
             {
                 if (ModelState.IsValid)
                 {
-                    string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
-                    connection = new SqlConnection(connectionstring);
-                    SqlCommand command = new SqlCommand("SPD_Oldpassword", connection);
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@rid", rid);
-                    connection.Open();
-                    SqlDataReader sdr = command.ExecuteReader();
-                   
-                    if (sdr.Read())
+                    isvalidpasswords = registrationRepository.ChangePassword(changepassword, rid);
+                    if (isvalidpasswords)
                     {
-
-                        string encryptedpasswords = sdr["Password"].ToString();
-                        string decryptedpassword = decryptpassword.Decrypt(encryptedpasswords);
-                        if (changepassword.OldPassword == decryptedpassword)
+                        string newpassword = changepassword.NewPassword;
+                        string encryptedpassword = registrationRepository.Encrypt(newpassword);
+                        isupdated = registrationRepository.ChangeUserPassword(encryptedpassword, rid);
+                        if (isupdated)
                         {
-                            string newpassword = changepassword.NewPassword;
-                            string encryptedpassword = registrationRepository.Encrypt(newpassword);
-                            bool isupdated=false;
-                            isupdated = registrationRepository.ChangeUserPassword(encryptedpassword, rid);
-                            if(isupdated)
-                            {
-                                return RedirectToAction("Getuserdetails");
-                            }
-                            else
-                            {
-                                ViewBag.Message = "Model Not VALID!!!!!!! ";
-                                return View();
-                            }
-                            
+                            return RedirectToAction("Getuserdetails");
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Unable to save your password";
+                            return View();
                         }
                     }
                     else
                     {
-                        ViewBag.Message = "User not found Please recheck it ";
+                        ViewBag.Message = "Please Enter your password Correctly";
                         return View();
                     }
-
                 }
-                return View();
+                else
+                {
+                    ViewBag.Message = "Please Enter the required fields";
+                    return View();
+                }
             }
             catch (Exception ex)
             {
-                ViewBag.Message = "Exception "+ex;
+                ViewBag.Message = "Exception " + ex;
                 return View();
             }
-           
         }
 
-} } 
+    } } 

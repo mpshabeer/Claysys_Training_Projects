@@ -123,6 +123,8 @@ namespace Batch_32_Final_Project.Repository
                         vid = Convert.ToInt32(datarow["vid"]),
                         JobTitle = Convert.ToString(datarow["JobTitle"]),
                         JobDescription = Convert.ToString(datarow["JobDescription"]),
+                        Department = Convert.ToString(datarow["Department"]),
+                        NumberOfOpenings = Convert.ToString(datarow["NumberOfOpenings"]),
                         PostedDate = Convert.ToString(datarow["PostedDate"]),
                         LastDateToApply = Convert.ToString(datarow["LastDateToApply"]),
                         Createdby = Convert.ToString(datarow["Createdby"])
@@ -533,6 +535,68 @@ namespace Batch_32_Final_Project.Repository
                 }
             } 
         }
+        public List<Contactus> Getallcontactrequest()
+        {
+            List<Contactus> ContactusList = new List<Contactus>();
 
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                SqlCommand command = new SqlCommand("SPD_Contactus", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter dataadapter = new SqlDataAdapter(command);
+                DataTable datatable = new DataTable();
+
+                connection.Open();
+                dataadapter.Fill(datatable);
+
+                foreach (DataRow datarow in datatable.Rows)
+                {
+                    ContactusList.Add(new Contactus
+                    {
+                        cid = Convert.ToInt32(datarow["id"]),
+                        Name = Convert.ToString(datarow["Name"]),
+                        Email = Convert.ToString(datarow["Email"]),
+                        Phone = Convert.ToString(datarow["Phone"]),
+                        Command = Convert.ToString(datarow["Command"])                       
+                    });
+                }
+            }
+
+            return ContactusList;
+        }
+
+        public bool DeleteContactus(int cid)
+        {
+
+            int i = 0;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionstring))
+                {
+                    using (SqlCommand command = new SqlCommand("SPDel_Contact", connection))
+                    {
+
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@cid", cid);
+                        connection.Open();
+                        i = command.ExecuteNonQuery();
+                        connection.Close();
+                    }
+                }
+                if (i >= 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("An error occurred: " + ex.Message);
+                return false;
+            }
+        }
     }
 }

@@ -1,21 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
+
+document.addEventListener('DOMContentLoaded', function () {
     var today = new Date();
-    var month = today.getMonth() + 1; 
-    var year = today.getFullYear();
-    var tdate = today.getDate();
-  
-  
-    var maxdate = year + "-" + month + "-" + tdate;
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
 
-    document.getElementById("Dateofbirth").setAttribute("max", maxdate);
-
-  });
-  
-
-
-
-
-
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("Dateofbirth").setAttribute("max", today);
+});
 
 const statevisecity={
     Kerala:["Kochi","Calicut","Tiruvanadapuram","Malappuram"],

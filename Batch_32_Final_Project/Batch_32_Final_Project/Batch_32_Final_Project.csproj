@@ -166,6 +166,7 @@
     <Content Include="Content\CSS\HRStyle.css" />
     <Content Include="Content\CSS\Homepage.css" />
     <Content Include="Content\CSS\table.css" />
+    <Content Include="Content\CSS\Userdetails.css" />
     <Content Include="Content\CSS\vacancyform.css" />
     <Content Include="Content\Images\logo.jpg" />
     <Content Include="Content\Images\image1.jpg" />
@@ -173,6 +174,7 @@
     <Content Include="Content\Images\image4.jpg" />
     <Content Include="Content\Images\image5.jpg" />
     <Content Include="Content\Images\image2.jpg" />
+    <Content Include="Content\JS\contacts.js" />
     <Content Include="Content\JS\homepagescript.js" />
     <Content Include="Content\JS\Preventbackt.js" />
     <Content Include="Content\JS\Signup.js" />
@@ -237,6 +239,7 @@
     <Content Include="Views\HR\Getuserdetails.cshtml" />
     <Content Include="Views\HR\Updateuserdetails.cshtml" />
     <Content Include="Views\HR\ChangePassword.cshtml" />
+    <Content Include="Views\HR\Viewcontact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

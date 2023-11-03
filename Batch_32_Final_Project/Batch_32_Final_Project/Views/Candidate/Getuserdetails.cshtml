@@ -4,40 +4,13 @@
     ViewBag.Title = "Getuserdetails";
     Layout = "~/Views/Shared/CandidateLayout.cshtml";
 }
-<style>
-    .user-details-container {
-        width: 50%;
-        margin: 0 auto;
-        text-align: left;
-    }
-
-    .user-details-section {
-        background-color: #f9f9f9;
-        padding: 20px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        margin-top: 50px;
-    }
-
-    .user-detail-row {
-        margin-bottom: 15px;
-    }
-
-        .user-detail-row label {
-            font-weight: bold;
-            width: 150px;
-            display: inline-block;
-        }
-
-    .update-button {
-        text-align: center;
-        margin-top: 20px;
-    }
-</style>
+<link href="~/Content/CSS/Userdetails.css" rel="stylesheet" />
 
 <div class="user-details-container">
     <div class="user-details-section">
         <div class="user-details">
+            <h4 class="text-center">About me</h4>
+            <hr />
             <div class="user-detail-row">
                 <label>Firstname:</label>
                 <span>@Html.DisplayFor(model => model.Firstname)</span>
