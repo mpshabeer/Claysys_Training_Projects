@@ -1,0 +1,94 @@
+﻿@model Batch_32_Final_Project.Models.Application
+
+
+
+@{
+    ViewBag.Title = "Applyforvacancy";
+    Layout = "~/Views/Shared/CandidateLayout.cshtml";
+}
+
+<div class="form-container bg-light" style="width:600px; margin-left:auto;margin-right:auto;padding:50px;">
+    @if (ViewBag.Message != null)
+    {
+        <div class="text-bg-warning">@ViewBag.Message</div>
+    }
+    @using (Html.BeginForm("Updateapplication", "Candidate", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+    {
+
+        @Html.AntiForgeryToken()
+
+       
+
+<div class="form-horizontal">
+    Update
+    <hr />
+
+    </div>
+    <div class="form-group" style="display:none;">
+        @Html.LabelFor(model => model.aid, htmlAttributes: new { @class = "control-label col-md-8" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.aid, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.aid, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Resume, htmlAttributes: new { @class = "control-label col-md-8" })
+        <div class="col-md-10">
+            <input type="file" name="Resume" accept=".doc,.docx,.pdf" required />
+            @Html.ValidationMessageFor(model => model.Resume, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Photo, htmlAttributes: new { @class = "control-label col-md-8" })
+        <div class="col-md-10">
+            <input type="file" name="Photo" accept="image/png,image/jpeg, image/jpg" required/>
+            @Html.ValidationMessageFor(model => model.Photo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Qualification, htmlAttributes: new { @class = "control-label col-md-8" })
+        <div class="col-md-10">
+            <select class="form-control" id="Qualification" name="Qualification" required>
+                <option value="MCA" @(Model.Qualification == "MCA" ? "selected" : "")>MCA</option>
+                <option value="BTECH CSE" @(Model.Qualification == "BTECH CSE" ? "selected" : "")>BTECH CSE</option>
+                <option value="BTECH MECH" @(Model.Qualification == "BTECH MECH" ? "selected" : "")>BTECH MECH</option>
+                <option value="BTECH IT" @(Model.Qualification == "BTECH IT" ? "selected" : "")>BTECH IT</option>
+                <option value="MTECH" @(Model.Qualification == "MTECH" ? "selected" : "")>MTECH</option>
+                <option value="BCA" @(Model.Qualification == "BCA" ? "selected" : "")>BCA</option>
+                <option value="BSC Computer Science" @(Model.Qualification == "BSC Computer Science" ? "selected" : "")>BSC Computer Science</option>
+                <option value="MSC Computer Science" @(Model.Qualification == "MSC Computer Science" ? "selected" : "")>MSC Computer Science</option>
+                <option value="Others" @(Model.Qualification == "Others" ? "selected" : "")>Others-Please mention in description</option>
+            </select>
+        </div>
+        @Html.ValidationMessageFor(model => model.Qualification, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Experiance, htmlAttributes: new { @class = "control-label col-md-8" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Experiance, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Experiance, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-8" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10" style="margin:20px;">
+            <input type="submit" value="Apply" class="btn btn-success" />
+        </div>
+    </div>
+
+    }
+</div>
+

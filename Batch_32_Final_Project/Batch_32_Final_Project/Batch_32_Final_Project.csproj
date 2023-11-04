@@ -127,6 +127,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Alldetailsofapplication.cs" />
+    <Compile Include="Models\Application.cs" />
     <Compile Include="Models\Applications.cs" />
     <Compile Include="Models\Apply.cs" />
     <Compile Include="Models\Changepassword.cs" />
@@ -165,6 +166,7 @@
     <Content Include="Content\CSS\HomeStyle.css" />
     <Content Include="Content\CSS\HRStyle.css" />
     <Content Include="Content\CSS\Homepage.css" />
+    <Content Include="Content\CSS\Statusapplication.css" />
     <Content Include="Content\CSS\table.css" />
     <Content Include="Content\CSS\Userdetails.css" />
     <Content Include="Content\CSS\vacancyform.css" />
@@ -240,6 +242,8 @@
     <Content Include="Views\HR\Updateuserdetails.cshtml" />
     <Content Include="Views\HR\ChangePassword.cshtml" />
     <Content Include="Views\HR\Viewcontact.cshtml" />
+    <Content Include="Views\Candidate\Updateapplication.cshtml" />
+    <Content Include="Views\HR\Updateapplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

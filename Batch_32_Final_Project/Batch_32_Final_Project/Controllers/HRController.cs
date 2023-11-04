@@ -66,7 +66,7 @@ namespace Batch_32_Final_Project.Controllers
                 }
                 else
                 {
-                    ViewBag.Message = " Error";
+                    ViewBag.Message = " Model not Valid";
                     return View();
                 }
 
@@ -377,6 +377,51 @@ namespace Batch_32_Final_Project.Controllers
             }
             return RedirectToAction("Viewcontact");
         }
+
+        public ActionResult Updateapplication(int id)
+        {
+
+            Alldetailsofapplication alldetailsofapplication = new Alldetailsofapplication();
+            alldetailsofapplication = vacancyRepository.Getapplications(id);
+            ViewBag.aid = id;
+            return View(alldetailsofapplication);
+        }
+
+        /*public ActionResult Applyforvacancy(HttpPostedFileBase Resume, HttpPostedFileBase Photo,int vid)*/
+        [HttpPost]
+        public ActionResult Updateapplication(Alldetailsofapplication application)
+        {
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+
+                    bool IsSelected = vacancyRepository.Selections(application,application.aid);
+                    if (IsSelected)
+                    {
+                        ViewBag.Message = "Staus Updated";
+                        return RedirectToAction("Updateapplication", new { id = application.aid });
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Unable to Update the status";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "An error occurred: " + ex.Message;
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Model Not Valid";
+                return View();
+            }
+            ViewBag.Message = "Updated";
+            return View();
+        }
+
     }
 }
 

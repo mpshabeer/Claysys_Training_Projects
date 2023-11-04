@@ -1,46 +1,26 @@
-      
- function validatename() {
-    
-    const name = document.getElementById("name").value;
-    const validname = /^[A-Za-z]+$/; 
+function validateName() {
+    const firstname = document.getElementById("Name").value;
+    const validFirstname = /^[A-Za-z ]+$/;
 
-    if (name == "") {
-        document.getElementById("namewarn").innerHTML = "Please enter your name";
-    } else if (!validname.test(name)) {
-        document.getElementById("namewarn").innerHTML = "Name should contain only letters";
+    if (firstname.trim() === "") {
+        document.getElementById("namewarn").innerHTML = "Please enter your Firstname";
+    } else if (!validFirstname.test(firstname)) {
+        document.getElementById("namewarn").innerHTML = "Firstname should contain only letters";
     } else {
         document.getElementById("namewarn").innerHTML = "";
     }
 }
 
-function validemail(){
-    
-    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/;
-    const email = document.getElementById("mail").value;
-    if (email == "") {
-        document.getElementById("mailwarn").innerHTML="Please enter your e-mail"
-    }
-    else if (!email.match(validRegex)) {
-            document.getElementById("mailwarn").innerHTML=" Please enter a valid e-mail"
-            }
-    else{
-        document.getElementById("mailwarn").innerHTML=""
-    }
-}
-
-           
-                      
-
-    function validatephone() {
-    const phoneInput = document.getElementById("phone");
+function validatephone() {
+    const phoneInput = document.getElementById("Phone");
     const phonePattern = /^[6789][0-9]{9}$/;
 
     if (phonePattern.test(phoneInput.value)) {
-       
+        document.getElementById("warnphone").innerHTML = ""; 
+
     } else {
-        
-        document.getElementById("phonewarn").innerHTML = "Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9.";
-       
+
+        document.getElementById("warnphone").innerHTML = "Please enter a valid 10-digit Phone number starting with 6, 7, 8, or 9.";
+
     }
 }
-        

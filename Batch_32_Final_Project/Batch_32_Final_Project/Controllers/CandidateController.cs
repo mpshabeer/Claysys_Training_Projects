@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -46,8 +47,6 @@ namespace Batch_32_Final_Project.Controllers
             return View(vacancyRepository.GetallVacancy());
 
         }
-
-
         public ActionResult ViewVacancyDetails(int id)
         {
             try
@@ -295,5 +294,56 @@ namespace Batch_32_Final_Project.Controllers
                 return View();
             }
         }
+        public ActionResult Updateapplication(int id)
+        {
+           
+            Application application = new Application();
+            application = vacancyRepository.Getapplication(id);
+            return View(application);
+        }
 
-    } } 
+    /*public ActionResult Applyforvacancy(HttpPostedFileBase Resume, HttpPostedFileBase Photo,int vid)*/
+    [HttpPost]
+    public ActionResult Updateapplication(Application application)
+    {
+            
+            if (ModelState.IsValid)
+        {
+                HttpPostedFileBase Resume = Request.Files["Resume"];
+                HttpPostedFileBase Photo = Request.Files["Photo"];
+                bool isinserted;
+                if (Resume != null && Photo != null)
+                {
+                    try
+                    {
+                        isinserted = vacancyRepository.Updateapplications(application, Resume, Photo);
+                        if (isinserted)
+                        {
+                            return RedirectToAction("Viewmyapplication");
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Insertion error";
+                            return View();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        return View("Error" + ex);
+                    }
+                }
+                else
+                {
+                    ViewBag.message = "Resume empty";
+                    return View();
+                }
+            }
+            else
+            {
+                ViewBag.message = "Model NOT VALID";
+                return View();
+
+            }
+        return View();
+    }
+} } 

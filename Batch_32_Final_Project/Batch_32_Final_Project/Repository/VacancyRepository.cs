@@ -173,6 +173,7 @@ namespace Batch_32_Final_Project.Repository
                                 PostedDate = Convert.ToString(datarow["PostedDate"]),
                                 LastDateToApply = Convert.ToString(datarow["LastDateToApply"]),
                                 RecruiterInCharge = Convert.ToString(datarow["RecruiterInCharge"]),
+                                Createdby= Convert.ToString(datarow["Createdby"]),
                                 InterviewRounds = Convert.ToString(datarow["InterviewRounds"]),
                                 SelectionProcess = Convert.ToString(datarow["SelectionProcess"]),
                             }
@@ -595,6 +596,150 @@ namespace Batch_32_Final_Project.Repository
             catch (Exception ex)
             {
                 Console.WriteLine("An error occurred: " + ex.Message);
+                return false;
+            }
+        }
+        
+        public Application Getapplication(int id)
+        {
+            Application apply = null;
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+
+                SqlCommand command = new SqlCommand("SPD_Application", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@aid", id);
+                connection.Open();
+                SqlDataReader dataReader = command.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        apply = new Application
+                        {
+                            aid = Convert.ToInt32(dataReader["aid"]),
+                            Resume = Convert.ToString(dataReader["Resumes"]),
+                            Photo = Convert.ToString(dataReader["Photo"]),
+                            Qualification = Convert.ToString(dataReader["Qualification"]),
+                            Experiance = Convert.ToString(dataReader["Experiance"]),
+                            Description = Convert.ToString(dataReader["Description"]),
+                        };
+                    }
+                }
+            }
+            return apply;
+        }
+
+
+        public Alldetailsofapplication Getapplications(int id)
+        {
+            Alldetailsofapplication apply = null;
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                SqlCommand commandd = new SqlCommand("SPD_Applicant", connection);
+                commandd.CommandType = CommandType.StoredProcedure;
+                commandd.Parameters.AddWithValue("@aid", id);
+                connection.Open();
+                SqlDataReader dataReader = commandd.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        apply = new Alldetailsofapplication
+                        {
+                            vid = Convert.ToInt32(dataReader["vid"]),
+                            aid = id,
+                            rid = Convert.ToInt32(dataReader["rid"]),
+                            Department= Convert.ToString(dataReader["Department"]),
+                            Responsibilities = Convert.ToString(dataReader["ResponsibilitiesAndDuties"]),
+                            JobTitle = Convert.ToString(dataReader["JobTitle"]),
+                            JobDescription = Convert.ToString(dataReader["JobDescription"]),
+                            Firstname = Convert.ToString(dataReader["Firstname"]),
+                            Lastname = Convert.ToString(dataReader["Lastname"]),
+                            Email = Convert.ToString(dataReader["Email"]),
+                            Phone = Convert.ToString(dataReader["Phone"]),
+                            Resume = Convert.ToString(dataReader["Resumes"]),
+                            Photo = Convert.ToString(dataReader["Photo"]),
+                            Experiance = Convert.ToString(dataReader["Experiance"]),
+                            Description = Convert.ToString(dataReader["Description"]),
+                            Qualification = Convert.ToString(dataReader["Qualification"]),
+                            Status = Convert.ToString(dataReader["Status"]),
+                            Interviewdate = Convert.ToString(dataReader["Interviewdate"]),
+
+                        };
+                    }
+                }
+            }
+            return apply;
+        }
+
+        public bool Updateapplications(Application apply, HttpPostedFileBase Resume, HttpPostedFileBase Photo)
+        {
+
+            int i = 0;
+            byte[] resumeSource = new byte[Resume.ContentLength];
+            Resume.InputStream.Read(resumeSource, 0, Resume.ContentLength);
+            string resumeBase64 = Convert.ToBase64String(resumeSource);
+
+            byte[] imagesource = new byte[Photo.ContentLength];
+            Photo.InputStream.Read(imagesource, 0, Photo.ContentLength);
+            string imageBase64 = Convert.ToBase64String(imagesource);
+
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPU_Application", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@aid", apply.aid);
+                    command.Parameters.AddWithValue("@Resume", resumeBase64);
+                    command.Parameters.AddWithValue("@Photo", imageBase64);
+                    command.Parameters.AddWithValue("@Qualification", apply.Qualification);
+                    command.Parameters.AddWithValue("@Experiance", apply.Experiance);
+                    command.Parameters.AddWithValue("@Description", apply.Description);
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
+            if (i >= 1)
+            {
+
+                return true;
+
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+
+        public bool Selections(Alldetailsofapplication alldetailsofapplication, int aid)
+        {
+            int i;
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                using (SqlCommand command = new SqlCommand("SPU_Applicationsstatus", connection))
+                {
+
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@aid", aid);
+                    command.Parameters.AddWithValue("@Status", alldetailsofapplication.Status);
+                    command.Parameters.AddWithValue("@Interviewdate", alldetailsofapplication.Interviewdate);
+                    connection.Open();
+                    i = command.ExecuteNonQuery();
+                }
+            }
+            if (i >= 1)
+            {
+
+                return true;
+
+            }
+            else
+            {
+
                 return false;
             }
         }

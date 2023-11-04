@@ -1,6 +1,4 @@
 ﻿function validatefirstname() {
-
-
     const firstname = document.getElementById("Firstname").value;
     const validfirstname = /^[A-Za-z ]+$/;
 
@@ -125,5 +123,18 @@ function validateconfirmpassword() {
     else {
 
         document.getElementById("confirmpasswordwarn").innerHTML = "Password must contain at least one digit, one lowercase letter, one uppercase letter, and be at least 8 characters long";
+    }
+}
+
+function validateName() {
+    const firstname = document.getElementById("Name").value;
+    const validFirstname = /^[A-Za-z ]+$/;
+
+    if (firstname.trim() === "") {
+        document.getElementById("namewarn").innerHTML = "Please enter your Firstname";
+    } else if (!validFirstname.test(firstname)) {
+        document.getElementById("namewarn").innerHTML = "Firstname should contain only letters";
+    } else {
+        document.getElementById("namewarn").innerHTML = "";
     }
 }

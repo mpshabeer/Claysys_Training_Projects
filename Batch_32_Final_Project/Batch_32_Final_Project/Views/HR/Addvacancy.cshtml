@@ -4,7 +4,10 @@
     ViewBag.Title = "Addvacancy";
     Layout = "~/Views/Shared/HRLayout.cshtml";
 }
-
+@if (ViewBag.Message != null)
+{
+    <div class="text-bg-warning">@ViewBag.Message</div>
+}
 <div class="table-bordered bg-light" style="width:600px; margin-left:auto;margin-right:auto;padding:50px;">
 
     <h2 class="text-center">Create New Job Poster</h2>

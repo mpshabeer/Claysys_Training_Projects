@@ -9,6 +9,10 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th> 
+
+        <th>
             @Html.DisplayNameFor(model => model.Firstname)
         </th>
         <th>
@@ -17,34 +21,26 @@
         <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.JobTitle)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Resume)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Photo)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Qualification)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Experiance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
+
+
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Interviewdate)
-        </th>
+
     </tr>
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobTitle)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Firstname)
         </td>
@@ -54,34 +50,19 @@
         <td>
             <a href="mailto:item.Email">@Html.DisplayFor(modelItem => item.Email)</a>
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.JobTitle)
-        </td>
+
         <td>
             <a href="data:application/pdf;base64,@item.Resume" target="_blank">View Resume</a>
         <td>
             <img src="data:image;base64,@item.Photo" alt="Image" style="width:100px" />
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Qualification)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Experiance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Status)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Interviewdate)
-        </td>
 
 
-        <td>@Html.ActionLink("Action", "Actionstatus", new { id = item.aid }, new { @class = "btn btn-primary" })</td>
-
-
+        <td style="display:none;">@Html.ActionLink("Action", "Actionstatus", new { id = item.aid }, new { @class = "btn btn-primary" })</td>
+        <td>@Html.ActionLink("View", "Updateapplication", new { id = item.aid }, new { @class = "btn btn-primary" })</td>
     </tr>
 }
 

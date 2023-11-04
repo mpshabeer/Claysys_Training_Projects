@@ -10,7 +10,7 @@
     <table>
         @foreach (var vacancy in Model)
         {
-          
+
             <tr>
                 <th>Job Title</th>
                 <th>@vacancy.JobTitle</th>
@@ -52,14 +52,17 @@
                 <td>@vacancy.LastDateToApply</td>
             </tr>
             <tr>
-                <th>RecruiterInCharge</th>
+                <th>Recruiter In Charge</th>
                 <td>@vacancy.RecruiterInCharge</td>
             </tr>
             <tr>
                 <th>Interview Rounds</th>
                 <td>@vacancy.InterviewRounds</td>
             </tr>
-
+            <tr>
+                <th>HR EMail</th>
+                <td><a href="mailto:@vacancy.Createdby">@vacancy.Createdby</a</td>
+            </tr>
             <tr>
                 <th>SelectionProcess</th>
                 <td>@vacancy.SelectionProcess</td>

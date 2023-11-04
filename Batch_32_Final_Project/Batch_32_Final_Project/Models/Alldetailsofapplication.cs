@@ -23,8 +23,12 @@ namespace Batch_32_Final_Project.Models
 
         public string Lastname { get; set; }
         public string Email { get; set; }
+        public string Phone { get; set; }
 
         public string Qualification { get; set; }
+        public string Department { get; set; }
+
+        public string Responsibilities { get; set; }
         public string Resume { get; set; }
 
         public string Photo { get; set; }

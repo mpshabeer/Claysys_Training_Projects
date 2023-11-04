@@ -77,8 +77,8 @@
             <td>
                 <strong>@Html.DisplayFor(modelItem => item.Interviewdate)</strong>
             </td>
-
-
+           
+            <td>@Html.ActionLink("Update Application", "Updateapplication", new { id = item.aid }, new { @class = "btn btn-primary" })</td>
             <td>@Html.ActionLink("Withdraw Application", "Withdrawapplication", new { aid = item.aid }, new { @class = "btn btn-danger" })</td>
 
         </tr>

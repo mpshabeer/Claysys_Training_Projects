@@ -1,11 +1,11 @@
 ﻿@model Batch_32_Final_Project.Models.Contactus
-
+<script src="~/Content/JS/contacts.js"></script>
 @{
     ViewBag.Title = "Contact";
     Layout = "~/Views/Shared/HomeLayout.cshtml";
 }
+<script src="~/Content/JS/Validations.js"></script>
 <script src="~/Content/JS/contacts.js"></script>
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -15,10 +15,11 @@
             <h4>Contactus</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
             <div class="form-group">
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",onfocusout = "validatename()" } })
+                    <input type="text" name="Name" id="Name" class="form-control" onfocusout="validateName()" />
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                     <div><small id="namewarn" style="color: red;"></small></div>
                 </div>
@@ -27,18 +28,18 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control",onfocusout = "validemail()" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", onfocusout = "validateemail()" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                    <div> <small id="mailwarn" style="color: red;"></small></div>
+                    <div> <small id="warnemail" style="color: red;"></small></div>
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control",onfocusout = "validatephone()" } })
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", onfocusout = "validatephone()" } })
                     @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-                    <div> <small id="phonewarn" style="color: red;"></small></div>
+                    <div> <small id="warnphone" style="color: red;"></small></div>
                 </div>
             </div>
 
@@ -59,6 +60,8 @@
     </div>
 
 }
+
+
 <h3 class="text-center" style="color: rgb(224, 80, 36); margin-top: 30px;">Our Branches</h3>
 <div class="container" style="margin-bottom:100px;">
     <div class="row justify-content-around">

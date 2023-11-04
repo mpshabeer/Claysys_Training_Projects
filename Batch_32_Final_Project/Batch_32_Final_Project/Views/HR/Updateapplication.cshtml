@@ -1,0 +1,131 @@
+﻿
+@model Batch_32_Final_Project.Models.Alldetailsofapplication
+
+@{
+    ViewBag.Title = "Updateapplication";
+    Layout = "~/Views/Shared/HRLayout.cshtml";
+}
+
+<link href="~/Content/CSS/Statusapplication.css" rel="stylesheet" />
+@if (ViewBag.Message != null)
+{
+    <div class="text-bg-warning">@ViewBag.Message</div>
+}
+
+
+
+<div class="user-details-container">
+    <div class="user-details-section">
+        <div class="user-details">
+            <h4>Application For @Html.DisplayFor(model => model.JobTitle)</h4>
+            <hr />
+
+
+
+            <div class="user-detail-row">
+                <label>Job Title:</label>
+                <span>@Html.DisplayFor(model => model.JobTitle)</span>
+            </div>
+
+            <div class="user-detail-row">
+                <label>Job Description:</label>
+                <span>@Html.DisplayFor(model => model.JobDescription)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Qualification:</label>
+                <span>@Html.DisplayFor(model => model.Department)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Responsibilities:</label>
+                <span>@Html.DisplayFor(model => model.Responsibilities)</span>
+            </div>   <h4>Applicant Informations</h4>
+            <hr />
+            <div class="user-detail-row">
+                <label>First Name:</label>
+                <span>@Html.DisplayFor(model => model.Firstname)</span>
+            </div>
+
+            <div class="user-detail-row">
+                <label>Last Name:</label>
+                <span>@Html.DisplayFor(model => model.Lastname)</span>
+            </div>
+
+            <div class="user-detail-row">
+                <label>Photo:</label>
+                <img src="@("data:image;base64," + Model.Photo)" alt="Image" style="width:100px" />
+            </div>
+            <div class="user-detail-row">
+                <label>Resume:</label>
+                
+                    <embed src="@("data:application/pdf;base64," + Model.Resume)" type="application/pdf" width="70%" height="300px" />
+            </div>
+
+
+            <div class="user-detail-row">
+                <label>Email:</label>
+                <a href="mailto:@Html.DisplayFor(model => model.Email)">@Html.DisplayFor(model => model.Email)</a>
+            </div>
+
+            <div class="user-detail-row">
+                <label>Contact number:</label>
+                <span>@Html.DisplayFor(model => model.Phone)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Description:</label>
+                <span>@Html.DisplayFor(model => model.Description)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Experiance:</label>
+                <span>@Html.DisplayFor(model => model.Experiance)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Status:</label>
+                <span>@Html.DisplayFor(model => model.Status)</span>
+            </div>
+            <div class="user-detail-row">
+                <label>Interview Date:</label>
+                <span>@Html.DisplayFor(model => model.Interviewdate)</span>
+            </div>
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+
+                <div class="box">
+                    @Html.HiddenFor(model => model.aid)
+                    @Html.HiddenFor(model => model.Qualification)
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Experiance, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-4"><strong>Update Status</strong></label>
+                    <select class="col-md-8" id="Status" name="Status" required>
+                        <option value="Pending" @(Model.Status == "Pending" ? "selected" : "")>Pending</option>
+                        <option value="Short Listed For interview" @(Model.Status == "Short Listed For interview" ? "selected" : "")>Short Listing For interview</option>
+                        <option value="Short Listed For Final interview" @(Model.Status == "Short Listed For Final interview" ? "selected" : "")>Short Listing For Final interview</option>
+                        <option value="Short Listed For Training" @(Model.Status == "Short Listed For Training" ? "selected" : "")>Short Listing For Training</option>
+                        <option value="Not selected" @(Model.Status == "Not selected" ? "selected" : "")>Not Selected</option>
+                        <option value="Approved for On-Site Interview" @(Model.Status == "Approved for On-Site Interview" ? "selected" : "")>Approved for On-Site Interview</option>
+                        <option value="Scheduled for HR Interview" @(Model.Status == "Scheduled for HR Interview" ? "selected" : "")>Scheduled for HR Interview</option>
+                        <option value="On Hold" @(Model.Status == "On Hold" ? "selected" : "")>On Hold</option>
+                        <option value="Rejected After Interview" @(Model.Status == "Rejected After Interview" ? "selected" : "")>Rejected After Interview</option>
+                        <option value="Hired" @(Model.Status == "Hired" ? "selected" : "")>Hired</option>
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4"><strong>Interview Date</strong></label>
+                    <input class="col-md-8" type="date" name="Interviewdate" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="Update" class="btn btn-success" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
