@@ -332,6 +332,7 @@ namespace Batch_32_Final_Project.Repository
             byte[] imagesource = new byte[Photo.ContentLength];
             Photo.InputStream.Read(imagesource, 0, Photo.ContentLength);
             string imageBase64 = Convert.ToBase64String(imagesource);
+            string todaydate = DateTime.UtcNow.ToString("yyyy-MM-dd");
 
             int i;
             using (SqlConnection connection = new SqlConnection(connectionstring))
@@ -347,6 +348,7 @@ namespace Batch_32_Final_Project.Repository
                     command.Parameters.AddWithValue("@Experiance", applyforjob.Experiance);
                     command.Parameters.AddWithValue("@Qualification", applyforjob.Qualification);
                     command.Parameters.AddWithValue("@Description", applyforjob.Description);
+                    command.Parameters.AddWithValue("@AppliedDate", todaydate);
                     connection.Open();
                     i = command.ExecuteNonQuery();
                 }
@@ -461,11 +463,13 @@ namespace Batch_32_Final_Project.Repository
                         aid = Convert.ToInt32(datarow["aid"]),
                         rid = Convert.ToInt32(datarow["rid"]),
                         JobTitle = Convert.ToString(datarow["JobTitle"]),
+                        JobDescription = Convert.ToString(datarow["JobDescription"]),
                         Firstname = Convert.ToString(datarow["Firstname"]),
                         Lastname = Convert.ToString(datarow["Lastname"]),
                         Email = Convert.ToString(datarow["Email"]),
                         Resume = Convert.ToString(datarow["Resumes"]),
                         Photo = Convert.ToString(datarow["Photo"]),
+                        AppliedDate = Convert.ToString(datarow["AppliedDate"]),
                         Experiance = Convert.ToString(datarow["Experiance"]),
                         Description = Convert.ToString(datarow["Description"]),
                         Qualification = Convert.ToString(datarow["Qualification"]),
@@ -512,11 +516,12 @@ namespace Batch_32_Final_Project.Repository
         }
         public bool IsApplied(int vid, int rid)
         {
+            
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
                 using (SqlCommand command = new SqlCommand("SPD_isUserApplied", connection))
                 {
-
+                    
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@vid", vid);
                     command.Parameters.AddWithValue("@rid", rid);
@@ -657,6 +662,7 @@ namespace Batch_32_Final_Project.Repository
                             Firstname = Convert.ToString(dataReader["Firstname"]),
                             Lastname = Convert.ToString(dataReader["Lastname"]),
                             Email = Convert.ToString(dataReader["Email"]),
+                            AppliedDate= Convert.ToString(dataReader["AppliedDate"]),
                             Phone = Convert.ToString(dataReader["Phone"]),
                             Resume = Convert.ToString(dataReader["Resumes"]),
                             Photo = Convert.ToString(dataReader["Photo"]),

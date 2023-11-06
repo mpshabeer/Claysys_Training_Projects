@@ -5,14 +5,25 @@
     Layout = "~/Views/Shared/HRLayout.cshtml";
 }
 
-@if (ViewBag.Message != null)
-{
-    <div class="text-bg-warning">@ViewBag.Message</div>
-}
 
 <link href="~/Content/CSS/Userdetails.css" rel="stylesheet" />
+@if (ViewBag.Message != null)
+{
+    @ViewBag.Message
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="text-bg-info">
+        <div class="text-center">
+            @TempData["SuccessMessage"].ToString();
+        </div>
+    </div>
+}
 <div class="user-details-container">
     <div class="user-details-section">
+
+
         <h4 class="text-center">About me</h4>
         <hr />
         <div class="user-details">

@@ -5,7 +5,22 @@
     Layout = "~/Views/Shared/CandidateLayout.cshtml";
 }
 <link href="~/Content/CSS/Userdetails.css" rel="stylesheet" />
+@if (ViewBag.Message != null)
+{<div class="text-bg-warn">
+        <div class="text-center">
+            @ViewBag.Message
+        </div>
+    </div>
+}
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="text-bg-info">
+        <div class="text-center">
+            @TempData["SuccessMessage"].ToString();
+        </div>
+    </div>
+}
 <div class="user-details-container">
     <div class="user-details-section">
         <div class="user-details">

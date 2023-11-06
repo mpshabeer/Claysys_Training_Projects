@@ -7,7 +7,19 @@
     ViewBag.Title = "Viewvacancy";
     Layout = "~/Views/Shared/HRLayout.cshtml";
 }
-<div class="text-warning">@ViewBag.Message</div>
+@if (ViewBag.Message != null)
+{
+    @ViewBag.Message
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="text-bg-info">
+        <strong class="alert-info">
+            TempData["SuccessMessage"].ToString();
+        </strong>
+    </div>
+}
 <div class="container" style="margin-bottom:100px;">
     <style>
         .card {

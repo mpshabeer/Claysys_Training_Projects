@@ -123,7 +123,7 @@ namespace Batch_32_Final_Project.Controllers
                     if (isInserted)
                     {
                         // Setting a success message if the vacancy update is successful and redirecting to the Viewvacancy action.
-                        ViewBag.Message = "Vacancy Updated";
+                        TempData["SuccessMessage"] = "Vacancy Updated";
                         return RedirectToAction("Viewvacancy");
                     }
                     else
@@ -162,7 +162,7 @@ namespace Batch_32_Final_Project.Controllers
                 bool isDeleted = vacancyRepository.DeleteTHEvacancy(id);
                 if (isDeleted)
                 {
-                    ViewBag.Message = "Vacancy Deleted Successfully";
+                    TempData["SuccessMessage"] = "Vacancy Deleted Successfully";
                 }
                 else
                 {
@@ -220,7 +220,7 @@ namespace Batch_32_Final_Project.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Signin", "Home");
         }
         /// <summary>
         /// Displays the list of all vacancies.
@@ -260,7 +260,7 @@ namespace Batch_32_Final_Project.Controllers
                         isInserted = registrationRepository.InserttoHR(registration);
                         if (isInserted)
                         {
-                            TempData["Successmessage"] = "Registration of HR Successfull";
+                            ViewBag.Message = "Registration of HR Successfull";
                             return View();
                         }
                         else
@@ -320,7 +320,7 @@ namespace Batch_32_Final_Project.Controllers
                     isInserted = registrationRepository.Updateuserdetails(userdetails);
                     if (isInserted)
                     {
-                        ViewBag.Message = "User details Updated";
+                        TempData["SuccessMessage"]  = "Details Updated";
                         return RedirectToAction("Getuserdetails");
                     }
                     else
@@ -379,7 +379,7 @@ namespace Batch_32_Final_Project.Controllers
                         isupdated = registrationRepository.ChangeUserPassword(encryptedpassword, rid);
                         if (isupdated)
                         {
-                            ViewBag.Message = "Password has been changed successfully.";
+                            TempData["SuccessMessage"] = "Password has been changed successfully.";
                             return RedirectToAction("Getuserdetails");
                         }
                         else

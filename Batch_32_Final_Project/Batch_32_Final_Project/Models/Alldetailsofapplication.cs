@@ -14,7 +14,7 @@ namespace Batch_32_Final_Project.Models
         public int aid { get; set; }
         public int vid { get; set; }
         public int rid { get; set; }
-
+        
         public string JobTitle { get; set; }
 
         public string JobDescription { get; set; }
@@ -37,6 +37,7 @@ namespace Batch_32_Final_Project.Models
         public string Description { get; set; }
 
         
+        public string AppliedDate { get; set; }
 
         public string Status { get; set; }
         [DataType(DataType.Date)]

@@ -30,6 +30,7 @@ namespace Batch_32_Final_Project.Models
         [Required(ErrorMessage = "Qualification required")]
         public string Qualification { get; set; }
         public string Description { get; set; }
+        public string AppliedDate { get; set; }
 
         [ForeignKey("vid")] 
         public Vacancy Vacancy { get; set; }

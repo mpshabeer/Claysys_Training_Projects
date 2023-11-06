@@ -71,7 +71,7 @@ namespace Batch_32_Final_Project.Controllers
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Signin", "Home");
         }
         /// <summary>
         /// Displays the view for applying to a specific vacancy.
@@ -116,6 +116,7 @@ namespace Batch_32_Final_Project.Controllers
                             isinserted = vacancyRepository.Applytojob(Resume, Photo, vid, rid, applytojob);
                             if (isinserted)
                             {
+                                TempData["SuccessMessage"] = "Application saved";
                                 return RedirectToAction("Viewvacancy");
                             }
                             else
@@ -158,16 +159,16 @@ namespace Batch_32_Final_Project.Controllers
                 bool isDeleted = vacancyRepository.Withdrawapplication(aid);
                 if (isDeleted)
                 {
-                    ViewBag.Message = "Application withdraw Successfully";
+                    TempData["SuccessMessage"] = "Application withdraw Successfully";
                 }
                 else
                 {
-                    ViewBag.Message = "Unable to withdraw the Application";
+                    TempData["SuccessMessage"] = "Unable to withdraw the Application";
                 }
             }
             catch (Exception ex)
             {
-                ViewBag.Message = "An error occurred: " + ex.Message;
+                TempData["SuccessMessage"] = "An error occurred: " + ex.Message;
             }
             return RedirectToAction("Viewmyapplication");
         }
@@ -211,7 +212,7 @@ namespace Batch_32_Final_Project.Controllers
                     isInserted = registrationRepository.Updateuserdetails(userdetails);
                     if (isInserted)
                     {
-                        ViewBag.Message = "User details Updated";
+                        TempData["SuccessMessage"] = "User details Updated";
                         return RedirectToAction("Getuserdetails");
                     }
                     else
@@ -258,6 +259,7 @@ namespace Batch_32_Final_Project.Controllers
                         isupdated = registrationRepository.ChangeUserPassword(encryptedpassword, rid);
                         if (isupdated)
                         {
+                            TempData["SuccessMessage"] = "Password Changed successfully";
                             return RedirectToAction("Getuserdetails");
                         }
                         else
@@ -341,4 +343,12 @@ namespace Batch_32_Final_Project.Controllers
 
             }
     }
-} } 
+        public ActionResult viewDetailsofapplication(int id)
+        {
+
+            Alldetailsofapplication alldetailsofapplication = new Alldetailsofapplication();
+            alldetailsofapplication = vacancyRepository.Getapplications(id);
+            ViewBag.aid = id;
+            return View(alldetailsofapplication);
+        }
+    } } 

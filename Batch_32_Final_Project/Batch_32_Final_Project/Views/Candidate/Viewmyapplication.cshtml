@@ -5,6 +5,23 @@
     Layout = "~/Views/Shared/CandidateLayout.cshtml";
 }
 
+@if (ViewBag.Message != null)
+{<div class="text-bg-warn">
+        <div class="text-center">
+            @ViewBag.Message
+        </div>
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="text-bg-info">
+        <div class="text-center">
+            @TempData["SuccessMessage"].ToString();
+        </div>
+    </div>
+}
+
 <table class="table">
     <tr>
 
@@ -12,25 +29,17 @@
             @Html.DisplayNameFor(model => model.JobTitle)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Firstname)
+            Job Description
         </th>
+
         <th>
-            @Html.DisplayNameFor(model => model.Lastname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Qualification)
+            @Html.DisplayNameFor(model => model.AppliedDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Resume)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Photo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Experiance)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
@@ -47,28 +56,19 @@
 
             <td>
                 <strong> @Html.DisplayFor(modelItem => item.JobTitle)</strong>
-            </td>
+
             <th>
-                @Html.DisplayFor(modelItem => item.Firstname)
+                @Html.DisplayFor(modelItem => item.JobDescription)
             </th>
             <th>
-                @Html.DisplayFor(modelItem => item.Lastname)
+                @Html.DisplayFor(modelItem => item.AppliedDate)
             </th>
             <th>
-                @Html.DisplayFor(modelItem => item.Email)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Qualification)
-            </th>
-            <td>
                 <a href="data:application/pdf;base64,@item.Resume" target="_blank">View Resume</a>
+            </th>
             <td>
                 <img src="data:image;base64,@item.Photo" alt="Image" style="width:100px" />
             </td>
-            <th>
-                @Html.DisplayFor(modelItem => item.Experiance)
-            </th>
-
             <td>
                 <strong>
                     @Html.DisplayFor(modelItem => item.Status)
@@ -77,9 +77,9 @@
             <td>
                 <strong>@Html.DisplayFor(modelItem => item.Interviewdate)</strong>
             </td>
-           
-            <td>@Html.ActionLink("Update Application", "Updateapplication", new { id = item.aid }, new { @class = "btn btn-primary" })</td>
-            <td>@Html.ActionLink("Withdraw Application", "Withdrawapplication", new { aid = item.aid }, new { @class = "btn btn-danger" })</td>
+
+            <td>@Html.ActionLink("Details of Application", "viewDetailsofapplication", new { id = item.aid }, new { @class = "btn btn-primary" })</td>
+
 
         </tr>
     }

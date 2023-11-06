@@ -247,6 +247,7 @@
     <Content Include="Views\Candidate\Updateapplication.cshtml" />
     <Content Include="Views\HR\Updateapplication.cshtml" />
     <Content Include="Views\HR\ViewVacancyDetails.cshtml" />
+    <Content Include="Views\Candidate\viewDetailsofapplication.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
