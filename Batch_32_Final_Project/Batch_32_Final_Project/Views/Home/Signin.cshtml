@@ -4,6 +4,7 @@
     ViewBag.Title = "Signin";
     Layout = "~/Views/Shared/HomeLayout.cshtml";
 }
+<script src="~/Content/JS/siginin.js"></script>
 <script src="~/Content/JS/Preventbackt.js"></script>
 @using (Html.BeginForm())
 {
@@ -11,30 +12,31 @@
     <div class="table-bordered" style="width:600px; margin-left:auto;margin-right:auto;padding:50px;">
         <div class="text-warning">@ViewBag.Message</div>
         <h2 class="text-center">Signin</h2>
-
+        <div class="form-group"></div>
         <div class="form-horizontal">
 
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-form-labell col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", onfocusout = "validateemail()" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <div><small id="warnemail" style="text-align: center; color: red;"></small></div>
                 </div>
             </div>
 
-
+            <div class="form-group"></div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "col-form-labell col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", onfocusout = "validatepssword()" } })
                     @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <div><small id="passwordwarn" style="text-align: center; color: red;"></small></div>
                 </div>
             </div>
-
-
+            <div class="form-group"></div>
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-6">
                     <input type="submit" value="Login" class="btn btn-primary" />

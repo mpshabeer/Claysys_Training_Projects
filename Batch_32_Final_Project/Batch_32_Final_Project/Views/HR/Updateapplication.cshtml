@@ -32,7 +32,12 @@
                 <span>@Html.DisplayFor(model => model.JobDescription)</span>
             </div>
             <div class="user-detail-row">
-                <label>Qualification:</label>
+                <label>Required Qualifications :</label>
+                <span>@Html.DisplayFor(model => model.Qualifications)</span>
+            </div>
+          
+            <div class="user-detail-row">
+                <label>Department:</label>
                 <span>@Html.DisplayFor(model => model.Department)</span>
             </div>
             <div class="user-detail-row">
@@ -56,11 +61,14 @@
             </div>
             <div class="user-detail-row">
                 <label>Resume:</label>
-                
-                    <embed src="@("data:application/pdf;base64," + Model.Resume)" type="application/pdf" width="70%" height="300px" />
+
+                <embed src="@("data:application/pdf;base64," + Model.Resume)" type="application/pdf" width="70%" height="300px" />
             </div>
 
-
+            <div class="user-detail-row">
+                <label>Qualification :</label>
+                <span>@Html.DisplayFor(model => model.Qualification)</span>
+            </div>
             <div class="user-detail-row">
                 <label>Email:</label>
                 <a href="mailto:@Html.DisplayFor(model => model.Email)">@Html.DisplayFor(model => model.Email)</a>
@@ -74,6 +82,7 @@
                 <label>Description:</label>
                 <span>@Html.DisplayFor(model => model.Description)</span>
             </div>
+
             <div class="user-detail-row">
                 <label>Experiance:</label>
                 <span>@Html.DisplayFor(model => model.Experiance)</span>

@@ -28,8 +28,10 @@
                         <div>Close Date: @vacancy.LastDateToApply</div>
                         <div>Created by: @vacancy.Createdby</div>
                         <div class="card-footer">
-                            @Html.ActionLink("Update", "UpdateVacancy", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
                             @Html.ActionLink("Delete", "DeleteVacancy", new { id = vacancy.vid }, new { @class = "btn btn-danger" })
+
+                            @Html.ActionLink("Update", "UpdateVacancy", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("View Details ", "ViewVacancyDetails", new { id = vacancy.vid }, new { @class = "btn btn-success" })
                         </div>
                     </div>
                 </div>

@@ -128,7 +128,6 @@
     </Compile>
     <Compile Include="Models\Alldetailsofapplication.cs" />
     <Compile Include="Models\Application.cs" />
-    <Compile Include="Models\Applications.cs" />
     <Compile Include="Models\Apply.cs" />
     <Compile Include="Models\Changepassword.cs" />
     <Compile Include="Models\Contactus.cs" />
@@ -176,10 +175,13 @@
     <Content Include="Content\Images\image4.jpg" />
     <Content Include="Content\Images\image5.jpg" />
     <Content Include="Content\Images\image2.jpg" />
+    <Content Include="Content\JS\changepassword.js" />
     <Content Include="Content\JS\contacts.js" />
     <Content Include="Content\JS\homepagescript.js" />
     <Content Include="Content\JS\Preventbackt.js" />
+    <Content Include="Content\JS\siginin.js" />
     <Content Include="Content\JS\Signup.js" />
+    <Content Include="Content\JS\vacancy.js" />
     <Content Include="Content\JS\Validations.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -244,6 +246,7 @@
     <Content Include="Views\HR\Viewcontact.cshtml" />
     <Content Include="Views\Candidate\Updateapplication.cshtml" />
     <Content Include="Views\HR\Updateapplication.cshtml" />
+    <Content Include="Views\HR\ViewVacancyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -39,7 +39,7 @@ namespace Batch_32_Final_Project.Repository
                     command.Parameters.AddWithValue("@Location", vacancy.Location);
                     command.Parameters.AddWithValue("@VacancyStatus", vacancy.VacancyStatus);
                     command.Parameters.AddWithValue("@NumberOfOpenings", Convert.ToInt32(vacancy.NumberOfOpenings));
-                    command.Parameters.AddWithValue("@Qualification", vacancy.Qualification);
+                    command.Parameters.AddWithValue("@Qualification", vacancy.Qualifications);
                     command.Parameters.AddWithValue("@ResponsibilitiesAndDuties", vacancy.ResponsibilitiesAndDuties);
                     command.Parameters.AddWithValue("@SalaryRange", vacancy.SalaryRange);
                     command.Parameters.AddWithValue("@PostedDate", todaydate);
@@ -102,6 +102,40 @@ namespace Batch_32_Final_Project.Repository
                  return false;
              }
          }*/
+        public List<Vacancy> GetallVacancytocandidate()
+        {
+            List<Vacancy> VacancyList = new List<Vacancy>();
+            string todaydate = DateTime.UtcNow.ToString("yyyy-MM-dd");
+
+            using (SqlConnection connection = new SqlConnection(connectionstring))
+            {
+                SqlCommand command = new SqlCommand("SP_GetOpenvacancy", connection);
+                command.Parameters.AddWithValue("@Date", todaydate);
+                command.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter dataadapter = new SqlDataAdapter(command);
+                DataTable datatable = new DataTable();
+
+                connection.Open();
+                dataadapter.Fill(datatable);
+
+                foreach (DataRow datarow in datatable.Rows)
+                { 
+                    VacancyList.Add(new Vacancy
+                    {
+                        vid = Convert.ToInt32(datarow["vid"]),
+                        JobTitle = Convert.ToString(datarow["JobTitle"]),
+                        JobDescription = Convert.ToString(datarow["JobDescription"]),
+                        Department = Convert.ToString(datarow["Department"]),
+                        NumberOfOpenings = Convert.ToString(datarow["NumberOfOpenings"]),
+                        PostedDate = Convert.ToString(datarow["PostedDate"]),
+                        LastDateToApply = Convert.ToString(datarow["LastDateToApply"]),
+                        Createdby = Convert.ToString(datarow["Createdby"])
+                    });
+                }
+            }
+
+            return VacancyList;
+        }
         public List<Vacancy> GetallVacancy()
         {
             List<Vacancy> VacancyList = new List<Vacancy>();
@@ -110,6 +144,7 @@ namespace Batch_32_Final_Project.Repository
             {
                 SqlCommand command = new SqlCommand("SPD_Vacancy", connection);
                 command.CommandType = CommandType.StoredProcedure;
+       
                 SqlDataAdapter dataadapter = new SqlDataAdapter(command);
                 DataTable datatable = new DataTable();
 
@@ -167,7 +202,7 @@ namespace Batch_32_Final_Project.Repository
                                 Location = Convert.ToString(datarow["Location"]),
                                 VacancyStatus = Convert.ToString(datarow["VacancyStatus"]),
                                 NumberOfOpenings = Convert.ToString(datarow["NumberOfOpenings"]),
-                                Qualification = Convert.ToString(datarow["Qualification"]),
+                                Qualifications = Convert.ToString(datarow["Qualifications"]),
                                 ResponsibilitiesAndDuties = Convert.ToString(datarow["ResponsibilitiesAndDuties"]),
                                 SalaryRange = Convert.ToString(datarow["SalaryRange"]),
                                 PostedDate = Convert.ToString(datarow["PostedDate"]),
@@ -202,7 +237,7 @@ namespace Batch_32_Final_Project.Repository
                     command.Parameters.AddWithValue("@Location", vacancy.Location);
                     command.Parameters.AddWithValue("@VacancyStatus", vacancy.VacancyStatus);
                     command.Parameters.AddWithValue("@NumberOfOpenings", Convert.ToInt32(vacancy.NumberOfOpenings));
-                    command.Parameters.AddWithValue("@Qualification", vacancy.Qualification);
+                    command.Parameters.AddWithValue("@Qualification", vacancy.Qualifications);
                     command.Parameters.AddWithValue("@ResponsibilitiesAndDuties", vacancy.ResponsibilitiesAndDuties);
                     command.Parameters.AddWithValue("@SalaryRange", vacancy.SalaryRange);
                     command.Parameters.AddWithValue("@LastDateToApply", vacancy.LastDateToApply);
@@ -285,44 +320,6 @@ namespace Batch_32_Final_Project.Repository
 
                 return false;
             }
-        }
-
-        public List<Applications> GetApplied()
-        {
-             List<Applications> ApplicationsList = new List<Applications>();
-                connections();
-
-                SqlCommand command = new SqlCommand("SPD_Applications", connection);
-                command.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
-                DataTable dataTable = new DataTable();
-
-
-                connection.Open();
-                dataAdapter.Fill(dataTable);
-                connection.Close();
-                foreach (DataRow dataRow in dataTable.Rows)
-                {
-                    byte[] imageData;
-                    try
-                    {
-                        string base64String = dataRow["image"].ToString();
-                        imageData = Convert.FromBase64String(base64String);
-                    }
-                    catch (FormatException ex)
-                    {
-                        Console.WriteLine("Error converting from Base64: " + ex.Message);
-                        continue;
-                    }
-
-                    ApplicationsList.Add(new Applications
-                    {
-                        id = Convert.ToInt32(dataRow["id"]),
-                        Imagefile = imageData
-                    });
-                }
-
-                return ApplicationsList;
         }
 
         public bool Applytojob(HttpPostedFileBase Resume, HttpPostedFileBase Photo, int vid,int rid,Apply applyforjob)
@@ -653,6 +650,7 @@ namespace Batch_32_Final_Project.Repository
                             aid = id,
                             rid = Convert.ToInt32(dataReader["rid"]),
                             Department= Convert.ToString(dataReader["Department"]),
+                            Qualifications = Convert.ToString(dataReader["Qualifications"]),
                             Responsibilities = Convert.ToString(dataReader["ResponsibilitiesAndDuties"]),
                             JobTitle = Convert.ToString(dataReader["JobTitle"]),
                             JobDescription = Convert.ToString(dataReader["JobDescription"]),

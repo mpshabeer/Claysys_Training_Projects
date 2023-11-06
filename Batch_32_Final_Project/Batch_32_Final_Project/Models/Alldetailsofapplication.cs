@@ -24,7 +24,7 @@ namespace Batch_32_Final_Project.Models
         public string Lastname { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-
+        public string Qualifications { get; set; }
         public string Qualification { get; set; }
         public string Department { get; set; }
 

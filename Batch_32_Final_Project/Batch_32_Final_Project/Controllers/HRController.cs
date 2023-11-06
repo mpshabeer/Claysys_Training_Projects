@@ -45,31 +45,35 @@ namespace Batch_32_Final_Project.Controllers
         [HttpPost]
         public ActionResult Addvacancy(Vacancy vacancy)
         {
+            // Flag to track whether the update operation was successful.
             bool isInserted = false;
+            // Retrieving the email from the session.
             string mail = (string)Session["Email"];
             try
             {
                 if (ModelState.IsValid)
                 {
+                    // Inserting the new vacancy into the repository if the ModelState is valid.
                     isInserted = vacancyRepository.InsertVacancy(vacancy, mail);
                     if (isInserted)
                     {
+                        // Setting a success message if the vacancy update is successful and redirecting to the Viewvacancy action.
                         ViewBag.Message = "New Vacancy Added";
-
                         return View();
                     }
                     else
                     {
+                        // Setting a error message if the update operation fails and returning the current view.
                         ViewBag.Message = "Unable to save";
                         return View();
                     }
                 }
                 else
                 {
+                    // Setting a error message if the ModelState is invalid  and returning the current view.
                     ViewBag.Message = " Model not Valid";
                     return View();
                 }
-
             }
 
             catch (Exception)
@@ -78,44 +82,60 @@ namespace Batch_32_Final_Project.Controllers
                 return View();
             }
         }
-
+        /// <summary>
+        /// Displays the vacancies on the view.
+        /// </summary>
+        /// <returns>Returns the ActionResult containing the view with all the vacancies.</returns>
         public ActionResult Viewvacancy()
         {
-          
+            // Clearing the model state to prevent invalid or unwanted data from persisting.
             ModelState.Clear();
+            // Returning the view with all the vacancies fetched from the VacancyRepository.
             return View(vacancyRepository.GetallVacancy());
         }
-
+        /// <summary>
+        /// Displays the form to update a specific vacancy.
+        /// </summary>
+        /// <param name="id">The unique identifier of the vacancy to be updated.</param>
+        /// <returns>Returns the ActionResult containing the view with the details of the specific vacancy to be updated.</returns>
         public ActionResult UpdateVacancy(int id)
         {
-            
+            // Retrieving the specific vacancy details from the vacancy repository by its unique identifier.
+            // The Find method is used to locate the specific vacancy based on the provided id.
             return View(vacancyRepository.GetVacancyDetails(id).Find(Vacancy => Vacancy.vid == id));
         }
-
+        /// <summary>
+        /// Handles the HTTP POST request for updating a vacancy.
+        /// </summary>
+        /// <param name="vacancy">The Vacancy object containing the updated details of the vacancy.</param>
+        /// <returns>Returns an ActionResult based on the result of the update operation. If successful, redirects to the Viewvacancy action; otherwise, returns the View with appropriate error messages.</returns>
         [HttpPost]
         public ActionResult UpdateVacancy(Vacancy vacancy)
         {
-
+            // Flag to track whether the update operation was successful.
             bool isInserted = false;
-
             try
             {
                 if (ModelState.IsValid)
                 {
+                    // Updating the vacancy in the repository if the ModelState is valid.
                     isInserted = vacancyRepository.UpdateTOVacancy(vacancy);
                     if (isInserted)
                     {
+                        // Setting a success message if the vacancy update is successful and redirecting to the Viewvacancy action.
                         ViewBag.Message = "Vacancy Updated";
                         return RedirectToAction("Viewvacancy");
                     }
                     else
                     {
+                        // Setting a error message if the update operation fails and returning the current view.
                         ViewBag.Message = "Unable to save";
                         return View();
                     }
                 }
                 else
                 {
+                    // Setting a error message if the ModelState is invalid and returning the current view.
                     ViewBag.Message = " Error";
                     return View();
                 }
@@ -129,7 +149,12 @@ namespace Batch_32_Final_Project.Controllers
             }
 
         }
-
+        /// <summary>
+        /// Deletes a specific vacancy based on the provided id.
+        /// </summary>
+        /// <param name="id">The unique identifier of the vacancy to be deleted.</param>
+        /// <returns>Returns an ActionResult after attempting to delete the vacancy. 
+        /// If successful, displays a success message; otherwise, displays an error message and redirects to the Viewvacancy action.</returns>
         public ActionResult DeleteVacancy(int id)
         {
             try
@@ -150,7 +175,11 @@ namespace Batch_32_Final_Project.Controllers
             }
             return RedirectToAction("Viewvacancy");
         }
-
+        /// <summary>
+        /// Displays the details of the applicants who have applied for a specific vacancy.
+        /// </summary>
+        /// <param name="id">The unique identifier of the vacancy for which the applicant details are to be displayed.</param>
+        /// <returns>Returns the ActionResult containing the view with the details of the applicants who have applied for the specified vacancy.</returns>
         public ActionResult ViewAppliedDetails(int id)
         {
             
@@ -165,7 +194,6 @@ namespace Batch_32_Final_Project.Controllers
         [HttpPost]
         public ActionResult Actionstatus(Statusofapplication statusofapplication, int aid)
         {
-            
             try
             {
                 bool IsSelected = vacancyRepository.Selection(statusofapplication, aid);
@@ -184,26 +212,39 @@ namespace Batch_32_Final_Project.Controllers
             }
             return RedirectToAction("Viewappliedlist");
         }
-    
+        /// <summary>
+        /// Logs out the currently authenticated user, clears the forms authentication, and abandons the session.
+        /// </summary>
+        /// <returns>Returns an ActionResult that redirects the user to the Index action of the Home controller after logging out.</returns>
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
-
+        /// <summary>
+        /// Displays the list of all vacancies.
+        /// </summary>
+        /// <returns>Returns the ActionResult containing the view with the list of all vacancies.</returns>
         public ActionResult Viewappliedlist()
         {
-            
             ModelState.Clear();
             return View(vacancyRepository.GetallVacancy());
         }
-
+        /// <summary>
+        /// Displays the view for creating a new HR (Human Resources) user.
+        /// </summary>
+        /// <returns>Returns the ActionResult containing the view for creating a new HR user.</returns>
         public ActionResult CeatenewHR()
         {
             return View();
         }
-
+        /// <summary>
+        /// Handles the HTTP POST request for creating a new HR (Human Resources) user.
+        /// </summary>
+        /// <param name="registration">The Registration object containing the details of the new HR user.</param>
+        /// <returns>Returns an ActionResult based on the result of the creation operation. 
+        /// If successful, returns the view with a success message; otherwise, returns the view with an appropriate error message.</returns>
         [HttpPost]
         public ActionResult CeatenewHR(Registration registration)
         {
@@ -211,7 +252,6 @@ namespace Batch_32_Final_Project.Controllers
             bool isvalidmail = false;
             try
             {
-
                 if (ModelState.IsValid)
                 {
                     isvalidmail = emailexist.checkemail(registration);
@@ -221,7 +261,6 @@ namespace Batch_32_Final_Project.Controllers
                         if (isInserted)
                         {
                             TempData["Successmessage"] = "Registration of HR Successfull";
-
                             return View();
                         }
                         else
@@ -244,6 +283,7 @@ namespace Batch_32_Final_Project.Controllers
                 return View();
             }
         }
+
         public ActionResult Getuserdetails()
         {
             int rid = Convert.ToInt32(Session["rid"].ToString());
@@ -252,20 +292,27 @@ namespace Batch_32_Final_Project.Controllers
             return View(userdetails);
 
         }
+        /// <summary>
+        /// Displays the view for updating the details of the currently logged-in HR (Human Resources) user.
+        /// </summary>
+        /// <returns>Returns the ActionResult containing the view for updating the details of the currently logged-in HR user.</returns>
         public ActionResult Updateuserdetails()
         {
             int rid = Convert.ToInt32(Session["rid"].ToString());
             Userdetails userdetails = new Userdetails();
             userdetails = registrationRepository.GetDetailsofUser(rid);
             return View(userdetails);
-
         }
-
+        /// <summary>
+        /// Handles the HTTP POST request for updating the details of the currently logged-in user.
+        /// </summary>
+        /// <param name="userdetails">The Userdetails object containing the updated details of the user.</param>
+        /// <returns>Returns an ActionResult based on the result of the update operation. 
+        ///  If successful,redirects to the Getuserdetails action; otherwise, returns the view with an appropriate error message.</returns>
         [HttpPost]
         public ActionResult Updateuserdetails(Userdetails userdetails)
         {
             bool isInserted = false;
-
             try
             {
                 if (ModelState.IsValid)
@@ -300,13 +347,20 @@ namespace Batch_32_Final_Project.Controllers
                 return View();
             }
         }
-
+        /// <summary>
+        /// Displays the view for Changing the password to currently logged-in HR.
+        /// </summary>
+        ///<returns>Returns the ActionResult containing the view for updating Password of the currently logged-in HR user.</returns>
         public ActionResult ChangePassword()
         {
-
             return View();
-
         }
+        /// <summary>
+        ///  Handles the HTTP POST request for updating the password of the currently logged-in user.
+        /// </summary>
+        /// <param name="changepassword">The Changepassword object containing the updated password of the user</param>
+        /// <returns>Returns an ActionResult based on the result of the update operation. 
+        ///  If successful,redirects to the Getuserdetails action; otherwise, returns the view with an appropriate error message.</returns>
         [HttpPost]
         public ActionResult ChangePassword(Changepassword changepassword)
         {
@@ -325,6 +379,7 @@ namespace Batch_32_Final_Project.Controllers
                         isupdated = registrationRepository.ChangeUserPassword(encryptedpassword, rid);
                         if (isupdated)
                         {
+                            ViewBag.Message = "Password has been changed successfully.";
                             return RedirectToAction("Getuserdetails");
                         }
                         else
@@ -332,7 +387,6 @@ namespace Batch_32_Final_Project.Controllers
                             ViewBag.Message = "Unable to save your password";
                             return View();
                         }
-
                     }
                     else
                     {
@@ -352,11 +406,18 @@ namespace Batch_32_Final_Project.Controllers
                 return View();
             }
         }
-
+        /// <summary>
+        /// Displays the view containing all the contact request
+        ///<returns>Returns the ActionResult containing the view for all contact request.</returns>
         public ActionResult Viewcontact()
         {
             return View(vacancyRepository.Getallcontactrequest());
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteContact(int id)
         {
             try
@@ -377,7 +438,11 @@ namespace Batch_32_Final_Project.Controllers
             }
             return RedirectToAction("Viewcontact");
         }
-
+        /// <summary>
+        /// Displays the view for updating a specific application status.
+        /// </summary>
+        /// <param name="id">The unique identifier of the application to be updated.</param>
+        /// <returns>Returns the ActionResult containing the view for updating the status of the specific application.</returns>
         public ActionResult Updateapplication(int id)
         {
 
@@ -386,17 +451,20 @@ namespace Batch_32_Final_Project.Controllers
             ViewBag.aid = id;
             return View(alldetailsofapplication);
         }
-
-        /*public ActionResult Applyforvacancy(HttpPostedFileBase Resume, HttpPostedFileBase Photo,int vid)*/
+        /// <summary>
+        /// Handles the HTTP POST request for updating the application status.
+        /// </summary>
+        /// <param name="application">The Alldetailsofapplication object containing the updated details of the application.</param>
+        /// <returns>Returns an ActionResult based on the result of the status update operation.
+        /// If successful, redirects to the Updateapplication action with the updated application details;
+        /// otherwise, returns the view with an appropriate error message.</returns>
         [HttpPost]
         public ActionResult Updateapplication(Alldetailsofapplication application)
         {
             if (ModelState.IsValid)
             {
-
                 try
                 {
-
                     bool IsSelected = vacancyRepository.Selections(application,application.aid);
                     if (IsSelected)
                     {
@@ -421,7 +489,19 @@ namespace Batch_32_Final_Project.Controllers
             ViewBag.Message = "Updated";
             return View();
         }
-
+        public ActionResult ViewVacancyDetails(int id)
+        {
+            try
+            {
+                ModelState.Clear();
+                return View(vacancyRepository.GetVacancyDetails(id));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = ex.Message;
+                return View();
+            }
+        }
     }
 }
 

@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Batch_32_Final_Project.Models.Vacancy>
 
-    @{
-        ViewBag.Title = "ViewVacancyDetails";
-        Layout = "~/Views/Shared/CandidateLayout.cshtml";
-    }
+@{
+    ViewBag.Title = "ViewVacancyDetails";
+    Layout = "~/Views/Shared/HRLayout.cshtml";
+}
 <div class="form-container bg-light" style="width:600px; margin-left:auto;margin-right:auto;padding:50px;">
 
     <link href="~/Content/CSS/table.css" rel="stylesheet" />
@@ -61,18 +61,21 @@
             </tr>
             <tr>
                 <th>HR EMail</th>
-                <td><a href="mailto:@vacancy.Createdby">@vacancy.Createdby</a</td>
+                <td><a href="mailto:@vacancy.Createdby">@vacancy.Createdby</a></td>
             </tr>
             <tr>
                 <th>SelectionProcess</th>
                 <td>@vacancy.SelectionProcess</td>
             </tr>
             <tr>
-                <td> @Html.ActionLink("<<Back", "Viewvacancy", new { vid = vacancy.vid }, new { @class = "btn btn-primary" })</td>
-                <td>  @Html.ActionLink("Apply", "Applyforvacancy", new { vid = vacancy.vid }, new { @class = "btn btn-success" })</td>
-
+               
+                <td>
+                    @Html.ActionLink("Delete", "DeleteVacancy", new { id = vacancy.vid }, new { @class = "btn btn-danger" })
+                </td>
+                <td>
+                    @Html.ActionLink("Update", "UpdateVacancy", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
             </tr>
         }
     </table>
 
-    </div>
+</div>

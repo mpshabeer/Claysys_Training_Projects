@@ -4,11 +4,17 @@
     ViewBag.Title = "Getuserdetails";
     Layout = "~/Views/Shared/HRLayout.cshtml";
 }
+
+@if (ViewBag.Message != null)
+{
+    <div class="text-bg-warning">@ViewBag.Message</div>
+}
+
 <link href="~/Content/CSS/Userdetails.css" rel="stylesheet" />
 <div class="user-details-container">
     <div class="user-details-section">
         <h4 class="text-center">About me</h4>
-        <hr/>
+        <hr />
         <div class="user-details">
             <div class="user-detail-row">
                 <label>Firstname:</label>

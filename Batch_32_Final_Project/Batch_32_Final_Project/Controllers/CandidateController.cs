@@ -18,13 +18,6 @@ namespace Batch_32_Final_Project.Controllers
 
     public class CandidateController : Controller
     {
-        /// <summary>
-        /// 
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        /// 
-
         RegistrationRepository registrationRepository = new RegistrationRepository();
         VacancyRepository vacancyRepository = new VacancyRepository();
         private SqlConnection connection;
@@ -34,19 +27,29 @@ namespace Batch_32_Final_Project.Controllers
             connection = new SqlConnection(connectionstring);
 
         }
-
+        /// <summary>
+        /// Display the dashboard for candidate user
+        /// </summary>
+        /// <returns> Returns the ActionResult containing view for the candidate dashbord</returns>
+        /// 
         public ActionResult CandidateDashbord()
         {
             return View();
         }
-
+        /// <summary>
+        /// Display the view that containing all the vacancies
+        /// </summary>
+        /// <returns>Returns the ActionResult containing the view with all the vacancies.</returns>
         public ActionResult Viewvacancy()
         {
-           
             ModelState.Clear();
-            return View(vacancyRepository.GetallVacancy());
-
+            return View(vacancyRepository.GetallVacancytocandidate());
         }
+        /// <summary>
+        /// Display details of specifiv vacancy based on provided id.
+        /// </summary>
+        /// <param name="id">The unique identifier of the vacancy for which the details are to be displayed</param>
+        /// <returns>Return the Actionresult containing the with details of the specific vacancy. </returns>
         public ActionResult ViewVacancyDetails(int id)
         {
             try
@@ -60,59 +63,33 @@ namespace Batch_32_Final_Project.Controllers
                 return View();
             }
         }
-
-        [HttpGet]
-
-        public ActionResult ImageInsertintodb()
-        {
-            return View();
-        }
-
-
-        public ActionResult ImageInsertintodb(HttpPostedFileBase Imagefile)
-        {
-            bool isinserted;
-            try
-            {
-                if (Imagefile != null && Imagefile.ContentLength > 0)
-                {
-
-                    isinserted = vacancyRepository.ImageUpload(Imagefile);
-                    if (isinserted)
-                    {
-                        return RedirectToAction("Viewvacancy");
-                    }
-                }
-                return View();
-            }
-            catch (Exception ex)
-            {
-                return View("Error" + ex);
-            }
-        }
-
-        public ActionResult ViewApplications()
-        {
-
-            List<Applications> applicationsList = vacancyRepository.GetApplied();
-            return View(applicationsList);
-        }
-
+        /// <summary>
+        /// Logs out the currently authenticated user, clears the forms authentication, and abandons the session.
+        /// </summary>
+        /// <returns>Returns an ActionResult that redirects the user to the Index action of the Home controller after logging out.</returns>
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
-            return RedirectToAction("Signin", "Home");
+            return RedirectToAction("Index", "Home");
         }
-
+        /// <summary>
+        /// Displays the view for applying to a specific vacancy.
+        /// </summary>
+        /// <param name="vid">The unique identifier of the vacancy for which the user is applying.</param>
+        /// <returns>Returns the ActionResult containing the view for applying to the specified vacancy.</returns>
         public ActionResult Applyforvacancy(int vid)
         {
             Apply applyModel = new Apply();
             ViewBag.Vid = vid;
             return View(applyModel);
         }
-
-        /*public ActionResult Applyforvacancy(HttpPostedFileBase Resume, HttpPostedFileBase Photo,int vid)*/
+        /// <summary>
+        /// Handles the HTTP POST request for applying to a specific vacancy.
+        /// </summary>
+        /// <param name="applytojob">The Apply object containing the details of the application.</param>
+        /// <param name="vid">The unique identifier of the vacancy for which the user is applying.</param>
+        /// <returns>Returns an ActionResult based on the result of the application process. If successful, redirects to the Viewvacancy action; otherwise, returns the view with an appropriate error message.</returns>
         [HttpPost]
         public ActionResult Applyforvacancy(Apply applytojob, int vid)
         {
@@ -158,26 +135,34 @@ namespace Batch_32_Final_Project.Controllers
             }
             return View();
         }
+        /// <summary>
+        /// Displays the view containing all applications made by the currently logged-in user.
+        /// </summary>
+        /// <returns>Returns the ActionResult containing the view with all the applications made by the currently logged-in user.</returns>
         public ActionResult Viewmyapplication()
         {
             int rid = Convert.ToInt32(Session["rid"].ToString());
             List<Alldetailsofapplication> applicationsList = vacancyRepository.Myapplications(rid);
             return View(applicationsList);
         }
-
+        /// <summary>
+        /// Withdraws a specific application based on the provided application id.
+        /// </summary>
+        /// <param name="aid">The unique identifier of the application to be withdrawn.</param>
+        /// <returns>Returns an ActionResult after attempting to withdraw the application. 
+        /// If successful, displays a success message; otherwise, displays an error message and redirects to the Viewmyapplication action.</returns>
         public ActionResult Withdrawapplication(int aid)
         {
-
             try
             {
                 bool isDeleted = vacancyRepository.Withdrawapplication(aid);
                 if (isDeleted)
                 {
-                    ViewBag.Message = "Vacancy Deleted Successfully";
+                    ViewBag.Message = "Application withdraw Successfully";
                 }
                 else
                 {
-                    ViewBag.Message = "Unable to Delete the Vacancy";
+                    ViewBag.Message = "Unable to withdraw the Application";
                 }
             }
             catch (Exception ex)
@@ -186,6 +171,10 @@ namespace Batch_32_Final_Project.Controllers
             }
             return RedirectToAction("Viewmyapplication");
         }
+        // <summary>
+        /// sisplay and displays the details of the currently logged-in user.
+        /// </summary>
+        /// <returns>Returns the ActionResult containing the view with the details of the currently logged-in user.</returns>
         public ActionResult Getuserdetails()
         {
             int rid = Convert.ToInt32(Session["rid"].ToString());
@@ -194,7 +183,10 @@ namespace Batch_32_Final_Project.Controllers
             return View(userdetails);
 
         }
-
+        /// <summary>
+        /// Displays the view for updating the details of the currently logged-in user.
+        /// </summary>
+        /// <returns>Returns the ActionResult containing the view for updating the details of the currently logged-in user.</returns>
         public ActionResult Updateuserdetails()
         {
             int rid = Convert.ToInt32(Session["rid"].ToString());
@@ -203,12 +195,15 @@ namespace Batch_32_Final_Project.Controllers
             return View(userdetails);
 
         }
-
+        /// <summary>
+        /// Handles the HTTP POST request for updating the details of the currently logged-in user.
+        /// </summary>
+        /// <param name="userdetails">The Userdetails object containing the updated details of the user.</param>
+        /// <returns>Returns an ActionResult based on the result of the update operation. If successful, redirects to the Getuserdetails action; otherwise, returns the view with an appropriate error message.</returns>
         [HttpPost]
         public ActionResult Updateuserdetails(Userdetails userdetails)
         {
             bool isInserted = false;
-
             try
             {
                 if (ModelState.IsValid)
@@ -228,12 +223,6 @@ namespace Batch_32_Final_Project.Controllers
                 else
                 {
                     ViewBag.Message = "Model not Valid";
-                    var errors = ModelState.Values.SelectMany(v => v.Errors);
-                    foreach (var error in errors)
-                    {
-                        // Log or print the specific validation errors
-                        Console.WriteLine(error.ErrorMessage);
-                    }
                     return View();
                 }
             }
@@ -243,12 +232,13 @@ namespace Batch_32_Final_Project.Controllers
                 return View();
             }
         }
-
+        /// <summary>
+        /// Display view to change currently logged-in user password
+        /// </summary>
+        /// <returns>Returns the ActionResult containing the view for changing the password of the currently logged-in user.</returns>
         public ActionResult ChangePassword()
         {
-
             return View();
-
         }
         [HttpPost]
         public ActionResult ChangePassword(Changepassword changepassword)
@@ -294,19 +284,25 @@ namespace Batch_32_Final_Project.Controllers
                 return View();
             }
         }
+        /// <summary>
+        /// Displays the view for updating a specific application.
+        /// </summary>
+        /// <param name="id">The unique identifier of the application to be updated.</param>
+        /// <returns>Returns the ActionResult containing the view for updating the specific application.</returns>
         public ActionResult Updateapplication(int id)
         {
-           
             Application application = new Application();
             application = vacancyRepository.Getapplication(id);
             return View(application);
         }
-
-    /*public ActionResult Applyforvacancy(HttpPostedFileBase Resume, HttpPostedFileBase Photo,int vid)*/
-    [HttpPost]
+        /// <summary>
+        /// Displays the view for updating a specific application.
+        /// </summary>
+        /// <param name="id">The unique identifier of the application to be updated.</param>
+        /// <returns>Returns the ActionResult containing the view for updating the specific application.</returns>
+        [HttpPost]
     public ActionResult Updateapplication(Application application)
     {
-            
             if (ModelState.IsValid)
         {
                 HttpPostedFileBase Resume = Request.Files["Resume"];
@@ -344,6 +340,5 @@ namespace Batch_32_Final_Project.Controllers
                 return View();
 
             }
-        return View();
     }
 } } 

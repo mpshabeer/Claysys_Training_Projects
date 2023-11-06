@@ -39,9 +39,9 @@ namespace Batch_32_Final_Project.Models
         public string NumberOfOpenings { get; set; }
 
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Qualification")]
+        [Display(Name = "Qualifications")]
         [Required(ErrorMessage = "Qualification is required")]
-        public string Qualification { get; set; }
+        public string Qualifications { get; set; }
 
         [DataType(DataType.MultilineText)]
         [Display(Name = "Responsibilities And Duties")]
