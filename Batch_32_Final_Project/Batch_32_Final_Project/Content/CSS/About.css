@@ -1,0 +1,37 @@
+﻿.title-container {
+    text-align: center;
+    margin-top: 100px;
+}
+
+    .title-container h1 {
+        color: #0077b6;
+        font-size: 3em;
+        font-family: 'Arial', sans-serif;
+    }
+
+.content-container {
+    margin: 50px 150px;
+}
+
+    .content-container p {
+        font-size: 1.2em;
+        font-family: 'Arial', sans-serif;
+        text-align: justify;
+    }
+
+.container {
+    margin-bottom: 100px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px;
+}
+
+    .card h5 {
+        color: #0077b6;
+        font-size: 1.5em;
+        font-family: 'Arial', sans-serif;
+    }

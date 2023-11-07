@@ -4,14 +4,34 @@
     Layout = "~/Views/Shared/HomeLayout.cshtml";
 }
 
-
+<style>
+    .title {
+       text-align: center;
+       color: skyblue;
+       font: 3em sans-serif; 
+       margin-top: 100px;
+    }
+    .text-justify {
+        font-size: large; 
+        font-family:'Times New Roman';
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+    #h3 {
+       color: rgb(224, 80, 36); 
+       margin-top: 30px;
+    }
+    #exp {
+      text-align:left;
+      color: rgb(247, 58, 25);
+      margin-left: 150px;
+      font: 1.5em sans-serif;
+      margin-top: 40px;
+    }
+</style>
     <main aria-labelledby="title">
-
-
-        <h1 style="text-align: center;color: skyblue;font: 3em sans-serif; margin-top: 100px;">Aboutus</h1></u>
-
-
-        <p class="text-justify" style="font-size: large; font-family:'Times New Roman'; margin-left: 150px; margin-right: 150px;">
+        <h1 class="title">Aboutus</h1>
+        <p class="text-justify">
             We're known more by the impact we create than the titles we hold. Impact that is brought by
             working together on audacious challenges at scale with an aim to revolutionize for the Indian customer.
             We believe great ideas can emerge from anywhere and must be backed. Our people - backed by our
@@ -19,7 +39,7 @@
         </p>
 
 
-        <i><u><h3 style="text-align:left;color: rgb(247, 58, 25);margin-left: 150px; font: 1.5em sans-serif; margin-top: 40px;">Experiment Learn Grow</h3></u></i>
+        <h3 id="exp" >Experiment Learn Grow</h3>
         <p class="text-justify" style="font-size: large; font-family:'Times New Roman'; margin-left: 150px; margin-right: 150px;">
             Our journey of building India's biggest unicorn start-up has been full of successes, but also failures
             and learning from them. That's why there's calculated risk-taking, a high willingness to learn and improvise,
@@ -27,7 +47,7 @@
             our mobile app a bit more consumer friendly, we're always experimenting, learning and growing!
         </p>
 
-        <h3 class="text-center" style="color: rgb(224, 80, 36); margin-top: 30px;">Our Branches</h3>
+        <h3 id="h3" class="text-center" >Our Branches</h3>
         <div class="container" style="margin-bottom:100px;">
             <div class="row justify-content-around">
                 <div class="col-md-4">
@@ -63,6 +83,6 @@
             </div>
         </div>
 
-        </div>
+        
     </main>
 

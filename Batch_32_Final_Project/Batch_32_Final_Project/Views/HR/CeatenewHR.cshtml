@@ -6,7 +6,7 @@
 }
 
 <script src="~/Content/JS/Signup.js"></script>
-<script src="~/Content/JS/Validations.js"></script>
+<script src="~/Content/JS/hrvalidation.js"></script>
 
 @using (Html.BeginForm())
 {
@@ -53,10 +53,10 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "col-form-label col-md-4" })
                 
-                    <label class="radio-inline">
+                    <label class="radio-inline" style="margin-right:20px">
                         @Html.RadioButtonFor(model => model.Gender, "Male  ", new { htmlAttributes = new { @class = "form-control" } }) Male
                     </label>
-                    <label class="radio-inline">
+                    <label class="radio-inline" style="margin-right:20px">
                         @Html.RadioButtonFor(model => model.Gender, "Female  ", new { htmlAttributes = new { @class = "form-control" } }) Female
                     </label>
                     <label class="radio-inline">

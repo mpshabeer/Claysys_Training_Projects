@@ -3,7 +3,7 @@ function validateName() {
     const validFirstname = /^[A-Za-z ]+$/;
 
     if (firstname.trim() === "") {
-        document.getElementById("namewarn").innerHTML = "Please enter your Firstname";
+        document.getElementById("namewarn").innerHTML = "Please enter your Name";
     } else if (!validFirstname.test(firstname)) {
         document.getElementById("namewarn").innerHTML = "Firstname should contain only letters";
     } else {
@@ -22,5 +22,21 @@ function validatephone() {
 
         document.getElementById("warnphone").innerHTML = "Please enter a valid 10-digit Phone number starting with 6, 7, 8, or 9.";
 
+    }
+}
+
+
+function validateemail() {
+
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/;
+    const email = document.getElementById("Email").value;
+    if (email == "") {
+        document.getElementById("warnemail").innerHTML = "Please enter your Email"
+    }
+    else if (!email.match(validRegex)) {
+        document.getElementById("warnemail").innerHTML = " Please enter a valid Email"
+    }
+    else {
+        document.getElementById("warnemail").innerHTML = ""
     }
 }

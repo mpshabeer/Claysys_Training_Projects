@@ -4,17 +4,15 @@
     Layout = "~/Views/Shared/HRLayout.cshtml";
 }
 <script src="~/Content/JS/vacancy.js"></script>
-@if (ViewBag.Message != null)
-{
-    <div class="text-bg-warning">@ViewBag.Message</div>
-}
+
 <div class="table-bordered bg-light" style="width:600px; margin-left:auto;margin-right:auto;padding:50px;">
 
     <h2 class="text-center">Create New Job Poster</h2>
     <hr />
-
-    <div class="text-bg-warning">@ViewBag.Message</div>
-
+    @if (ViewBag.Message != null)
+    {
+        <div class="text-bg-warning">@ViewBag.Message</div>
+    }
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -34,7 +32,7 @@
         <div class="form-group row">
             <label class="col-md-4 col-form-label ">Job Description:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.JobDescription, new { htmlAttributes = new { @class = "form-control" , @onfocusout = "validatedescription()" } })
+                @Html.EditorFor(model => model.JobDescription, new { htmlAttributes = new { @class = "form-control", @onfocusout = "validatedescription()" } })
                 @Html.ValidationMessageFor(model => model.JobDescription, "", new { @class = "text-danger" })
                 <div><small id="descriptionwarn" style="text-align: center; color: red;"></small></div>
             </div>
@@ -53,7 +51,7 @@
         <div class="form-group row">
             <label class="col-md-4 col-form-label ">Location:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control" ,onfocusout= "validatelocation()" } })
+                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @class = "form-control", onfocusout = "validatelocation()" } })
                 @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
                 <div><small id="locationwarn" style="text-align: center; color: red;"></small></div>
             </div>
@@ -64,25 +62,24 @@
             <div class="col-md-8">
                 <select id="VacancyStatus" name="VacancyStatus" class="form-control" required>
                     <option value="Open">Open</option>
-                    <option value="Pending">Pending</option>
+                    <option value="On Hold">On Hold</option>
                 </select>
-
                 @Html.ValidationMessageFor(model => model.VacancyStatus, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group row">
             <label class="col-md-4 col-form-label ">Number_of Openings:</label>
             <div class="col-md-8">
-                <input type="number" id="NumberOfOpenings" name="NumberOfOpenings" class="form-control" onfocusout= "validatenumberofopenings()" />
+                <input type="number" id="NumberOfOpenings" name="NumberOfOpenings" class="form-control" onfocusout="validatenumberofopenings()" />
                 @Html.ValidationMessageFor(model => model.NumberOfOpenings, "", new { @class = "text-danger" })
-            <div><small id="noofopeningwarn" style="text-align: center; color: red;"></small></div>
+                <div><small id="noofopeningwarn" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-md-4 col-form-label ">Qualifications:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.Qualifications, new { htmlAttributes = new { @class = "form-control",onfocusout= "validatequalification()" } })
+                @Html.EditorFor(model => model.Qualifications, new { htmlAttributes = new { @class = "form-control", onfocusout = "validatequalification()" } })
                 @Html.ValidationMessageFor(model => model.Qualifications, "", new { @class = "text-danger" })
                 <div><small id="qualificationwarn" style="text-align: center; color: red;"></small></div>
             </div>
@@ -91,7 +88,7 @@
         <div class="form-group row">
             <label class="col-md-4 col-form-label ">Duties:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.ResponsibilitiesAndDuties, new { htmlAttributes = new { @class = "form-control" ,onfocusout= "validateduties()" } })
+                @Html.EditorFor(model => model.ResponsibilitiesAndDuties, new { htmlAttributes = new { @class = "form-control", onfocusout = "validateduties()" } })
                 @Html.ValidationMessageFor(model => model.ResponsibilitiesAndDuties, "", new { @class = "text-danger" })
                 <div><small id="dutieswarn" style="text-align: center; color: red;"></small></div>
             </div>
@@ -99,7 +96,7 @@
         <div class="form-group row">
             <label class="col-md-4 col-form-label">salary range:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.SalaryRange, new { htmlAttributes = new { @class = "form-control" ,onfocusout= "validatesalary()" } })
+                @Html.EditorFor(model => model.SalaryRange, new { htmlAttributes = new { @class = "form-control", onfocusout = "validatesalary()" } })
                 @Html.ValidationMessageFor(model => model.SalaryRange, "", new { @class = "text-danger" })
                 <div><small id="salarywarn" style="text-align: center; color: red;"></small></div>
             </div>
@@ -110,7 +107,7 @@
         <div class="form-group row">
             <label class="col-md-4 col-form-label ">Close Date:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.LastDateToApply, new { htmlAttributes = new { @class = "form-control",onfocusout= "validateclosedate()" } })
+                @Html.EditorFor(model => model.LastDateToApply, new { htmlAttributes = new { @class = "form-control", onfocusout = "validateclosedate()" } })
                 @Html.ValidationMessageFor(model => model.LastDateToApply, "", new { @class = "text-danger" })
                 <div><small id="closedatewarn" style="text-align: center; color: red;"></small></div>
             </div>
@@ -119,7 +116,7 @@
         <div class="form-group row">
             <label class="col-md-4 col-form-label ">Recruiter InCharge:</label>
             <div class="col-md-8">
-                @Html.EditorFor(model => model.RecruiterInCharge, new { htmlAttributes = new { @class = "form-control",onfocusout= "validaterecruiter()" } })
+                @Html.EditorFor(model => model.RecruiterInCharge, new { htmlAttributes = new { @class = "form-control", onfocusout = "validaterecruiter()" } })
                 @Html.ValidationMessageFor(model => model.RecruiterInCharge, "", new { @class = "text-danger" })
                 <div><small id="recruiterwarn" style="text-align: center; color: red;"></small></div>
             </div>
@@ -128,7 +125,7 @@
         <div class="form-group row">
             <label class="col-md-4 col-form-label ">Interview Rounds:</label>
             <div class="col-md-8">
-                <input type="number" class="form-control" name="InterviewRounds" onfocusout = "validateinterviewrounds()"/>
+                <input type="number" class="form-control" name="InterviewRounds" onfocusout="validateinterviewrounds()" />
                 @Html.ValidationMessageFor(model => model.InterviewRounds, "", new { @class = "text-danger" })
                 <div><small id="interviewwarn" style="text-align: center; color: red;"></small></div>
             </div>

@@ -1,9 +1,7 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
-<!DOCTYPE html>
 
 <html>
 <head>
@@ -13,37 +11,36 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Content/CSS/HRStyle.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
+    <link href="~/Content/CSS/hrnavbar.css" rel="stylesheet" />
 </head>
+
+@if (Session["Email"] == null && Session["rid"] == null)
+{
+    Response.RedirectToRoute("Default", new { controller = "Home", action = "Index" });
+}
 <body>
-
-
 
     <ul class="unorderdlist">
 
-        <li class="navbar_list">@Html.ActionLink("Logout", "Logout", "HR", new { area = "" })</a></li>
-        <li class="navbar_list">@Html.ActionLink("Contact request", "Viewcontact", "HR", new { area = "" })</a></li>
+
+        <li class="navbar_list">@Html.ActionLink("Logout", "Logout", "HR", new { area = "" })</li>
+        <li class="navbar_list">@Html.ActionLink("Contact request", "Viewcontact", "HR", new { area = "" })</li>
         <li class="navbar_list">@Html.ActionLink("Account", "Getuserdetails", "", new { area = "" })</li>
         <li class="navbar_list">@Html.ActionLink("Add new member", "CeatenewHR", "", new { area = "" })</li>
         <li class="navbar_list">@Html.ActionLink("View applications", "Viewappliedlist", "HR", new { area = "" })</li>
-        <li class="navbar_list">@Html.ActionLink("Manage Job poster", "Viewvacancy", "HR", new { area = "" })</li>
+        <li class="navbar_list">@Html.ActionLink("Manage job poster", "Viewvacancy", "HR", new { area = "" })</li>
+        <li class="navbar_list">@Html.ActionLink("Create job poster", "Addvacancy", "HR", new { area = "" })</li>
 
-        <li class="navbar_list">@Html.ActionLink("Create Job poster", "Addvacancy", "HR", new { area = "" })</li>
-        <li class="navbar_list">@Html.ActionLink("Home", "HRDashbord", "HR", new { area = "" })</li>
-        @if (Session["Email"] != null && Session["rid"] != null)
-        {
-            // <li class="navbar_list">
-            // <a href="">
-            //    <strong>Welcome @Session["Email"].ToString()</strong>
-            //  </a>
-            //  </li>
-        }
-        else
-        {
-            Response.RedirectToRoute("Default", new { controller = "Home", action = "Index" });
-        }
-        <li class="liof"><a href="#"><strong>Infotech Pvt Ltd</strong></a></li>
-        
+        <li class="navbar_list">
+
+            @Html.ActionLink("Home", "HRDashbord", "HR", new { area = "" })
+        </li>
+        <li><img class="logo-image" src="~/Content/Images/logo.jpg" /></li>
+        <li class="cmpname"><strong>@Html.ActionLink("Infotech Pvt Ltd", "HRDashbord", "HR", new { area = "" })</strong></li>
+
+
+
+
     </ul>
     @RenderBody()
 
@@ -52,4 +49,3 @@
     </footer>
 </body>
 </html>
-

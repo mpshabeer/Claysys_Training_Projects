@@ -247,11 +247,6 @@ namespace Batch_32_Final_Project.Repository
                 }
             }
     }
-
-
-
-
-
         public bool ValidateUser(Login login, out string userType, out string rid)
         {
             try
@@ -276,7 +271,7 @@ namespace Batch_32_Final_Project.Repository
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 userType = null;
                 rid = null;
@@ -286,9 +281,6 @@ namespace Batch_32_Final_Project.Repository
             userType = null;
             rid = null;
             return false;
-        
     }
-
-
 }
 }

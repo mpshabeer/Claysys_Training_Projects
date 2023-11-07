@@ -48,17 +48,17 @@
             </div>
         </div>
 
-    <script>
-   document.addEventListener('DOMContentLoaded', function () {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var today = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
 
-        today = yyyy + '-' + mm + '-' + dd;
-        document.getElementById("Dateofbirth").setAttribute("max", today);
-    });
-</script>
+                today = yyyy + '-' + mm + '-' + dd;
+                document.getElementById("Dateofbirth").setAttribute("max", today);
+            });
+        </script>
 
 
 
@@ -155,10 +155,9 @@
                 <div><small id="confirmpasswordwarn" style="text-align: center; color: red;"></small></div>
             </div>
         </div>
-
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Sigup" class="btn btn-primary" />
+            <div class="col-md-offset-4 col-md-10">
+                <input type="submit" value="Sigup" class="btn btn-primary"  style="width:40%;"/>
             </div>
         </div>
     </div>

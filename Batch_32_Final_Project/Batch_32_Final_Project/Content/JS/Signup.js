@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("Dateofbirth").setAttribute("max", today);
 });
 
-const statevisecity={
-    Kerala:["Kochi","Calicut","Tiruvanadapuram","Malappuram"],
-    Tamilnadu:["Chennai","Coimbatore","Vellore","Madurai"],
-    Karnataka:["Bangalore","Mysuru","Chikmagalur","Kalaburagi"]
+const statevisecity = {
+    Kerala: ["Kochi", "Tiruvanadapuram", "Calicut", "Palakkad", "Malappuram", "Thrissur", "Ernakulam"],
+    Tamilnadu: ["Chennai", "Coimbatore", "Vellore", "Madurai", "Salem", "Tiruchirappalli", "Tirunelveli", "Thanjavur", "Erode", "Tiruppur"],
+    Karnataka: ["Bangalore", "Mysuru", "Chikmagalur", "Kalaburagi", "Belagavi", "Shivamogga", "Davangere", "Udupi"]
 }
 function selectcity(value){
     if(value.length==0){

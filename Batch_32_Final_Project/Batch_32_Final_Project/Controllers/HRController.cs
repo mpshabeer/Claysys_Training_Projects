@@ -58,7 +58,7 @@ namespace Batch_32_Final_Project.Controllers
                     if (isInserted)
                     {
                         // Setting a success message if the vacancy update is successful and redirecting to the Viewvacancy action.
-                        ViewBag.Message = "New Vacancy Added";
+                        ViewBag.Message = "New Jobposter Added";
                         return View();
                     }
                     else
@@ -71,7 +71,7 @@ namespace Batch_32_Final_Project.Controllers
                 else
                 {
                     // Setting a error message if the ModelState is invalid  and returning the current view.
-                    ViewBag.Message = " Model not Valid";
+                    ViewBag.Message = "Please fill requird fields ";
                     return View();
                 }
             }
@@ -123,7 +123,7 @@ namespace Batch_32_Final_Project.Controllers
                     if (isInserted)
                     {
                         // Setting a success message if the vacancy update is successful and redirecting to the Viewvacancy action.
-                        TempData["SuccessMessage"] = "Vacancy Updated";
+                        TempData["SuccessMessage"] = "Job Poster Updated Successfully ";
                         return RedirectToAction("Viewvacancy");
                     }
                     else
@@ -162,11 +162,11 @@ namespace Batch_32_Final_Project.Controllers
                 bool isDeleted = vacancyRepository.DeleteTHEvacancy(id);
                 if (isDeleted)
                 {
-                    TempData["SuccessMessage"] = "Vacancy Deleted Successfully";
+                    TempData["SuccessMessage"] = "Jobposter Deleted Successfully";
                 }
                 else
                 {
-                    ViewBag.Message = "Unable to Delete the Vacancy";
+                    ViewBag.Message = "Unable to Delete the Jobposter";
                 }
             }
             catch (Exception ex)
@@ -320,7 +320,7 @@ namespace Batch_32_Final_Project.Controllers
                     isInserted = registrationRepository.Updateuserdetails(userdetails);
                     if (isInserted)
                     {
-                        TempData["SuccessMessage"]  = "Details Updated";
+                        TempData["SuccessMessage"]  = "Details Updated Successfully !!";
                         return RedirectToAction("Getuserdetails");
                     }
                     else
@@ -489,11 +489,17 @@ namespace Batch_32_Final_Project.Controllers
             ViewBag.Message = "Updated";
             return View();
         }
+        /// <summary>
+        /// Display the details of vacancy with curresponding id
+        /// </summary>
+        /// <param name="id">The ID of the vacancy</param>
+        /// <returns>Returns a view displaying the details of the specified vacancy</returns>
         public ActionResult ViewVacancyDetails(int id)
         {
             try
             {
                 ModelState.Clear();
+                // Retrieve vacancy details from the repository based on the provided ID
                 return View(vacancyRepository.GetVacancyDetails(id));
             }
             catch (Exception ex)

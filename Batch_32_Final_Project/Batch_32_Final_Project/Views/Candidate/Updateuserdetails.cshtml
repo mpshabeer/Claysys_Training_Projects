@@ -6,77 +6,23 @@
 }
 @if (ViewBag.Message != null)
 {
- <div class="text-bg-warning">@ViewBag.Message</div>
+    <div class="text-bg-warning">@ViewBag.Message</div>
 }
+<link href="~/Content/CSS/Updateuser.css" rel="stylesheet" />
 
- <style>
-     .form-horizontal {
-         width: 50%;
-         margin: 0 auto;
-     }
 
-     .form-group {
-         margin-bottom: 20px;
-     }
-
-     .control-label {
-         font-weight: bold;
-     }
-
-     .text-danger {
-         color: red;
-     }
-
-     .btn-default {
-         background-color: #f0ad4e;
-         color: #fff;
-         border-color: #eea236;
-     }
-
-         .btn-default:hover,
-         .btn-default:focus,
-         .btn-default:active,
-         .btn-default.active {
-             background-color: #eea236;
-             border-color: #eea236;
-         }
-
-         .btn-default:active,
-         .btn-default.active {
-             background-image: none;
-         }
-
-     .text-bg-warning {
-         background-color: #f0ad4e;
-         color: #fff;
-         padding: 10px;
-         text-align: center;
-         font-weight: bold;
-         margin-bottom: 20px;
-     }
-
-     a {
-         color: #007bff;
-         text-decoration: none;
-     }
-
-         a:hover {
-             color: #0056b3;
-             text-decoration: underline;
-         }
- </style>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        
+
+    <div class="form-horizontal  bg-light">
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <div class="col-md-10">
                 @Html.HiddenFor(model => model.rid)
-                
+
                 @Html.ValidationMessageFor(model => model.rid, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -163,12 +109,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Update" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+

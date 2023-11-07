@@ -14,9 +14,9 @@
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="text-bg-info">
+    <div class="text-bg-info text-center">
         <strong class="alert-info">
-            TempData["SuccessMessage"].ToString();
+            @TempData["SuccessMessage"].ToString()
         </strong>
     </div>
 }
@@ -40,7 +40,7 @@
                         <div>Close Date: @vacancy.LastDateToApply</div>
                         <div>Created by: @vacancy.Createdby</div>
                         <div class="card-footer">
-                            @Html.ActionLink("Delete", "DeleteVacancy", new { id = vacancy.vid }, new { @class = "btn btn-danger" })
+                           
 
                             @Html.ActionLink("Update", "UpdateVacancy", new { id = vacancy.vid }, new { @class = "btn btn-primary" })
                             @Html.ActionLink("View Details ", "ViewVacancyDetails", new { id = vacancy.vid }, new { @class = "btn btn-success" })

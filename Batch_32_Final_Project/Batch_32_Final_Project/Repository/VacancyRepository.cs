@@ -142,31 +142,33 @@ namespace Batch_32_Final_Project.Repository
 
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
-                SqlCommand command = new SqlCommand("SPD_Vacancy", connection);
-                command.CommandType = CommandType.StoredProcedure;
-       
-                SqlDataAdapter dataadapter = new SqlDataAdapter(command);
-                DataTable datatable = new DataTable();
-
-                connection.Open();
-                dataadapter.Fill(datatable);
-
-                foreach (DataRow datarow in datatable.Rows)
+                using (SqlCommand command = new SqlCommand("SPD_Vacancy", connection))
                 {
-                    VacancyList.Add(new Vacancy
+
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter dataadapter = new SqlDataAdapter(command);
+                    DataTable datatable = new DataTable();
+
+                    connection.Open();
+                    dataadapter.Fill(datatable);
+
+                    foreach (DataRow datarow in datatable.Rows)
                     {
-                        vid = Convert.ToInt32(datarow["vid"]),
-                        JobTitle = Convert.ToString(datarow["JobTitle"]),
-                        JobDescription = Convert.ToString(datarow["JobDescription"]),
-                        Department = Convert.ToString(datarow["Department"]),
-                        NumberOfOpenings = Convert.ToString(datarow["NumberOfOpenings"]),
-                        PostedDate = Convert.ToString(datarow["PostedDate"]),
-                        LastDateToApply = Convert.ToString(datarow["LastDateToApply"]),
-                        Createdby = Convert.ToString(datarow["Createdby"])
-                    });
+                        VacancyList.Add(new Vacancy
+                        {
+                            vid = Convert.ToInt32(datarow["vid"]),
+                            JobTitle = Convert.ToString(datarow["JobTitle"]),
+                            JobDescription = Convert.ToString(datarow["JobDescription"]),
+                            Department = Convert.ToString(datarow["Department"]),
+                            NumberOfOpenings = Convert.ToString(datarow["NumberOfOpenings"]),
+                            PostedDate = Convert.ToString(datarow["PostedDate"]),
+                            LastDateToApply = Convert.ToString(datarow["LastDateToApply"]),
+                            Createdby = Convert.ToString(datarow["Createdby"])
+                        });
+                    }
                 }
             }
-
             return VacancyList;
         }
 
@@ -190,7 +192,6 @@ namespace Batch_32_Final_Project.Repository
 
                     foreach (DataRow datarow in datatable.Rows)
                     {
-
                         VacancyList.Add(
 
                             new Vacancy
@@ -369,44 +370,46 @@ namespace Batch_32_Final_Project.Repository
 
         public List<Alldetailsofapplication> Getallapplieddetails(int id)
         {
-
-            connections();
             List<Alldetailsofapplication> AppliedList = new List<Alldetailsofapplication>();
-            SqlCommand command = new SqlCommand("SPD_Allapplications", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@vid", id);
-            SqlDataAdapter dataadapter = new SqlDataAdapter(command);
-            DataTable datatable = new DataTable();
-
-            connection.Open();
-            dataadapter.Fill(datatable);
-            connection.Close();
-            foreach (DataRow datarow in datatable.Rows)
+            using (SqlConnection connection = new SqlConnection(connectionstring))
             {
+                using (SqlCommand command = new SqlCommand("SPD_Allapplications", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@vid", id);
+                    SqlDataAdapter dataadapter = new SqlDataAdapter(command);
+                    DataTable datatable = new DataTable();
 
-                AppliedList.Add(
-
-                    new Alldetailsofapplication
+                    connection.Open();
+                    dataadapter.Fill(datatable);
+                    connection.Close();
+                    foreach (DataRow datarow in datatable.Rows)
                     {
-                        vid = Convert.ToInt32(datarow["vid"]),
-                        aid= Convert.ToInt32(datarow["aid"]),
-                        rid = Convert.ToInt32(datarow["rid"]),
-                        JobTitle= Convert.ToString(datarow["JobTitle"]),
-                        Firstname = Convert.ToString(datarow["Firstname"]),
-                        Lastname = Convert.ToString(datarow["Lastname"]),
-                        Email = Convert.ToString(datarow["Email"]),
-                        Resume = Convert.ToString(datarow["Resumes"]),
-                        Photo = Convert.ToString(datarow["Photo"]),
-                        Experiance = Convert.ToString(datarow["Experiance"]),
-                        Description = Convert.ToString(datarow["Description"]),
-                        Qualification = Convert.ToString(datarow["Qualification"]),
-                        Status = Convert.ToString(datarow["Status"]),
-                        Interviewdate = Convert.ToString(datarow["Interviewdate"]),
 
+                        AppliedList.Add(
+
+                            new Alldetailsofapplication
+                            {
+                                vid = Convert.ToInt32(datarow["vid"]),
+                                aid = Convert.ToInt32(datarow["aid"]),
+                                rid = Convert.ToInt32(datarow["rid"]),
+                                JobTitle = Convert.ToString(datarow["JobTitle"]),
+                                Firstname = Convert.ToString(datarow["Firstname"]),
+                                Lastname = Convert.ToString(datarow["Lastname"]),
+                                Email = Convert.ToString(datarow["Email"]),
+                                Resume = Convert.ToString(datarow["Resumes"]),
+                                Photo = Convert.ToString(datarow["Photo"]),
+                                Experiance = Convert.ToString(datarow["Experiance"]),
+                                Description = Convert.ToString(datarow["Description"]),
+                                Qualification = Convert.ToString(datarow["Qualification"]),
+                                Status = Convert.ToString(datarow["Status"]),
+                                Interviewdate = Convert.ToString(datarow["Interviewdate"]),
+
+                            }
+                            );
                     }
-                    );
+                }
             }
-
             return AppliedList;
         }
 
@@ -448,7 +451,6 @@ namespace Batch_32_Final_Project.Repository
             command.Parameters.AddWithValue("@rid", rid);
             SqlDataAdapter dataadapter = new SqlDataAdapter(command);
             DataTable datatable = new DataTable();
-
             connection.Open();
             dataadapter.Fill(datatable);
             connection.Close();
@@ -483,7 +485,6 @@ namespace Batch_32_Final_Project.Repository
         }
         public bool Withdrawapplication(int id)
         {
-
             int i = 0;
             try
             {
@@ -548,10 +549,8 @@ namespace Batch_32_Final_Project.Repository
                 command.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter dataadapter = new SqlDataAdapter(command);
                 DataTable datatable = new DataTable();
-
                 connection.Open();
                 dataadapter.Fill(datatable);
-
                 foreach (DataRow datarow in datatable.Rows)
                 {
                     ContactusList.Add(new Contactus
@@ -607,7 +606,6 @@ namespace Batch_32_Final_Project.Repository
             Application apply = null;
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
-
                 SqlCommand command = new SqlCommand("SPD_Application", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@aid", id);
@@ -644,7 +642,6 @@ namespace Batch_32_Final_Project.Repository
                 commandd.Parameters.AddWithValue("@aid", id);
                 connection.Open();
                 SqlDataReader dataReader = commandd.ExecuteReader();
-
                 if (dataReader.HasRows)
                 {
                     while (dataReader.Read())
@@ -681,7 +678,6 @@ namespace Batch_32_Final_Project.Repository
 
         public bool Updateapplications(Application apply, HttpPostedFileBase Resume, HttpPostedFileBase Photo)
         {
-
             int i = 0;
             byte[] resumeSource = new byte[Resume.ContentLength];
             Resume.InputStream.Read(resumeSource, 0, Resume.ContentLength);
@@ -726,7 +722,6 @@ namespace Batch_32_Final_Project.Repository
             {
                 using (SqlCommand command = new SqlCommand("SPU_Applicationsstatus", connection))
                 {
-
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@aid", aid);
                     command.Parameters.AddWithValue("@Status", alldetailsofapplication.Status);

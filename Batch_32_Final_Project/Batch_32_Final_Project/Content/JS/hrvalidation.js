@@ -3,10 +3,10 @@
     const validfirstname = /^[A-Za-z ]+$/;
 
     if (firstname == "") {
-        document.getElementById("fnamewarn").innerHTML = "Please enter your Firstname";
+        document.getElementById("fnamewarn").innerHTML = "Please enter  Firstname";
     } else if (!validfirstname.test(firstname)) {
         document.getElementById("fnamewarn").innerHTML = "Firstname should contain only letters";
-    } 
+    }
     else {
         document.getElementById("fnamewarn").innerHTML = "";
     }
@@ -14,10 +14,11 @@
 
 function validatelastname() {
 
-    const lastname = document.getElementById("Lastname").value; 
+    const lastname = document.getElementById("Lastname").value;
     const validfirstname = /^[A-Za-z ]+$/;
+
     if (lastname == "") {
-        document.getElementById("lnamewarn").innerHTML = "Please enter your Lastname";
+        document.getElementById("lnamewarn").innerHTML = "Please enter  Lastname";
     } else if (!validfirstname.test(lastname)) {
         document.getElementById("lnamewarn").innerHTML = "Lastname should contain only letters";
     } else {
@@ -26,29 +27,29 @@ function validatelastname() {
 
 }
 
-    function validdates() {
-        var today = new Date();
-        var month = today.getMonth() + 1;
-        var year = today.getFullYear();
-        var tdate = today.getDate();
-        var maxdate = year + "-" + month + "-" + tdate;
-        minyear = year - 20;
-        var mindate = minyear + "-" + month + "-" + tdate;
-        selecteddate = document.getElementById("Dateofbirth").value;
-        if (selecteddate == "") {
-            document.getElementById("datewarn").innerHTML = "Please select Date of birth";
-            document.getElementById("Dateofbirth").value = "";
-        }
-        else {
-            document.getElementById("datewarn").innerHTML = "";
-        }
+function validdates() {
+    var today = new Date();
+    var month = today.getMonth() + 1;
+    var year = today.getFullYear();
+    var tdate = today.getDate();
+    var maxdate = year + "-" + month + "-" + tdate;
+    minyear = year - 20;
+    var mindate = minyear + "-" + month + "-" + tdate;
+    selecteddate = document.getElementById("Dateofbirth").value;
+    if (selecteddate == "") {
+        document.getElementById("datewarn").innerHTML = "Please select Date of birth";
+        document.getElementById("Dateofbirth").value = "";
     }
+    else {
+        document.getElementById("datewarn").innerHTML = "";
+    }
+}
 function validateemail() {
 
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/;
     const email = document.getElementById("Email").value;
     if (email == "") {
-        document.getElementById("warnemail").innerHTML = "Please enter your Email"
+        document.getElementById("warnemail").innerHTML = "Please enter Email"
     }
     else if (!email.match(validRegex)) {
         document.getElementById("warnemail").innerHTML = " Please enter a valid Email"
@@ -74,7 +75,7 @@ function validatephone() {
 function validateaddress() {
     address = document.getElementById("Address").value;
     if (address.length = "") {
-        document.getElementById("addresswarn").innerHTML = "Please enter your Address"
+        document.getElementById("addresswarn").innerHTML = "Please enter  Address"
 
     }
     else if (address.length < 6) {
@@ -89,7 +90,7 @@ function validatepassword() {
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     password = document.getElementById("Password").value;
     if (password.length == "") {
-        document.getElementById("passwordwarn").innerHTML = "Please enter your password"
+        document.getElementById("passwordwarn").innerHTML = "Please enter password"
 
     }
 
@@ -107,7 +108,7 @@ function validateconfirmpassword() {
     password1 = document.getElementById("Password").value;
     password = document.getElementById("Confirmpassword").value;
     if (password.length == "") {
-        document.getElementById("confirmpasswordwarn").innerHTML = "Please enter your Password"
+        document.getElementById("confirmpasswordwarn").innerHTML = "Please enter  Password"
 
     }
     else if (password1 != password) {
@@ -130,7 +131,7 @@ function validateName() {
     const validFirstname = /^[A-Za-z ]+$/;
 
     if (firstname.trim() === "") {
-        document.getElementById("namewarn").innerHTML = "Please enter your Firstname";
+        document.getElementById("namewarn").innerHTML = "Please enter  Firstname";
     } else if (!validFirstname.test(firstname)) {
         document.getElementById("namewarn").innerHTML = "Firstname should contain only letters";
     } else {

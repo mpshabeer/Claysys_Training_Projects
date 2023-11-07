@@ -11,15 +11,8 @@ namespace Batch_32_Final_Project.Repository
 {
     public class ContactRepository
     {
-
         private SqlConnection connection;
-        //To Handle connection related activities    
-      
-            string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
-         
-
-        
-
+        string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
         public bool InsertContact(Contactus contactus)
         {
             int i;
@@ -33,8 +26,6 @@ namespace Batch_32_Final_Project.Repository
                     command.Parameters.AddWithValue("@Phone", contactus.Phone);
                     command.Parameters.AddWithValue("@Email", contactus.Email);
                     command.Parameters.AddWithValue("@Command", contactus.Command);
-
-
                     connection.Open();
                     i = command.ExecuteNonQuery();
                 }
