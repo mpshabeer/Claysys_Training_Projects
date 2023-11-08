@@ -27,7 +27,6 @@ namespace Batch_32_Final_Project.Repository
         {
             string todaydate = DateTime.UtcNow.ToString("yyyy-MM-dd");
             int i;
-
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
                 using (SqlCommand command = new SqlCommand("SPI_Vacancy", connection))
@@ -323,7 +322,7 @@ namespace Batch_32_Final_Project.Repository
             }
         }
 
-        public bool Applytojob(HttpPostedFileBase Resume, HttpPostedFileBase Photo, int vid,int rid,Apply applyforjob)
+        public bool Applytojob(HttpPostedFileBase Resume, HttpPostedFileBase Photo, HttpPostedFileBase Acadamiccertificate, HttpPostedFileBase Experiancecertificate, int vid,int rid,Apply applyforjob)
         {
             
             byte[] resumeSource = new byte[Resume.ContentLength];
@@ -333,6 +332,17 @@ namespace Batch_32_Final_Project.Repository
             byte[] imagesource = new byte[Photo.ContentLength];
             Photo.InputStream.Read(imagesource, 0, Photo.ContentLength);
             string imageBase64 = Convert.ToBase64String(imagesource);
+
+            byte[] Acadamicsource = new byte[Acadamiccertificate.ContentLength];
+            Acadamiccertificate.InputStream.Read(Acadamicsource, 0, Acadamiccertificate.ContentLength);
+            string acadamicBase64 = Convert.ToBase64String(Acadamicsource);
+            string expBase64 = null;
+            if (Experiancecertificate != null)
+            {
+                byte[] experiancesource = new byte[Experiancecertificate.ContentLength];
+                Experiancecertificate.InputStream.Read(experiancesource, 0, Experiancecertificate.ContentLength);
+                expBase64 = Convert.ToBase64String(experiancesource);
+            }
             string todaydate = DateTime.UtcNow.ToString("yyyy-MM-dd");
 
             int i;
@@ -346,6 +356,8 @@ namespace Batch_32_Final_Project.Repository
                     command.Parameters.AddWithValue("@rid", rid);
                     command.Parameters.AddWithValue("@Resume", resumeBase64);
                     command.Parameters.AddWithValue("@Photo", imageBase64);
+                    command.Parameters.AddWithValue("@Acadamic", acadamicBase64);
+                    command.Parameters.AddWithValue("@Expcertificate",expBase64);
                     command.Parameters.AddWithValue("@Experiance", applyforjob.Experiance);
                     command.Parameters.AddWithValue("@Qualification", applyforjob.Qualification);
                     command.Parameters.AddWithValue("@Description", applyforjob.Description);
@@ -621,6 +633,8 @@ namespace Batch_32_Final_Project.Repository
                             aid = Convert.ToInt32(dataReader["aid"]),
                             Resume = Convert.ToString(dataReader["Resumes"]),
                             Photo = Convert.ToString(dataReader["Photo"]),
+                            Acadamiccertificate = Convert.ToString(dataReader["Acadmiccertificate"]),
+                            Experiancecertificate = Convert.ToString(dataReader["ExperienceCertificate"]),
                             Qualification = Convert.ToString(dataReader["Qualification"]),
                             Experiance = Convert.ToString(dataReader["Experiance"]),
                             Description = Convert.ToString(dataReader["Description"]),
@@ -662,6 +676,8 @@ namespace Batch_32_Final_Project.Repository
                             AppliedDate= Convert.ToString(dataReader["AppliedDate"]),
                             Phone = Convert.ToString(dataReader["Phone"]),
                             Resume = Convert.ToString(dataReader["Resumes"]),
+                            Acadamiccertificate = Convert.ToString(dataReader["Acadmiccertificate"]),
+                            Experiancecertificate = Convert.ToString(dataReader["ExperienceCertificate"]),
                             Photo = Convert.ToString(dataReader["Photo"]),
                             Experiance = Convert.ToString(dataReader["Experiance"]),
                             Description = Convert.ToString(dataReader["Description"]),
@@ -676,7 +692,7 @@ namespace Batch_32_Final_Project.Repository
             return apply;
         }
 
-        public bool Updateapplications(Application apply, HttpPostedFileBase Resume, HttpPostedFileBase Photo)
+        public bool Updateapplications(Application apply, HttpPostedFileBase Resume, HttpPostedFileBase Photo, HttpPostedFileBase Acadamic, HttpPostedFileBase Exp)
         {
             int i = 0;
             byte[] resumeSource = new byte[Resume.ContentLength];
@@ -687,6 +703,14 @@ namespace Batch_32_Final_Project.Repository
             Photo.InputStream.Read(imagesource, 0, Photo.ContentLength);
             string imageBase64 = Convert.ToBase64String(imagesource);
 
+            byte[] acadamicsource = new byte[Acadamic.ContentLength];
+            Acadamic.InputStream.Read(acadamicsource, 0, Acadamic.ContentLength);
+            string acadamicBase64 = Convert.ToBase64String(acadamicsource);
+
+            byte[] expsource = new byte[Exp.ContentLength];
+            Exp.InputStream.Read(expsource, 0, Exp.ContentLength);
+            string expBase64 = Convert.ToBase64String(expsource);
+
             using (SqlConnection connection = new SqlConnection(connectionstring))
             {
                 using (SqlCommand command = new SqlCommand("SPU_Application", connection))
@@ -695,6 +719,8 @@ namespace Batch_32_Final_Project.Repository
                     command.Parameters.AddWithValue("@aid", apply.aid);
                     command.Parameters.AddWithValue("@Resume", resumeBase64);
                     command.Parameters.AddWithValue("@Photo", imageBase64);
+                    command.Parameters.AddWithValue("@Acadamiccertificate", acadamicBase64);
+                    command.Parameters.AddWithValue("@experiancecertificate", expBase64);
                     command.Parameters.AddWithValue("@Qualification", apply.Qualification);
                     command.Parameters.AddWithValue("@Experiance", apply.Experiance);
                     command.Parameters.AddWithValue("@Description", apply.Description);

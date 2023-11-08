@@ -15,15 +15,17 @@ namespace Batch_32_Final_Project.Models
         public string Resume { get; set; }
 
         [Display(Name = "Your Photo")]
-
         public string Photo { get; set; }
+        [Display(Name = "Your Acadamic Certificate")]
+        public string Acadamiccertificate { get; set; }
 
         [Display(Name = "Experiance")]
-  
         public string Experiance { get; set; }
 
+        [Display(Name = "Experiance Certificate")]
+        public string Experiancecertificate { get; set; }
+
         [Display(Name = "Highest Qualification")]
-      
         public string Qualification { get; set; }
         public string AppliedDate { get; set; }
         public string Description { get; set; }

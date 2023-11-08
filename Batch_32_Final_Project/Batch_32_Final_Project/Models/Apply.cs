@@ -26,6 +26,13 @@ namespace Batch_32_Final_Project.Models
         [Required(ErrorMessage = "Experiance required")]
         public string Experiance { get; set; }
 
+        [Display(Name = "Experiance certificate if any")]
+        public string Experiancecertificate { get; set; }
+
+        [Display(Name = "Highest Qualification Certificate")]
+        [Required(ErrorMessage = "Acadmic Qualification Certificate  required")]
+        public string Acadamiccertificate { get; set; }
+
         [Display(Name = "Highest Qualification")]
         [Required(ErrorMessage = "Qualification required")]
         public string Qualification { get; set; }

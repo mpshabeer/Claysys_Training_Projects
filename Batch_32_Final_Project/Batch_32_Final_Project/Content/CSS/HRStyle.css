@@ -1,4 +1,7 @@
-﻿.unorderdlist {
+﻿body {
+    background-color: rgb(202, 194, 194);
+}
+.unorderdlist {
     list-style-type: none;
     margin: 0;
     padding: 0;

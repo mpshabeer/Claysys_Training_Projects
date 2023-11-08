@@ -19,15 +19,48 @@
 
                 </p>
             </div>
-
-
         </div>
     </div>
 </div>
 
 
-<script src="~/Content/JS/homepagescript.js"></script>
-<link href="~/Content/CSS/Homepage.css" rel="stylesheet" />
+<main>
+    <script src="~/Content/JS/homepagescript.js"></script>
+    <link href="~/Content/CSS/Homepage.css" rel="stylesheet" />
+
+    <section class="row" aria-labelledby="aspnetTitle">
+    </section>
+
+    <div class="row" style="margin-top:100px;">
+        <div class="imageborder">
+            <div class="next" onclick="pluslide(1)"> ❯ </div>
+            <div class="prev" onclick="pluslide(-1)"> ❮ </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image1.jpg")">
+            </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image2.jpg")">
+            </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image3.jpg")">
+            </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image4.jpg")">
+            </div>
+            <div class="imageslideshow">
+                <img src="@Url.Content("~/Content/Images/image5.jpg")">
+            </div>
+        </div>
+        <div style="text-align: center; margin: 20px;">
+            <span class="dot" onclick="slide(1)"></span>
+            <span class="dot" onclick="slide(2)"></span>
+            <span class="dot" onclick="slide(3)"></span>
+            <span class="dot" onclick="slide(4)"></span>
+            <span class="dot" onclick="slide(5)"></span>
+        </div>
+    </div>
+
+</main>
 
 
 

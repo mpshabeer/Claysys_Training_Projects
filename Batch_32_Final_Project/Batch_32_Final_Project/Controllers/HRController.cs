@@ -27,6 +27,7 @@ namespace Batch_32_Final_Project.Controllers
         /// <returns>Returns the default view for the controller.</returns>
         public ActionResult HRDashbord()
         {
+
             return View();
         }
         /// <summary>
@@ -58,8 +59,8 @@ namespace Batch_32_Final_Project.Controllers
                     if (isInserted)
                     {
                         // Setting a success message if the vacancy update is successful and redirecting to the Viewvacancy action.
-                        ViewBag.Message = "New Jobposter Added";
-                        return View();
+                        TempData["SuccessMessage"] = "New Jobposter Added";
+                        return RedirectToAction("Addvacancy");
                     }
                     else
                     {
@@ -260,8 +261,8 @@ namespace Batch_32_Final_Project.Controllers
                         isInserted = registrationRepository.InserttoHR(registration);
                         if (isInserted)
                         {
-                            ViewBag.Message = "Registration of HR Successfull";
-                            return View();
+                            TempData["SuccessMessage"] = "Registration of HR Successfull";
+                            return RedirectToAction("CeatenewHR");
                         }
                         else
                         {

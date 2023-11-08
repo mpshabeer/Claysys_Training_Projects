@@ -61,10 +61,19 @@
             </div>
             <div class="user-detail-row">
                 <label>Resume:</label>
-
                 <embed src="@("data:application/pdf;base64," + Model.Resume)" type="application/pdf" width="70%" height="300px" />
             </div>
-
+            <div class="user-detail-row">
+                <label>Acadamic certificate:</label>
+                <a href="data:application/pdf;base64,@Model.Acadamiccertificate" target="_blank"><strong>Certificate</strong></a>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Experiancecertificate))
+            {
+                <div class="user-detail-row">
+                    <label>Experiance certificate:</label>
+                    <a href="data:application/pdf;base64,@Model.Experiancecertificate" target="_blank"><strong>Certificate</strong></a>
+                </div>
+            }
             <div class="user-detail-row">
                 <label>Qualification :</label>
                 <span>@Html.DisplayFor(model => model.Qualification)</span>

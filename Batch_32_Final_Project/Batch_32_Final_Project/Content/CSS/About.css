@@ -1,37 +1,34 @@
-﻿.title-container {
+﻿
+.title {
     text-align: center;
-    margin-top: 100px;
+    color: rgb(27, 18, 147);
+    font: 3em sans-serif;
+    margin-top: 50px;
+    margin-bottom: 60px;
 }
 
-    .title-container h1 {
-        color: #0077b6;
-        font-size: 3em;
-        font-family: 'Arial', sans-serif;
-    }
-
-.content-container {
-    margin: 50px 150px;
+#p {
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(0, 42, 177);
+    margin-bottom: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
-    .content-container p {
-        font-size: 1.2em;
-        font-family: 'Arial', sans-serif;
-        text-align: justify;
-    }
-
-.container {
-    margin-bottom: 100px;
+#h3 {
+    color: rgb(0, 42, 177);
+    margin-top: 30px;
 }
 
-.card {
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.card-title {
+    font-family: 'Arno Pro Display';
+    color: rgb(217, 3, 3)
+}
+
+#mv {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(48, 68, 135);
+    font-size: 16px;
     margin: 10px;
-    padding: 20px;
 }
-
-    .card h5 {
-        color: #0077b6;
-        font-size: 1.5em;
-        font-family: 'Arial', sans-serif;
-    }

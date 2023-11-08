@@ -14,12 +14,12 @@
 
         <li class="list">@Html.ActionLink("Logout", "Logout", "Candidate", new { area = "" })</li>
         <li class="list">@Html.ActionLink("Account", "Getuserdetails", "Candidate", new { area = "" })</li>
-        <li class="list">@Html.ActionLink("My Applications", "Viewmyapplication", "", new { area = "" })</li>
-        <li class="list">@Html.ActionLink("Career Opportunities", "Viewvacancy", "Candidate", new { area = "" })</li>
+        <li class="list">@Html.ActionLink("My applications", "Viewmyapplication", "", new { area = "" })</li>
+        <li class="list">@Html.ActionLink("Career opportunities", "Viewvacancy", "Candidate", new { area = "" })</li>
         <li class="list">@Html.ActionLink("Home", "CandidateDashbord", "Candidate", new { area = "" })</li>
 
 
-        @if (Session["Email"] != null && Session["rid"] != null)
+        @if (Session["Email"] != null && Session["rid"] != null && Session["userType"].ToString() != "HR")
         {
             <li class="list">
                 <a href="#home">
@@ -29,16 +29,16 @@
         }
         else
         {
-            Response.RedirectToRoute("Default", new { controller = "Home", action = "Index" });
+            Response.RedirectToRoute("Default", new { controller = "Home", action = "Signin" });
         }
         <li class="liof"> <img  src="~/Content/Images/logo.jpg" style="width: 40px; height: 50px; margin-left:10px;padding: 1px;" /></li>
-        <li class="liof"><a href="#"><strong>Infotech Pvt Ltd</strong></a></li>
+        <li class="liof"><a href="#"><strong>INFOTECH PVT LTD</strong></a></li>
     </ul>
     @RenderBody()
 
-    <footer class="bg-light text-dark text-center p-3 " >
+<footer class="bg-light text-dark text-center p-3 ">
 
-        Infotech Pvt Ltd &copy; 2023
-    </footer>
+    INFOTECH PVT LTD &copy; 2023
+</footer>
 </body>
 </html>

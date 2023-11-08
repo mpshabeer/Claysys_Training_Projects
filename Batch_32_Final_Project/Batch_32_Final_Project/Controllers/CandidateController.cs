@@ -101,7 +101,9 @@ namespace Batch_32_Final_Project.Controllers
                 {
                     HttpPostedFileBase Resume = Request.Files["Resume"];
                     HttpPostedFileBase Photo = Request.Files["Photo"];
-                    if (Resume != null && Photo != null)
+                    HttpPostedFileBase Acadamiccertificate = Request.Files["Acadamiccertificate"];
+                    HttpPostedFileBase Experiancecertificate = Request.Files["Experiancecertificate"];
+                    if (Resume != null && Photo != null && Acadamiccertificate!=null)
                     {
                        
                         int rid = Convert.ToInt32(Session["rid"].ToString());
@@ -113,7 +115,7 @@ namespace Batch_32_Final_Project.Controllers
                         }
                         else
                         {
-                            isinserted = vacancyRepository.Applytojob(Resume, Photo, vid, rid, applytojob);
+                            isinserted = vacancyRepository.Applytojob(Resume, Photo, Acadamiccertificate, Experiancecertificate, vid, rid, applytojob);
                             if (isinserted)
                             {
                                 TempData["SuccessMessage"] = "Application saved";
@@ -309,12 +311,14 @@ namespace Batch_32_Final_Project.Controllers
         {
                 HttpPostedFileBase Resume = Request.Files["Resume"];
                 HttpPostedFileBase Photo = Request.Files["Photo"];
+                HttpPostedFileBase Acadamic = Request.Files["Acadamiccertificate"];
+                HttpPostedFileBase Exp = Request.Files["Experiancecertificate"];
                 bool isinserted;
                 if (Resume != null && Photo != null)
                 {
                     try
                     {
-                        isinserted = vacancyRepository.Updateapplications(application, Resume, Photo);
+                        isinserted = vacancyRepository.Updateapplications(application, Resume, Photo,Acadamic,Exp);
                         if (isinserted)
                         {
                             return RedirectToAction("Viewmyapplication");

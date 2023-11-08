@@ -14,6 +14,15 @@
         <div class="text-bg-warning">@ViewBag.Message</div>
     }
 
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="text-bg-info text-center">
+            <strong class="alert-info">
+                @TempData["SuccessMessage"].ToString()
+            </strong>
+        </div>
+    }
+
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     @using (Html.BeginForm())

@@ -96,6 +96,8 @@ namespace Batch_32_Final_Project.Controllers
         /// <returns>Returns the Signin view for user</returns>
         public ActionResult Signin()
         {
+            FormsAuthentication.SignOut();
+            Session.Abandon();
             return View();
         }
         /// <summary>
@@ -118,6 +120,7 @@ namespace Batch_32_Final_Project.Controllers
                         FormsAuthentication.SetAuthCookie(login.Email, false);
                         Session["Email"] = login.Email.ToString();
                         Session["rid"] = Convert.ToInt32(rid);
+                        Session["userType"] = userType;
                         try
                         {
                             if (userType == "Candidate")

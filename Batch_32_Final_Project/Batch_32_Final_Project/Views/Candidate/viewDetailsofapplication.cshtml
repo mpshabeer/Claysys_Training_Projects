@@ -18,9 +18,6 @@
         <div class="user-details">
             <h4>Application For @Html.DisplayFor(model => model.JobTitle)</h4>
             <hr />
-
-
-
             <div class="user-detail-row">
                 <label>Job Title:</label>
                 <span>@Html.DisplayFor(model => model.JobTitle)</span>
@@ -41,7 +38,7 @@
             </div>
             <div class="user-detail-row">
                 <label>Responsibilities:</label>
-                <span>@Html.DisplayFor(model => model.Responsibilities)</span>
+                <span class="text-justify">@Html.DisplayFor(model => model.Responsibilities)</span>
             </div>   <h4>Applicant Informations</h4>
             <hr />
             <div class="user-detail-row">
@@ -63,6 +60,17 @@
 
                 <embed src="@("data:application/pdf;base64," + Model.Resume)" type="application/pdf" width="400" height="300" />
             </div>
+            <div class="user-detail-row">
+                <label>Acadamic certificate:</label>
+                <a href="data:application/pdf;base64,@Model.Acadamiccertificate" target="_blank"><strong>Certificate</strong></a>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.Experiancecertificate))
+            {
+                <div class="user-detail-row">
+                    <label>Experiance certificate:</label>
+                    <a href="data:application/pdf;base64,@Model.Experiancecertificate" target="_blank"><strong>Certificate</strong></a>
+                </div>
+            }
 
             <div class="user-detail-row">
                 <label>Qualification :</label>

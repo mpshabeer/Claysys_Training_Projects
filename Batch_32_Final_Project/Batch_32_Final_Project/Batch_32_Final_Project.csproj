@@ -161,7 +161,6 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\CSS\About.css" />
-    <Content Include="Content\CSS\Abouutus.css" />
     <Content Include="Content\CSS\CandidateStylele.css" />
     <Content Include="Content\CSS\ContactusSheet1.css" />
     <Content Include="Content\CSS\HomeStyle.css" />

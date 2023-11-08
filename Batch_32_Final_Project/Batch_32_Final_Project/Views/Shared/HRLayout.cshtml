@@ -1,8 +1,6 @@
 ﻿@{
     Layout = null;
 }
-
-
 <html>
 <head>
     <meta charset="UTF-8">
@@ -12,17 +10,13 @@
     <link href="~/Content/CSS/HRStyle.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/CSS/hrnavbar.css" rel="stylesheet" />
-</head>
-
-@if (Session["Email"] == null && Session["rid"] == null)
+</head>@if (Session["Email"] == null || Session["rid"] == null || Session["userType"]==null || Session["userType"].ToString() == "Candidate" )
 {
-    Response.RedirectToRoute("Default", new { controller = "Home", action = "Index" });
+    Response.RedirectToRoute("Default", new { controller = "Home", action = "Signin" });
 }
-<body>
+<body style="background-color:rgb(238, 238, 238);">
 
     <ul class="unorderdlist">
-
-
         <li class="navbar_list">@Html.ActionLink("Logout", "Logout", "HR", new { area = "" })</li>
         <li class="navbar_list">@Html.ActionLink("Contact request", "Viewcontact", "HR", new { area = "" })</li>
         <li class="navbar_list">@Html.ActionLink("Account", "Getuserdetails", "", new { area = "" })</li>
@@ -36,16 +30,11 @@
             @Html.ActionLink("Home", "HRDashbord", "HR", new { area = "" })
         </li>
         <li><img class="logo-image" src="~/Content/Images/logo.jpg" /></li>
-        <li class="cmpname"><strong>@Html.ActionLink("Infotech Pvt Ltd", "HRDashbord", "HR", new { area = "" })</strong></li>
-
-
-
-
+        <li class="cmpname"><strong>@Html.ActionLink("INFOTECH PVT LTD", "HRDashbord", "HR", new { area = "" })</strong></li>
     </ul>
     @RenderBody()
-
-    <footer class="bg-dark text-light text-center p-3">
-        Infotech Pvt Ltd &copy; 2023
-    </footer>
+<footer class="bg-dark text-light text-center p-3">
+    INFOTECH PVT LTD &copy; 2023
+</footer>
 </body>
 </html>

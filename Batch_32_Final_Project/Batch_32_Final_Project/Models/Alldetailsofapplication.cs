@@ -27,18 +27,14 @@ namespace Batch_32_Final_Project.Models
         public string Qualifications { get; set; }
         public string Qualification { get; set; }
         public string Department { get; set; }
-
         public string Responsibilities { get; set; }
         public string Resume { get; set; }
-
+        public string Experiancecertificate { get; set; }
+        public string Acadamiccertificate { get; set; }
         public string Photo { get; set; }
-
         public string Experiance { get; set; }
         public string Description { get; set; }
-
-        
         public string AppliedDate { get; set; }
-
         public string Status { get; set; }
         [DataType(DataType.Date)]
         public string Interviewdate { get; set; }
