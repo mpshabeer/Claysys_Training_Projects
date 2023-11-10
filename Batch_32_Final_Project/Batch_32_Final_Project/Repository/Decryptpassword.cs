@@ -11,6 +11,11 @@ namespace Batch_32_Final_Project.Repository
     public class Decryptpassword
     {
         string cleartext;
+        /// <summary>
+        /// Decrypts the provided cipherText using AES encryption.
+        /// </summary>
+        /// <param name="cipherText">The encrypted text to be decrypted.</param>
+        /// <returns>The decrypted clear text.</returns>
         public string Decrypt(string cipherText)
         {
             string encryptionKey = "MAKV2SPBNI99212";
@@ -30,7 +35,6 @@ namespace Batch_32_Final_Project.Repository
                     cleartext = Encoding.Unicode.GetString(ms.ToArray());
                 }
             }
-
             return cleartext;
         }
     }

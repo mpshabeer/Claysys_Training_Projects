@@ -67,8 +67,8 @@ namespace Batch_32_Final_Project.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm Password")]
-        [Required(ErrorMessage = "Confirm Password is required")]
+        [Display(Name = "Confirm password")]
+        [Required(ErrorMessage = "Confirm password is required")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again !")]
         public string Confirmpassword { get; set; }
 

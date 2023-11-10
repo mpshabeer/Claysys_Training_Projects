@@ -13,37 +13,53 @@ namespace Batch_32_Final_Project.Repository
     public class EmailexistRepository
 
     {
-        private SqlConnection connection;
-       
-            string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
-           
-        
+       private SqlConnection connection;
+       string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
+
+        /// <summary>
+        /// Validates user credentials by checking the provided email and password against the database.
+        /// </summary>
+        /// <param name="login">The Login object containing user login information.</param>
+        /// <param name="userType">Output parameter that receives the user type if validation is successful; otherwise, null.</param>
+        /// <param name="rid">Output parameter that receives the user's registration ID if validation is successful; otherwise, null.</param>
+        /// <param name="username">Output parameter that receives the user's first name if validation is successful; otherwise, null.</param>
+        /// <returns>True if the provided credentials are valid; otherwise, false.</returns>
         public bool checkemail(Registration registration)
         {
-            using (SqlConnection connection = new SqlConnection(connectionstring))
+            try
             {
-                using (SqlCommand command = new SqlCommand("SPD_Emailexist", connection))
+                using (SqlConnection connection = new SqlConnection(connectionstring))
                 {
-
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Email", registration.Email);
-                    connection.Open();
-                    SqlDataReader sdr = command.ExecuteReader();
-                    if (sdr.Read())
+                    using (SqlCommand command = new SqlCommand("SPD_Emailexist", connection))
                     {
-                        string Emails = sdr["Email"].ToString();
-                        if (Emails == registration.Email)
+
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Email", registration.Email);
+                        connection.Open();
+                        SqlDataReader sdr = command.ExecuteReader();
+                        if (sdr.Read())
                         {
-                            return false;
-                        }
-                        else
-                        {
-                            return true;
+                            string Emails = sdr["Email"].ToString();
+                            if (Emails == registration.Email)
+                            {
+                                return false;
+                            }
+                            else
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
+                return true;
             }
-            return true;
+            finally
+            { 
+                if (connection != null && connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿function validatefirstname() {
+﻿// This function validates the input for the First name
+function validatefirstname() {
     const firstname = document.getElementById("Firstname").value;
     const validfirstname = /^[A-Za-z ]+$/;
 
@@ -11,7 +12,7 @@
         document.getElementById("fnamewarn").innerHTML = "";
     }
 }
-
+// This function validates the input for the Last name
 function validatelastname() {
 
     const lastname = document.getElementById("Lastname").value;
@@ -26,7 +27,7 @@ function validatelastname() {
     }
 
 }
-
+// This function validates the input for the date of birth
 function validdates() {
     var today = new Date();
     var month = today.getMonth() + 1;
@@ -44,6 +45,7 @@ function validdates() {
         document.getElementById("datewarn").innerHTML = "";
     }
 }
+// This function validates the input for the Email
 function validateemail() {
 
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/;
@@ -58,6 +60,7 @@ function validateemail() {
         document.getElementById("warnemail").innerHTML = ""
     }
 }
+// This function validates the input for the Phone number
 function validatephone() {
     const phoneInput = document.getElementById("Phone");
     const phonePattern = /^[6789][0-9]{9}$/;
@@ -71,7 +74,7 @@ function validatephone() {
 
     }
 }
-
+// This function validates the input for the Address
 function validateaddress() {
     address = document.getElementById("Address").value;
     if (address.length = "") {
@@ -86,6 +89,7 @@ function validateaddress() {
 
     }
 }
+// This function validates the input for the password
 function validatepassword() {
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     password = document.getElementById("Password").value;
@@ -103,6 +107,7 @@ function validatepassword() {
         document.getElementById("passwordwarn").innerHTML = "Password must contain at least one digit, one lowercase letter, one uppercase letter, and be at least 8 characters long";
     }
 }
+// This function validates the input for the Confirm password
 function validateconfirmpassword() {
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     password1 = document.getElementById("Password").value;
@@ -123,18 +128,5 @@ function validateconfirmpassword() {
     else {
 
         document.getElementById("confirmpasswordwarn").innerHTML = "Password must contain at least one digit, one lowercase letter, one uppercase letter, and be at least 8 characters long";
-    }
-}
-
-function validateName() {
-    const firstname = document.getElementById("Name").value;
-    const validFirstname = /^[A-Za-z ]+$/;
-
-    if (firstname.trim() === "") {
-        document.getElementById("namewarn").innerHTML = "Please enter  Firstname";
-    } else if (!validFirstname.test(firstname)) {
-        document.getElementById("namewarn").innerHTML = "Firstname should contain only letters";
-    } else {
-        document.getElementById("namewarn").innerHTML = "";
     }
 }

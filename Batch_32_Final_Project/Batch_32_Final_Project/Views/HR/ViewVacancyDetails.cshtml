@@ -6,17 +6,19 @@
 }
 <div class="form-container bg-light" style="width:600px; margin-left:auto;margin-right:auto;padding:50px;">
 
+  
+
     <link href="~/Content/CSS/table.css" rel="stylesheet" />
     <table>
         @foreach (var vacancy in Model)
         {
 
             <tr>
-                <th>Job Title</th>
+                <th>Job title</th>
                 <th>@vacancy.JobTitle</th>
             </tr>
             <tr>
-                <th>Job Description</th>
+                <th>Job description</th>
                 <th>@vacancy.JobDescription</th>
             </tr>
             <tr>
@@ -28,7 +30,7 @@
                 <td>@vacancy.Location</td>
             </tr>
             <tr>
-                <th>Number of Openings</th>
+                <th>Number of openings</th>
                 <th>@vacancy.NumberOfOpenings</th>
             </tr>
             <tr>
@@ -36,41 +38,63 @@
                 <th>@vacancy.Qualifications</th>
             </tr>
             <tr>
-                <th>Responsibilities And Duties</th>
+                <th>Responsibilities and duties</th>
                 <td>@vacancy.ResponsibilitiesAndDuties</td>
             </tr>
             <tr>
-                <th>Salary Range</th>
+                <th>Salary range</th>
                 <td>@vacancy.SalaryRange</td>
             </tr>
             <tr>
-                <th>Posted Date</th>
+                <th>Posted date</th>
                 <td>@vacancy.PostedDate</td>
             </tr>
             <tr>
-                <th>LastDate To Apply</th>
+                <th>LastDate to apply</th>
                 <td>@vacancy.LastDateToApply</td>
             </tr>
             <tr>
-                <th>Recruiter In Charge</th>
+                <th>Recruiter in charge</th>
                 <td>@vacancy.RecruiterInCharge</td>
             </tr>
             <tr>
-                <th>Interview Rounds</th>
+                <th>Interview rounds</th>
                 <td>@vacancy.InterviewRounds</td>
             </tr>
             <tr>
-                <th>HR EMail</th>
+                <th>HR email</th>
                 <td><a href="mailto:@vacancy.Createdby">@vacancy.Createdby</a></td>
             </tr>
             <tr>
-                <th>SelectionProcess</th>
+                <th>Selection process</th>
                 <td>@vacancy.SelectionProcess</td>
             </tr>
             <tr>
-               
+
                 <td>
-                    @Html.ActionLink("Delete", "DeleteVacancy", new { id = vacancy.vid }, new { @class = "btn btn-danger" })
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                        Delete poster
+                    </button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete Job poster</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    @Html.ActionLink("Delete", "DeleteVacancy", new { id = vacancy.vid }, new { @class = "btn btn-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     @Html.ActionLink("Update", "UpdateVacancy", new { id = vacancy.vid }, new { @class = "btn btn-primary" })

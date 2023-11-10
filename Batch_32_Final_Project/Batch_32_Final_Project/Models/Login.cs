@@ -13,12 +13,12 @@ namespace Batch_32_Final_Project.Models
         [DataType(DataType.EmailAddress)]
 
         [Display(Name = "Email")]
-        [Required(ErrorMessage = "Please Enter Your E-mail Address")]
+        [Required(ErrorMessage = "Please enter your email address")]
         public string Email { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        [Required(ErrorMessage = "Please Enter Your Password")]
+        [Required(ErrorMessage = "Please enter your password")]
         public string Password { get; set; }
     }
 }

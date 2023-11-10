@@ -56,7 +56,7 @@ namespace Batch_32_Final_Project.Controllers
                         isInserted = _RegistrationRepository.Insertregistration(registration);
                         if (isInserted)
                         {
-                            TempData["Successmessage"] = "Registration  Successfull";
+                            TempData["Successmessage"] = "Registration successfull";
 
                             return RedirectToAction("Signin");
                         }
@@ -68,7 +68,7 @@ namespace Batch_32_Final_Project.Controllers
                     }
                     else
                     {
-                        ViewBag.Message = "Email Already  Exisist";
+                        ViewBag.Message = "Email already exisist";
                         return View();
                     }
                 }
@@ -115,11 +115,12 @@ namespace Batch_32_Final_Project.Controllers
                 {
                     string connectionstring = ConfigurationManager.ConnectionStrings["adoConnnectionstring"].ToString();
                     RegistrationRepository registrationRepository= new RegistrationRepository();
-                    if (registrationRepository.ValidateUser(login, out string userType, out string rid))
+                    if (registrationRepository.ValidateUser(login, out string userType, out string rid,out string username))
                     {
                         FormsAuthentication.SetAuthCookie(login.Email, false);
                         Session["Email"] = login.Email.ToString();
                         Session["rid"] = Convert.ToInt32(rid);
+                        Session["username"] = username;
                         Session["userType"] = userType;
                         try
                         {
@@ -140,7 +141,7 @@ namespace Batch_32_Final_Project.Controllers
                     }
                     else
                     {
-                        ViewBag.Message = "Invalid email or password. Please try again.";
+                        ViewBag.Message = "Invalid email or password. please try again.";
                         return View();
                     }
                 }

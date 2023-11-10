@@ -12,13 +12,13 @@ namespace Batch_32_Final_Project.Models
         [Key]
         public int vid { get; set; }
 
-        [Display(Name = "Job Title")]
-        [Required(ErrorMessage = "Job Title is required")]
+        [Display(Name = "Job title")]
+        [Required(ErrorMessage = "Job title is required")]
         public string JobTitle { get; set; }
 
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Job Description")]
-        [Required(ErrorMessage = "Job Description is required")]
+        [Display(Name = "Job description")]
+        [Required(ErrorMessage = "Job description is required")]
         public string JobDescription { get; set; }
 
         [Display(Name = "Department")]
@@ -30,12 +30,12 @@ namespace Batch_32_Final_Project.Models
         public string Location { get; set; }
 
         [Display(Name = "Vacancy Status")]
-        [Required(ErrorMessage = "Vacancy Status is required")]
+        [Required(ErrorMessage = "Vacancy status is required")]
         public string VacancyStatus { get; set; }
 
         
-        [Display(Name = "Number Of Openings")]
-        [Required(ErrorMessage = "Number Of Openings is required")]
+        [Display(Name = "Number of openings")]
+        [Required(ErrorMessage = "Number of openings is required")]
         public string NumberOfOpenings { get; set; }
 
         [DataType(DataType.MultilineText)]
@@ -44,33 +44,33 @@ namespace Batch_32_Final_Project.Models
         public string Qualifications { get; set; }
 
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Responsibilities And Duties")]
-        [Required(ErrorMessage = "Responsibilities And Duties is required")]
+        [Display(Name = "Responsibilities and duties")]
+        [Required(ErrorMessage = "Responsibilities and duties is required")]
         public string ResponsibilitiesAndDuties { get; set; }
 
         [DataType(DataType.Currency)]
-        [Display(Name = "Salary Range")]
-        [Required(ErrorMessage = "Salary Range is required")]
+        [Display(Name = "Salary range")]
+        [Required(ErrorMessage = "Salary range is required")]
         public string SalaryRange { get; set; }
 
         public string PostedDate { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Last Date To Apply")]
-        [Required(ErrorMessage = "Last Date To Apply is required")]
+        [Display(Name = "Last date to apply")]
+        [Required(ErrorMessage = "Last date to apply is required")]
         public string LastDateToApply { get; set; }
 
-        [Display(Name = "Recruiter InCharge")]
-        [Required(ErrorMessage = "Recruiter InCharge is required")]
+        [Display(Name = "Recruiter incharge")]
+        [Required(ErrorMessage = "Recruiter incharge is required")]
         public string RecruiterInCharge { get; set; }
 
-        [Display(Name = "Interview Rounds")]
-        [Required(ErrorMessage = "Interview Rounds is required")]
+        [Display(Name = "Interview rounds")]
+        [Required(ErrorMessage = "Interview rounds is required")]
         public string InterviewRounds { get; set; }
 
         [DataType(DataType.MultilineText)]
-        [Display(Name = "Selection Process")]
-        [Required(ErrorMessage = "Selection Process is required")]
+        [Display(Name = "Selection process")]
+        [Required(ErrorMessage = "Selection process is required")]
         public string SelectionProcess { get; set; }
 
         public string Createdby { get; set; }

@@ -107,11 +107,35 @@
                 <span>@Html.DisplayFor(model => model.Interviewdate)</span>
             </div>
             <div class="user-detail-row">
-                <span>@Html.ActionLink("Withdraw Application", "Withdrawapplication", new { aid = Model.aid }, new { @class = "btn btn-danger" })</span>
-                <span></span>
+                <span style="display:none;">@Html.ActionLink("Withdraw Application", "Withdrawapplication", new { aid = Model.aid }, new { @class = "btn btn-danger" })</span>
+                <span>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    Withdraw Application
+                </button></span>
                 <span>@Html.ActionLink("Update Application", "Updateapplication", new { id = Model.aid }, new { @class = "btn btn-primary" })</span>
 
             </div>
         </div>
     </div>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Withdraw Application</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you Sure 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <span>@Html.ActionLink("Yes", "Withdrawapplication", new { aid = Model.aid }, new { @class = "btn btn-danger" })</span>
+                </div>
+            </div>
+        </div>
     </div>
+
+</div>

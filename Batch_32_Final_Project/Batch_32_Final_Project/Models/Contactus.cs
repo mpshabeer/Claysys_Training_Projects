@@ -23,7 +23,7 @@ namespace Batch_32_Final_Project.Models
 
         [Display(Name = "Phone")]
         [RegularExpression(@"\d{10}", ErrorMessage = "Please enter 10 digit Mobile No.")]
-        [Required(ErrorMessage = "Phone Number is required")]
+        [Required(ErrorMessage = "Phone number is required")]
         public string Phone { get; set; }
 
 

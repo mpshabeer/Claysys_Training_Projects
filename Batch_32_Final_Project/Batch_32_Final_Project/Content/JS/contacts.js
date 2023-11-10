@@ -1,3 +1,4 @@
+// This function validates the input for the Name
 function validateName() {
     const firstname = document.getElementById("Name").value;
     const validFirstname = /^[A-Za-z ]+$/;
@@ -10,7 +11,7 @@ function validateName() {
         document.getElementById("namewarn").innerHTML = "";
     }
 }
-
+// This function validates the input for the Phone number
 function validatephone() {
     const phoneInput = document.getElementById("Phone");
     const phonePattern = /^[6789][0-9]{9}$/;
@@ -25,7 +26,7 @@ function validatephone() {
     }
 }
 
-
+// This function validates the input for the Email
 function validateemail() {
 
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/;

@@ -59,7 +59,7 @@ namespace Batch_32_Final_Project.Controllers
                     if (isInserted)
                     {
                         // Setting a success message if the vacancy update is successful and redirecting to the Viewvacancy action.
-                        TempData["SuccessMessage"] = "New Jobposter Added";
+                        TempData["SuccessMessage"] = "New job poster added";
                         return RedirectToAction("Addvacancy");
                     }
                     else
@@ -124,7 +124,7 @@ namespace Batch_32_Final_Project.Controllers
                     if (isInserted)
                     {
                         // Setting a success message if the vacancy update is successful and redirecting to the Viewvacancy action.
-                        TempData["SuccessMessage"] = "Job Poster Updated Successfully ";
+                        TempData["SuccessMessage"] = "Job poster updated successfully ";
                         return RedirectToAction("Viewvacancy");
                     }
                     else
@@ -163,11 +163,11 @@ namespace Batch_32_Final_Project.Controllers
                 bool isDeleted = vacancyRepository.DeleteTHEvacancy(id);
                 if (isDeleted)
                 {
-                    TempData["SuccessMessage"] = "Jobposter Deleted Successfully";
+                    TempData["SuccessMessage"] = "Job poster deleted successfully";
                 }
                 else
                 {
-                    ViewBag.Message = "Unable to Delete the Jobposter";
+                    ViewBag.Message = "Unable to delete the job poster";
                 }
             }
             catch (Exception ex)
@@ -200,11 +200,11 @@ namespace Batch_32_Final_Project.Controllers
                 bool IsSelected = vacancyRepository.Selection(statusofapplication, aid);
                 if (IsSelected)
                 {
-                    ViewBag.Message = "Staus Updated";
+                    ViewBag.Message = "Staus updated";
                 }
                 else
                 {
-                    ViewBag.Message = "Unable to Update the status";
+                    ViewBag.Message = "Unable to update the status";
                 }
             }
             catch (Exception ex)
@@ -261,7 +261,7 @@ namespace Batch_32_Final_Project.Controllers
                         isInserted = registrationRepository.InserttoHR(registration);
                         if (isInserted)
                         {
-                            TempData["SuccessMessage"] = "Registration of HR Successfull";
+                            TempData["SuccessMessage"] = "Registration of HR successfull";
                             return RedirectToAction("CeatenewHR");
                         }
                         else
@@ -272,7 +272,7 @@ namespace Batch_32_Final_Project.Controllers
                     }
                     else
                     {
-                        ViewBag.Message = "Email Already  Exisist";
+                        ViewBag.Message = "Email already  exisist";
                         return View();
                     }
                 }
@@ -321,12 +321,12 @@ namespace Batch_32_Final_Project.Controllers
                     isInserted = registrationRepository.Updateuserdetails(userdetails);
                     if (isInserted)
                     {
-                        TempData["SuccessMessage"]  = "Details Updated Successfully !!";
+                        TempData["SuccessMessage"]  = "Details updated successfully !!";
                         return RedirectToAction("Getuserdetails");
                     }
                     else
                     {
-                        ViewBag.Message = "Unable to save: No records were updated.";
+                        ViewBag.Message = "Unable to save: no records were updated.";
                         return View();
                     }
                 }
@@ -391,13 +391,13 @@ namespace Batch_32_Final_Project.Controllers
                     }
                     else
                     {
-                        ViewBag.Message = "Please Enter your password Correctly";
+                        ViewBag.Message = "Please enter your password correctly";
                         return View();
                     }
                 }
                 else
                 {
-                    ViewBag.Message = "Please Enter the required fields";
+                    ViewBag.Message = "Please enter the required fields";
                     return View();
                 }
             }
@@ -426,11 +426,11 @@ namespace Batch_32_Final_Project.Controllers
                 bool isDeleted = vacancyRepository.DeleteContactus(id);
                 if (isDeleted)
                 {
-                    ViewBag.Message = "Vacancy Deleted Successfully";
+                    ViewBag.Message = "Vacancy deleted successfully";
                 }
                 else
                 {
-                    ViewBag.Message = "Unable to Delete the Vacancy";
+                    ViewBag.Message = "Unable to delete the vacancy";
                 }
             }
             catch (Exception ex)
@@ -469,12 +469,12 @@ namespace Batch_32_Final_Project.Controllers
                     bool IsSelected = vacancyRepository.Selections(application,application.aid);
                     if (IsSelected)
                     {
-                        ViewBag.Message = "Staus Updated";
+                        ViewBag.Message = "Staus updated";
                         return RedirectToAction("Updateapplication", new { id = application.aid });
                     }
                     else
                     {
-                        ViewBag.Message = "Unable to Update the status";
+                        ViewBag.Message = "Unable to update the status";
                     }
                 }
                 catch (Exception ex)

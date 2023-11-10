@@ -1,4 +1,4 @@
-
+// This function validates the input for the date of birth by disabling future date
 document.addEventListener('DOMContentLoaded', function () {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -14,6 +14,7 @@ const statevisecity = {
     Tamilnadu: ["Chennai", "Coimbatore", "Vellore", "Madurai", "Salem", "Tiruchirappalli", "Tirunelveli", "Thanjavur", "Erode", "Tiruppur"],
     Karnataka: ["Bangalore", "Mysuru", "Chikmagalur", "Kalaburagi", "Belagavi", "Shivamogga", "Davangere", "Udupi"]
 }
+// Function to dynamically populate the city select box based on the selected state
 function selectcity(value){
     if(value.length==0){
         document.getElementById("cityselect").innerHTML="<option></option>"

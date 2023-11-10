@@ -19,3 +19,15 @@ li {
     text-align: center;
     padding: 10px 0;
 }
+
+.footer {
+    position: relative;
+    left: 0;
+    margin-top: 50px;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}

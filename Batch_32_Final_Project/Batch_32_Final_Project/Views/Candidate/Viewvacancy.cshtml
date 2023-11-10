@@ -5,7 +5,37 @@
     ViewBag.Title = "GetallVacancy";
     Layout = "~/Views/Shared/CandidateLayout.cshtml";
 }
-
+@{
+    var successmessage = TempData["SuccessMessage"]?.ToString();
+    if (!string.IsNullOrEmpty(successmessage))
+    {
+        TempData["SuccessMessage"] = null;
+        <div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: block; ">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Applications</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @successmessage
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" onclick="closeModal()">Okay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+<script>
+    function closeModal() {
+        var modal = document.getElementById('exampleModal');
+        modal.style.display = 'none';
+    }
+</script>
 <style>
     .card {
         margin: 10px;

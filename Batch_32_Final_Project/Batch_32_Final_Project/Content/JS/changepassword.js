@@ -1,4 +1,5 @@
-﻿function validateoldpassword() {
+﻿// This function validates the input for the password
+function validateoldpassword() {
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     password = document.getElementById("OldPassword").value;
     if (password.length == "") {
@@ -15,7 +16,9 @@
         document.getElementById("oldpasswordwarn").innerHTML = "Password must contain at least one digit, one lowercase letter, one uppercase letter, and be at least 8 characters long";
     }
 
-} function validatepassword() {
+}
+// This function validates the input for the new password
+function validatepassword() {
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     password = document.getElementById("NewPassword").value;
     if (password.length == "") {
@@ -32,6 +35,7 @@
         document.getElementById("passwordwarn").innerHTML = "Password must contain at least one digit, one lowercase letter, one uppercase letter, and be at least 8 characters long";
     }
 }
+// This function validates the input for the Confirm password
 function validateconfirmpassword() {
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     password1 = document.getElementById("NewPassword").value;

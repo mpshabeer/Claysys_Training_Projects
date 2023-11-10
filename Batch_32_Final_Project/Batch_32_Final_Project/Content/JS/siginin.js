@@ -1,4 +1,4 @@
-﻿
+﻿// This function validates the input for the Email
 function validateemail() {
 
     var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/;
@@ -14,7 +14,7 @@ function validateemail() {
     }
 }
 
-
+// This function validates the input for the Password
 function validatepssword() {
     const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     password = document.getElementById("Password").value;

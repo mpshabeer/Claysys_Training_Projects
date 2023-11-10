@@ -14,23 +14,23 @@ namespace Batch_32_Final_Project.Models
         public int vid { get; set; }
         public int rid { get; set; }
 
-        [Display(Name = "Your Resume")]
+        [Display(Name = "Upload resume")]
 
         public string Resume { get; set; }
 
-        [Display(Name = "Your Photo")]
+        [Display(Name = "Upload photo")]
        
         public string Photo { get; set; }
 
-        [Display(Name = "Experiance")]
-        [Required(ErrorMessage = "Experiance required")]
+        [Display(Name = "Experience ")]
+        [Required(ErrorMessage = "Experience  required")]
         public string Experiance { get; set; }
 
-        [Display(Name = "Experiance certificate if any")]
+        [Display(Name = "Experience certificate if any")]
         public string Experiancecertificate { get; set; }
 
-        [Display(Name = "Highest Qualification Certificate")]
-        [Required(ErrorMessage = "Acadmic Qualification Certificate  required")]
+        [Display(Name = "Highest qualification certificate")]
+        [Required(ErrorMessage = "Acadmic qualification certificate  required")]
         public string Acadamiccertificate { get; set; }
 
         [Display(Name = "Highest Qualification")]

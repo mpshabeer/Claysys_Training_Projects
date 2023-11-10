@@ -321,6 +321,7 @@ namespace Batch_32_Final_Project.Controllers
                         isinserted = vacancyRepository.Updateapplications(application, Resume, Photo,Acadamic,Exp);
                         if (isinserted)
                         {
+                            TempData["SuccessMessage"] = "Application Updated Successfully";
                             return RedirectToAction("Viewmyapplication");
                         }
                         else

@@ -13,12 +13,13 @@
         history.go(1);
     };
 </script>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="table-bordered" style="width: 600px;color:rgb(10, 25, 77); margin-left: auto; margin-right: auto; padding: 40px; background-image: url('@Url.Content("~/Content/Images/image2.jpg")'); background-size: cover;">
+    <div class="table-bordered" style="width: 600px; border-radius: 40px; color: rgb(10, 25, 77); margin-left: auto; margin-right: auto; padding: 40px; background-image: url('@Url.Content("~/Content/Images/image2.jpg")'); background-size: cover;">
 
-        <div class="text-warning">@ViewBag.Message</div>
+        <div class="bg-info text-center">@ViewBag.Message</div>
         <h1 class="text-center">Sign in</h1>
         <div class="form-group"></div>
         <div class="form-horizontal">
